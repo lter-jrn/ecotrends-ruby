@@ -1,4 +1,6 @@
 EcoTrends::Application.routes.draw do
+  get "splash/index"
+
   get "home/index"
 
   get "home/about"

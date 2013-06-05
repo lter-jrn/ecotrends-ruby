@@ -1,4 +1,8 @@
 @import "twitter/bootstrap/bootstrap";
+
+/* MAIN ELEMENTS */
+body {padding-top: 100px;}
+
 @import "twitter/bootstrap/responsive";
 
 // Set the correct sprite paths
@@ -12,6 +16,7 @@
 @fontAwesomeEotPath_iefix: asset-path("fontawesome-webfont.eot?#iefix&v=3.0.2");
 @fontAwesomeWoffPath: asset-path("fontawesome-webfont.woff?v=3.0.2");
 @fontAwesomeTtfPath: asset-path("fontawesome-webfont.ttf?v=3.0.2");
+
 
 // Font Awesome
 @import "fontawesome";
@@ -29,3 +34,22 @@
 //
 // Example:
 // @linkColor: #ff0000;
+
+/* TYPE */
+.opensans300 {font-family: 'Open Sans'; font-weight: 300;}
+
+/* NAVIGATION */
+.navbar-inner {background-color: blue; background-image: none;}
+.navbar .nav li a {padding: 25px 0 0 75px; color: #fff; text-shadow: none; font-family: 'Open Sans'; font-size: 14px; font-weight: 300;}
+.welcome-block {width: 275px; overflow: hidden; float: right; text-align: right; color: #fff; .opensans300;
+	li {list-style: none;}
+}
+
+/* FOOTER */
+.footbox{ width: 400px; padding: 0 50% 0 50%; text-align: center; 
+	ul {margin: 0;}
+	li {list-style: none; display: inline;}
+	a {}
+}
+
+
