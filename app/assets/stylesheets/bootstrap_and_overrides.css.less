@@ -1,9 +1,11 @@
 @import "twitter/bootstrap/bootstrap";
 
 /* MAIN ELEMENTS */
-body {padding-top: 100px; color: #565656;}
+body {padding-top: 100px; color: #838383;}
+a {color: #000;}
+hr {border-top: 1px solid #d0d0d0;}
 
-@import "twitter/bootstrap/responsive";
+/* @import "twitter/bootstrap/responsive"; */
 
 // Set the correct sprite paths
 @iconSpritePath: asset-path("twitter/bootstrap/glyphicons-halflings.png");
@@ -35,20 +37,32 @@ body {padding-top: 100px; color: #565656;}
 // Example:
 // @linkColor: #ff0000;
 
+/* COLORS */
+.darkgrey {color: #554c43;}
+
 /* TYPE */
 .opensans300 {font-family: 'Open Sans'; font-weight: 300;}
+.opensans400 {font-family: 'Open Sans'; font-weight: 400;}
+.opensanscondensed700 {font-family: 'Open Sans Condensed'; font-weight: 700;}
+h1 {.opensanscondensed700; font-size: 36px; .darkgrey;}
+h2 {.opensans400; font-size: 24px; color: #3d3c3c;}
+h5 {font-family: Georgia; font-style: italic; font-size: 18px; color: #838383; font-weight: 100; line-height: 36px;}
+
 
 /* NAVIGATION */
-.navbar-inner {background-color: blue; background-image: none;}
+.navbar-inner {height: 74px; background-color: blue; background-image: none;}
 .navbar .nav li a {padding: 25px 0 0 75px; color: #fff; text-shadow: none; font-family: 'Open Sans'; font-size: 14px; font-weight: 300;}
 .navbar .nav  li  a:focus, .navbar .nav  li  a:hover {color: #fff; text-decoration: underline;}
-.welcome-block {width: 275px; overflow: hidden; float: right; text-align: right; color: #fff; .opensans300;
+.welcome-block {overflow: hidden; float: right; text-align: right; color: #fff; .opensans300;
 	li {list-style: none;}
+	a {color: #fff;}
+	a:hover, a:focus {color: #fff; text-decoration: underline;}
 }
 
 /* FOOTER */
-.footbox{ width: 400px; margin: 0 385px 0 385px; text-align: center; 
+.footbox{ width: 400px; margin: 0 385px 0 260px; text-align: center; 
 	ul {margin: 0;}
 	li {list-style: none; display: inline;}
+}
 
 
