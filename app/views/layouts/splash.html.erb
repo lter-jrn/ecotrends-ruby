@@ -33,6 +33,8 @@
     <!-- For all other devices -->
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
+    
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,700,300,400|Open+Sans+Condensed:700' rel='stylesheet' type='text/css'>
   </head>
   <body>
 
@@ -76,8 +78,17 @@
         </div><!--/row-->
 
       <footer>
-        <p>&copy; Company 2013</p>
+				<div class="footbox">
+		      <ul>
+		      	<a href="/policies"><li>Policies |&nbsp</li></a>
+		      	<a href="/guidelines"><li>Guidelines |&nbsp</li></a>
+		      	<a href="/contact"><li>Contact Us |&nbsp</li></a>
+		      	<a href="/publications"><li>Publications</li></a>
+		      </ul>
+		      <p>All Rights Reserved. EcoTrends &copy; 2013.</p>
+				</div> <!-- /footbox -->
       </footer>
+
 
     </div> <!-- /container -->
 
