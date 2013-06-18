@@ -41,23 +41,34 @@ hr {border-top: 1px solid #d0d0d0;}
 .darkgrey {color: #554c43;}
 .royalblue {color: #2946c4;}
 .darkbrown {color: #ab410c;}
+.yellow {color: #f1d607;}
 
 /* TYPE */
 .opensans300 {font-family: 'Open Sans'; font-weight: 300;}
 .opensans400 {font-family: 'Open Sans'; font-weight: 400;}
 .opensanscondensed700 {font-family: 'Open Sans Condensed'; font-weight: 700;}
 .searchbody {font-family: 'Georgia'; font-style: italic; font-size: 12px;}
-h1 {.opensanscondensed700; font-size: 36px; .darkgrey;}
+h1 {.opensanscondensed700; font-size: 36px; .darkgrey; letter-spacing: -1px;}
 h2 {.opensans400; font-size: 24px; color: #3d3c3c;}
 h4 {font-family: 'Open Sans Condensed'; font-weight: 700; font-size: 16px;}
 h5 {font-family: Georgia; font-style: italic; font-size: 18px; color: #838383; font-weight: 100; line-height: 36px;}
+.splashheader {.yellow; text-shadow: 1px 1px 0px black;}
 
 /* SEARCH RESULTS */
 .searchright {text-align: right; float: right; .darkgrey;}
 
+/* SPLASH PAGE */
+#bg_containers {display: block;}
+.splash-gallery1 {height: 389px; background-image:url('/assets/desert.jpg'); background-repeat: no-repeat; background-size: cover;}
+.splash-gallery2 {height: 389px; background-image:url('/assets/cactii.jpg'); background-repeat: no-repeat; background-size: cover;}
+.splash-gallery3 {height: 389px; background-image:url('/assets/bigsky.jpg'); background-repeat: no-repeat; background-size: cover;}
+.splash-gallery4 {height: 389px; background-image:url('/assets/orangesky.jpg'); background-repeat: no-repeat; background-size: cover;}
+.datapoints {margin-top: 60px;}
+
 
 /* NAVIGATION */
 .navbar-inner {height: 74px; background-color: #2946c4; background-image: none;}
+.navbar-inner-splash {height: 74px; background-color: transparent; background-image: none;}
 .navbar .nav li a {padding: 25px 0 0 75px; color: #fff; text-shadow: none; font-family: 'Open Sans'; font-size: 14px; font-weight: 300;}
 .navbar .nav  li  a:focus, .navbar .nav  li  a:hover {color: #fff; text-decoration: underline;}
 .welcome-block {overflow: hidden; float: right; text-align: right; color: #fff; .opensans300;
@@ -85,7 +96,7 @@ h5 {font-family: Georgia; font-style: italic; font-size: 18px; color: #838383; f
 }
 
 /* FOOTER */
-.footbox{ width: 400px; margin: 0 385px 0 260px; text-align: center; 
+.footbox{ width: 400px; margin: 40px 385px 0 260px; text-align: center; 
 	ul {margin: 0;}
 	li {list-style: none; display: inline;}
 }
