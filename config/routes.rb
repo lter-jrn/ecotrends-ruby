@@ -10,6 +10,10 @@ EcoTrends::Application.routes.draw do
   get "home/infographics"
 
   get "home/datastore"
+  
+  get "home/search"
+  
+  get "home/test"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

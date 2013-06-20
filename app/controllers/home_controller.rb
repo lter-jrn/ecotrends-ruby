@@ -1,5 +1,5 @@
 class HomeController < ApplicationController
-	layout = "home"
+	layout "search", :only => :search
   def index
   end
 
@@ -13,5 +13,11 @@ class HomeController < ApplicationController
   end
 
   def datastore
+  end
+  
+  def search
+  end
+  
+  def tester
   end
 end
