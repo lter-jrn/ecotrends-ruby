@@ -20,4 +20,10 @@ class HomeController < ApplicationController
   
   def tester
   end
+  
+  def comparison
+  end
+  
+  def dataset
+  end
 end
