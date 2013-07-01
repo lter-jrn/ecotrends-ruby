@@ -26,4 +26,7 @@ class HomeController < ApplicationController
   
   def dataset
   end
+  
+  def dataset2
+  end
 end

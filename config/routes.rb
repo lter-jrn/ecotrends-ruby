@@ -18,6 +18,8 @@ EcoTrends::Application.routes.draw do
   get "home/comparison"
   
   get "home/dataset"
+  
+  get "home/dataset2"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
