@@ -1,4 +1,8 @@
 EcoTrends::Application.routes.draw do
+  get 'search/index'
+
+  get 'search/create'
+
 	get "splash/index"
 	
   get "home/index"
