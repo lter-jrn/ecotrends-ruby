@@ -43,14 +43,20 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  username: mwallace
+  password: JER$eco
+  host: jornada-ecoruby.nmsu.edu
   # For details on connection pooling, see rails configuration guide
   # http://guides.rubyonrails.org/configuring.html#database-pooling
   pool: 5
 
 development:
   <<: *default
-  database: ecotrends_development
+  database: et_extracat
 
+search:
+  <<: *default
+  database: et_derived
   # The specified database role being used to connect to postgres.
   # To create additional roles in postgres see `$ createuser --help`.
   # When left blank, postgres will use the default role. This is
@@ -81,9 +87,9 @@ development:
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
-test:
-  <<: *default
-  database: ecotrends_test
+# test:
+#   <<: *default
+#   database: ecotrends_test
 
 # As with config/secrets.yml, you never want to store sensitive information,
 # like your database password, in your source code. If your source code is
@@ -104,8 +110,8 @@ test:
 #   production:
 #     url: <%= ENV['DATABASE_URL'] %>
 #
-production:
-  <<: *default
-  database: ecotrends_production
-  username: ecotrends
-  password: <%= ENV['JOBMIGHTY_DATABASE_PASSWORD'] %>
+# production:
+#   <<: *default
+#   database: ecotrends_production
+#   username: ecotrends
+#   password: <%= ENV['JOBMIGHTY_DATABASE_PASSWORD'] %>
