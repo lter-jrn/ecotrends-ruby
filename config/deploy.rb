@@ -2,7 +2,7 @@
 lock '3.1.0'
 
 set :application, 'EcoTrends'
-set :repo_url, 'https://github.com/matthewswallace/EcoTrends.git'
+set :repo_url, 'https://pjammer@bitbucket.org/pjammer/ecotrends.git'
 
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }
