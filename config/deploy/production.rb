@@ -26,7 +26,7 @@ role :db,  %w{mwallace@128.123.177.92}
     auth_methods: %w(password),
     password: 'JER$eco',
     user: 'mwallace'
-#  }
+  }
 # and/or per server
 # server 'example.com',
 #   user: 'user_name',
