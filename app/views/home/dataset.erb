@@ -6,8 +6,8 @@
 		    <li><a href="#tab2" data-toggle="tab">VIEW TABLE</a></li>
 		    <li><a href="#tab3" data-toggle="tab">VIEW CHART</a></li>
 		    <div class="dataset-mainaction">
-			  <a href="#"><img class="icon" src="/assets/datastore_off.png"/></a>
-			  <a href="#"><img src="/assets/printpagebutton.jpg"/></a>
+			  <a href="#"><%= image_tag "/assets/datastore_off.png" %></a>
+			  <a href="#"><%= image_tag "/assets/printpagebutton.jpg" %></a>
 		  </div>
 		  </ul>
 			<div class="tab-content">
@@ -21,7 +21,7 @@
 						<p><b>Dataset ID:</b>
 						ecotrends.9058.1
 						</p>
-						
+
 						<p><b>Site:</b>
 						Jornada Basin LTER/Jornada Experimental Range</p>
 						<p><b>Station(s):</b>
@@ -38,20 +38,20 @@
 						1 of 1</p>
 						<p><b>Other Data Versions:</b>
 						None</p>
-						
+
 						<p><b>Derived Data</b><br/>
 						<a href="#">View data as HTML</a><br/>
 						<a href="#">Download as CSV</a></p>
-						
+
 						<h4>Plot:</h4>
 						<p><b>Plot Options:</b>
 						  Data Points
 						  Data Lines
 						  Moving Average</p>
-						
+
 						<h4>Source Data</h4>
 						<p><b>Principal Investigator(s):</b></p>
-						
+
 						<h4>Organization(s):</h4>
 						<p><b>Jornada Basin</b>
 						Any use of data or figures from this EcoTrends project dataset must include the following statement(s): "Data and figures were obtained from the EcoTrends Project (http://www.ecotrends.info) funded by the National Science Foundation and USDA Agricultural Research Service. These data are from Jornada Basin (http://jornada-www.nmsu.edu/); ecotrends.9058.1."</p>
@@ -75,10 +75,10 @@
 			</div> <!-- row -->
 			<div class="row">
 				<div class="span4">
-					<h4><img class="icon" src="/assets/station.png"/>Research Site</h4>
+					<h4><%= image_tag "/assets/station.png", class: "icon" %>Research Site</h4>
 					<p>Jornada Experimental Range</p>
 					<hr/>
-					<h4><img class="icon" src="/assets/globeicon.png"/>Location</h4>
+					<h4><%= image_tag "/assets/globeicon.png", class: "icon" %>Location</h4>
 					<p>New Mexico, U.S.A.</p>
 					<hr/>
 					<h4>Related Publications</h4>

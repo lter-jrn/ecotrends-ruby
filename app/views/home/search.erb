@@ -1,5 +1,5 @@
 <div class="span3">
-	<h4><img class="baricon" src="/assets/sitesicon.png"/><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+	<h4><%= image_tag "/assets/sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 	<ul class="search-side">
 		<a href="#"><li>All Sites</li>														</a>
@@ -19,7 +19,7 @@
 	</ul>
 	<hr>
 
-	<h4><img class="baricon" src="/assets/networkicon.png"/><a href="#">Networks</a><span style="float:right;"><a href="#">All</a></span></h4>
+	<h4><%= image_tag "/assets/networkicon.png", class: "baricon" %><a href="#">Networks</a><span style="float:right;"><a href="#">All</a></span></h4>
 	<hr>
 	<ul class="search-side">
 		<a href="#"><li>All Networks</li>														</a>
@@ -30,7 +30,7 @@
 	</ul>
 	<hr>
 
-	<h4><img class="baricon" src="/assets/ecosystemicon.png"/><a href="#">EcoSystem Types</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+	<h4><%= image_tag "/assets/ecosystemicon.png", class: "baricon" %><a href="#">EcoSystem Types</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 	<ul class="search-side">
 		<a href="#"><li>All Ecosystems</li>														</a>
@@ -43,10 +43,10 @@
 	</ul>
 	<hr>
 
-	<h4><img class="baricon" src="/assets/topicicon.png"/><a href="#">Topics</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+	<h4><%= image_tag "/assets/topicicon.png", class: "baricon" %><a href="#">Topics</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 
-		<h4><img class="baricon" src="/assets/variableicon.png"/><a href="#">Variables Measured</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+		<h4><%= image_tag "/assets/variableicon.png", class: "baricon" %><a href="#">Variables Measured</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 	<ul class="search-side">
 		<a href="#"><li>All Variables</li>														</a>
@@ -65,29 +65,29 @@
 				<div style="padding-left:20px;" class="span3">
 					<h1>Search Results</h1>
 					<p class="searchbody">24 results for: <b>Plant Productivity</b></p>
-				</div> <!-- span -->	
+				</div> <!-- span -->
 				<div style="margin-right: -20px; padding-top: 27px;" class="span6">
 					<fieldset>
 						<form>
 							<input class="searchinput"type="search" value="Plant Productivity"></input>
 						</form>
 					</fieldset>
-				</div> <!-- span -->	
+				</div> <!-- span -->
 			</div> <!-- row -->
 		</div> <!-- span -->
-	</div> <!-- row -->	
+	</div> <!-- row -->
 </div> <!-- span -->
 
 <div class="row">
 	<div class="span9">
 		<ul class='inline'>
   <li class='active'>
-    <h4><img class="baricon" src="/assets/topicicon.png"/>Topic</h4>
+    <h4><%= image_tag "/assets/topicicon.png", class: "baricon" %>Topic</h4>
   </li>
   <li>
     <div class="dropdown">
       <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        <h4><img class="baricon" src="/assets/globeicon.png"/>Location</h4>
+        <h4><%= image_tag "/assets/globeicon.png", class: "baricon" %>Location</h4>
       </a>
       <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
       	<div class="row">
@@ -117,7 +117,7 @@
 									<a href="#">Louisiana						<br></a>
 			        </li>
 			        <li class="divider"></li>
-	      		</div> <!-- span --> 
+	      		</div> <!-- span -->
 	      		<div class="span2">
 			        <li>
 								<a href="#">Maryland			<br></a>
@@ -133,7 +133,7 @@
 								<a href="#">New Jersey		<br></a>
 								<a href="#">New Mexico		<br></a>
 								<a href="#">New York			<br></a>
-								<a href="#">North Carolina<br></a>	
+								<a href="#">North Carolina<br></a>
 								<a href="#">North Dakota	<br></a>
 								<a href="#">Ohio					<br></a>
 								<a href="#">Oklahoma			<br></a>
@@ -143,7 +143,7 @@
 								<a href="#">South Carolina<br></a>
 			        </li>
 			        <li class="divider"></li>
-	      		</div> <!-- span --> 
+	      		</div> <!-- span -->
 
 	      		<div class="span2">
 			        <li>
@@ -159,7 +159,7 @@
 								<a href="#">Wyoming			 <br></a>
 			        </li>
 			        <li class="divider"></li>
-	      		</div> <!-- span --> 
+	      		</div> <!-- span -->
 
 	      		<div class="span2">
 			        <li>
@@ -181,20 +181,20 @@
 								<a href="#">USFS		<br></a>
 			        </li>
 			        <li class="divider"></li>
-	      		</div> <!-- span --> 
+	      		</div> <!-- span -->
 
 
-      		</div> <!-- span -->	
+      		</div> <!-- span -->
       	</div> <!-- row -->
       </ul>
-    </div>   
+    </div>
     </li>
-</ul>		
+		</ul>
 <hr>
 <div class="row">
 	<div class="span9">
-		<a href="#"><img class="baricon" src="/assets/delete.png"/>Plant Productivity&nbsp;</a>
-		<a href="#"><img class="baricon" src="/assets/delete.png"/>New Mexico&nbsp;				 </a>
+		<a href="#"><%= image_tag "/assets/delete.png", class: "baricon" %>Plant Productivity&nbsp;</a>
+		<a href="#"><%= image_tag "/assets/delete.png", class: "baricon" %>New Mexico&nbsp;				 </a>
 	</div>
 </div>
 <hr>
@@ -214,13 +214,13 @@
 				<div class="span6">
 					<a href="#"><h4 class="darkbrown">Plant Productivity (aboveground)</h4></a>
 					<p class="searchbody">This study measures aboveground biomass by species in 49 1-m2 quadrats at each of 3 grassland locations three times a year to calculate aboveground plant production.</p>
-					<p><img class="icon" src="/assets/station.png"/>
+					<p><%= image_tag "/assets/station.png", class: "icon" %>
 						<a href="#"><b>Jornada Basin</b>/ New Mexico</a>
 						 -- NPP Study / Grassland vegetation -- Total grams PerMeterSquaredPerYard</p>
-				</div> <!-- span --> 
+				</div> <!-- span -->
 				<div class="span2 searchright">
 					<h4>1990 - 2012</h4>
-					<a href="#"><img src="/assets/datastore_on.png"/></a>
+					<a href="#"><%= image_tag "/assets/datastore_on.png" %></a>
 				</div> <!-- span -->
 			</div> <!-- row -->
 			<hr>
@@ -238,13 +238,13 @@
 				<div class="span6">
 					<a href="#"><h4 class="darkbrown">Plant Productivity (aboveground)</h4></a>
 					<p class="searchbody">This study measures aboveground biomass by species in 49 1-m2 quadrats at each of 3 grassland locations three times a year to calculate aboveground plant production.</p>
-					<p><img class="icon" src="/assets/station.png"/>
+					<p><%= image_tag "/assets/station.png", class: "icon" %>
 						<a href="#"><b>Jornada Basin</b>/ New Mexico</a>
 						 -- NPP Study / Grassland vegetation -- Total grams PerMeterSquaredPerYard</p>
-				</div> <!-- span --> 
+				</div> <!-- span -->
 				<div class="span2 searchright">
 					<h4>1990 - 2012</h4>
-					<a href="#"><img src="/assets/datastore_on.png"/></a>
+					<a href="#"><%= image_tag "/assets/datastore_on.png" %></a>
 				</div> <!-- span -->
 			</div> <!-- row -->
 			<hr>
@@ -262,13 +262,13 @@
 				<div class="span6">
 					<a href="#"><h4 class="darkbrown">Plant Productivity (aboveground)</h4></a>
 					<p class="searchbody">This study measures aboveground biomass by species in 49 1-m2 quadrats at each of 3 grassland locations three times a year to calculate aboveground plant production.</p>
-					<p><img class="icon" src="/assets/station.png"/>
+					<p><%= image_tag "/assets/station.png", class: "icon" %>
 						<a href="#"><b>Jornada Basin</b>/ New Mexico</a>
 						 -- NPP Study / Grassland vegetation -- Total grams PerMeterSquaredPerYard</p>
-				</div> <!-- span --> 
+				</div> <!-- span -->
 				<div class="span2 searchright">
 					<h4>1990 - 2012</h4>
-					<a href="#"><img src="/assets/datastore_on.png"/></a>
+					<a href="#"><%= image_tag "/assets/datastore_on.png" %></a>
 				</div> <!-- span -->
 			</div> <!-- row -->
 			<hr>
@@ -286,13 +286,13 @@
 				<div class="span6">
 					<a href="#"><h4 class="darkbrown">Plant Productivity (aboveground)</h4></a>
 					<p class="searchbody">This study measures aboveground biomass by species in 49 1-m2 quadrats at each of 3 grassland locations three times a year to calculate aboveground plant production.</p>
-					<p><img class="icon" src="/assets/station.png"/>
+					<p><%= image_tag "/assets/station.png", class: "icon" %>
 						<a href="#"><b>Jornada Basin</b>/ New Mexico</a>
 						 -- NPP Study / Grassland vegetation -- Total grams PerMeterSquaredPerYard</p>
-				</div> <!-- span --> 
+				</div> <!-- span -->
 				<div class="span2 searchright">
 					<h4>1990 - 2012</h4>
-					<a href="#"><img src="/assets/datastore_on.png"/></a>
+					<a href="#"><%= image_tag "/assets/datastore_on.png" %></a>
 				</div> <!-- span -->
 			</div> <!-- row -->
 			<hr>
@@ -310,13 +310,13 @@
 				<div class="span6">
 					<a href="#"><h4 class="darkbrown">Plant Productivity (aboveground)</h4></a>
 					<p class="searchbody">This study measures aboveground biomass by species in 49 1-m2 quadrats at each of 3 grassland locations three times a year to calculate aboveground plant production.</p>
-					<p><img class="icon" src="/assets/station.png"/>
+					<p><%= image_tag "/assets/station.png", class: "icon" %>
 						<a href="#"><b>Jornada Basin</b>/ New Mexico</a>
 						 -- NPP Study / Grassland vegetation -- Total grams PerMeterSquaredPerYard</p>
-				</div> <!-- span --> 
+				</div> <!-- span -->
 				<div class="span2 searchright">
 					<h4>1990 - 2012</h4>
-					<a href="#"><img src="/assets/datastore_on.png"/></a>
+					<a href="#"><%= image_tag "/assets/datastore_on.png" %></a>
 				</div> <!-- span -->
 			</div> <!-- row -->
 		</div> <!-- span -->

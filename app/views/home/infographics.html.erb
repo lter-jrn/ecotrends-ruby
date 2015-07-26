@@ -2,22 +2,22 @@
 	<div class="span12">
 		<h1>Infographics</h1>
 		<h5>Infographics Library</h5>
-		
+
         <p>
             <button id="start-slideshow" class="btn btn-small btn-success" data-slideshow="5000" data-target="#modal-gallery" data-selector="#gallery a[rel=gallery]">Start Slideshow</button>
             <button id="toggle-fullscreen" class="btn btn-small btn-primary" data-toggle="button">Toggle Fullscreen</button>
         </p>
-    </header>    
+    </header>
     <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
     <a href="/assets/RockNRoll.jpg" title="Banana" data-gallery="gallery">
-	    <img src="/assets/apples.jpg"/>
+	    <%= image_tag "/assets/apples.jpg" %>
     </a>
     <a href="/assets/RockNRoll.jpg" title="Apple" data-gallery="gallery">
-	    <img src="/assets/oranges.jpg"/>
+	    <%= image_tag "/assets/oranges.jpg" %>
     </a>
 </div>
     <br>
-		
+
 
 <!-- modal-gallery is the modal dialog used for the image gallery -->
 <div id="modal-gallery" class="modal modal-gallery hide fade" tabindex="-1">
@@ -45,6 +45,6 @@
         </a>
     </div>
 </div>
-		
+
 	</div> <!-- span -->
 </div> <!-- row -->
