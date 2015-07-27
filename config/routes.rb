@@ -1,10 +1,10 @@
 EcoTrends::Application.routes.draw do
-  get 'search/index'
+  # get 'search/index'
 
-  get 'search/create'
+  # get 'search/create'
 
 	get "splash/index"
-	
+
   get "home/index"
 
   get "home/about"
@@ -14,15 +14,15 @@ EcoTrends::Application.routes.draw do
   get "home/infographics"
 
   get "home/datastore"
-  
+
   get "home/search"
-  
+
   get "home/test"
-  
+
   get "home/comparison"
-  
+
   get "home/dataset"
-  
+
   get "home/dataset2"
 
   # The priority is based upon order of creation:
@@ -37,7 +37,7 @@ EcoTrends::Application.routes.draw do
   # This route can be invoked with purchase_url(:id => product.id)
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
+  resources :search
 
   # Sample resource route with options:
   #   resources :products do
