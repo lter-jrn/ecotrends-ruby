@@ -1,3 +1,4 @@
+# This class is containing all the Meta Data to Search against and display in Search Results
 class ExtracatMetadata < ActiveRecord::Base
   establish_connection(:development)
 # entryid
@@ -32,11 +33,14 @@ class ExtracatMetadata < ActiveRecord::Base
   def self.sites_count
     self.group(:site).count
   end
+  #search for metadata to display in results page
   def self.search(term_hash)
     #take the term_hash and get values for that table
     #for right now we'll just use the id
-    self.get_values(term_hash["id"])
+    self.where(entryid: term_hash["id"])
+    #self.get_values(term_hash["id"])
   end
+  #returns the dataset
   def self.get_values(entry_id)
     et_table_name = where(entryid: entry_id).first.real_table_name
     search_connection = SearchDatum.connection

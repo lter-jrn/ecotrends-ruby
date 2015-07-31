@@ -1,16 +1,243 @@
-<h1>Search</h1>
+<div class="span3">
+	<h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+	<hr>
+	<ul class="search-side">
+	  <%= form_tag('/search') do  %>
+	    <%#= select_tag :site_name, options_for_select(@sites) %><br />
+	    <%= select_tag :id, options_for_select(@ids.map(&:entryid)) %><br />
+	    <%= submit_tag %>
+	  <% end %>
+		<a href="#"><li>All Sites</li>														</a>
+		<a href="#"><li><b>Arctic LTER</b></li>										</a>
+		<a href="#"><li>Baltimore Ecosystem Study LTER</li>				</a>
+		<a href="#"><li>Bent Creek Experimental Forest</li>				</a>
+		<a href="#"><li>Blacks Mountain Experimental Forest</li>	</a>
+		<a href="#"><li>Bonanza Creek										 </li>		</a>
+		<a href="#"><li>California Current Ecosytem			 </li>		</a>
+		<a href="#"><li>Cascade Head Experimental Forest </li>		</a>
+		<a href="#"><li>Caspar Creek Experimental Waters.</li>		</a>
+		<a href="#"><li>Cedar Creek Ecosystem Science Reserve</li></a>
+		<a href="#"><li>Central Arizona - Phoenix Urban LTER</li>	</a>
+		<a href="#"><li>Coweeta													 </li>		</a>
+		<a href="#"><li>Crossett Experimental Forest		 </li>		</a>
+		<a href="#"><li><b>Show More &#x25BC;</b></li>		</a>
+	</ul>
+	<hr>
 
-<%= form_tag('/search') do  %>
-  <%#= select_tag :site_name, options_for_select(@sites) %><br />
-  <%= select_tag :id, options_for_select(@ids.map(&:entryid)) %><br />
-  <%= submit_tag %>
-<% end %>
+	<h4><%= image_tag "networkicon.png", class: "baricon" %><a href="#">Networks</a><span style="float:right;"><a href="#">All</a></span></h4>
+	<hr>
+	<ul class="search-side">
+		<a href="#"><li>All Networks</li>														</a>
+		<a href="#"><li>LTER</li>										</a>
+		<a href="#"><li>USDA-ARS</li>				</a>
+		<a href="#"><li>LTAR</li>				</a>
+		<a href="#"><li>USFS</li>	</a>
+	</ul>
+	<hr>
 
-<h2>Search Results</h2>
-<% if @results.blank? %>
-  <p>None</p>
-<% else %>
-  <% @results.each do |result| %>
-    <p><%= result %></p>
-  <% end %>
-<% end %>
+	<h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">EcoSystem Types</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+	<hr>
+	<ul class="search-side">
+		<a href="#"><li>All Ecosystems</li>														</a>
+		<a href="#"><li><b>Apline &amp; Arctic</b></li>										</a>
+		<a href="#"><li>Aridlands</li>				</a>
+		<a href="#"><li>Eastern Forrest</li>				</a>
+		<a href="#"><li>Rock &amp; Ice</li>	</a>
+		<a href="#"><li>Western Forrest</li>	</a>
+		<a href="#"><li>Other</li>	</a>
+	</ul>
+	<hr>
+
+	<h4><%= image_tag "topicicon.png", class: "baricon" %><a href="#">Topics</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+	<hr>
+
+		<h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Variables Measured</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+	<hr>
+	<ul class="search-side">
+		<a href="#"><li>All Variables</li>														</a>
+		<a href="#"><li><b>Density</b></li>										</a>
+		<a href="#"><li>Biomass</li>				</a>
+		<a href="#"><li>Productivity</li>				</a>
+		<a href="#"><li>Diversity of Richness</li>	</a>
+	</ul>
+
+</div> <!-- span -->
+
+<div class="span searchbar">
+	<div class="row">
+		<div class="span9">
+			<div class="row">
+				<div style="padding-left:20px;" class="span3">
+					<h1>Search Results</h1>
+					<p class="searchbody">24 results for: <b>Plant Productivity</b></p>
+				</div> <!-- span -->
+				<div style="margin-right: -20px; padding-top: 27px;" class="span6">
+					<fieldset>
+						<form>
+							<input class="searchinput"type="search" value="Plant Productivity"></input>
+						</form>
+					</fieldset>
+				</div> <!-- span -->
+			</div> <!-- row -->
+		</div> <!-- span -->
+	</div> <!-- row -->
+</div> <!-- span -->
+
+<div class="row">
+	<div class="span9">
+		<ul class='inline'>
+  <li class='active'>
+    <h4><%= image_tag "topicicon.png", class: "baricon" %>Topic</h4>
+  </li>
+  <li>
+    <div class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+        <h4><%= image_tag "globeicon.png", class: "baricon" %>Location</h4>
+      </a>
+      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      	<div class="row">
+      		<div class="span10">
+	      		<div class="span2">
+			        <li>
+			        	<h4>STATE</h4>
+									<a href="#">ALL									<br></a>
+									<a href="#">Alabama							<br></a>
+									<a href="#">Alaska							<br></a>
+									<a href="#">Arizona							<br></a>
+									<a href="#">Arkansas						<br></a>
+									<a href="#">California					<br></a>
+									<a href="#">Colorado						<br></a>
+									<a href="#">Connecticut					<br></a>
+									<a href="#">Delaware						<br></a>
+									<a href="#">District of Columbia<br></a>
+									<a href="#">Florida							<br></a>
+									<a href="#">Georgia							<br></a>
+									<a href="#">Hawaii							<br></a>
+									<a href="#">Idaho								<br></a>
+									<a href="#">Illinois						<br></a>
+									<a href="#">Indiana							<br></a>
+									<a href="#">Iowa								<br></a>
+									<a href="#">Kansas							<br></a>
+									<a href="#">Kentucky						<br></a>
+									<a href="#">Louisiana						<br></a>
+			        </li>
+			        <li class="divider"></li>
+	      		</div> <!-- span -->
+	      		<div class="span2">
+			        <li>
+								<a href="#">Maryland			<br></a>
+								<a href="#">Massachusetts	<br></a>
+								<a href="#">Michigan			<br></a>
+								<a href="#">Minnesota			<br></a>
+								<a href="#">Mississippi		<br></a>
+								<a href="#">Missouri			<br></a>
+								<a href="#">Motntana			<br></a>
+								<a href="#">Nebraska			<br></a>
+								<a href="#">Nevada				<br></a>
+								<a href="#">New Hampshire	<br></a>
+								<a href="#">New Jersey		<br></a>
+								<a href="#">New Mexico		<br></a>
+								<a href="#">New York			<br></a>
+								<a href="#">North Carolina<br></a>
+								<a href="#">North Dakota	<br></a>
+								<a href="#">Ohio					<br></a>
+								<a href="#">Oklahoma			<br></a>
+								<a href="#">Oregon				<br></a>
+								<a href="#">Pennsylvania	<br></a>
+								<a href="#">Rhode Island	<br></a>
+								<a href="#">South Carolina<br></a>
+			        </li>
+			        <li class="divider"></li>
+	      		</div> <!-- span -->
+
+	      		<div class="span2">
+			        <li>
+								<a href="#">South Dakota <br></a>
+								<a href="#">Tennessee		 <br></a>
+								<a href="#">Texas				 <br></a>
+								<a href="#">Utah				 <br></a>
+								<a href="#">Vermont			 <br></a>
+								<a href="#">Virginia		 <br></a>
+								<a href="#">Washington	 <br></a>
+								<a href="#">West Virginia<br></a>
+								<a href="#">Wisconsin		 <br></a>
+								<a href="#">Wyoming			 <br></a>
+			        </li>
+			        <li class="divider"></li>
+	      		</div> <!-- span -->
+
+	      		<div class="span2">
+			        <li>
+								<h4>ECOSYSTEM TYPE</h4>
+								<a href="#">ALL															<br></a>
+								<a href="#">Aridlands												<br></a>
+								<a href="#">Temperate grasslands and savannas<br></a>
+								<a href="#">Eastern Forrest									<br></a>
+								<a href="#">Western Forrest									<br></a>
+								<a href="#">Alpine and arctic								<br></a>
+								<a href="#">Rock and Ice											<br></a>
+								<a href="#">Other														<br></a>
+								<br>
+								<h4>NETWORKS</h4>
+								<a href="#">ALL			<br></a>
+								<a href="#">LTER		<br></a>
+								<a href="#">USDA-ARS<br></a>
+								<a href="#">LTAR		<br></a>
+								<a href="#">USFS		<br></a>
+			        </li>
+			        <li class="divider"></li>
+	      		</div> <!-- span -->
+
+
+      		</div> <!-- span -->
+      	</div> <!-- row -->
+      </ul>
+    </div>
+    </li>
+		</ul>
+<hr>
+<div class="row">
+	<div class="span9">
+		<a href="#"><%= image_tag "delete.png", class: "baricon" %>Plant Productivity&nbsp;</a>
+		<a href="#"><%= image_tag "delete.png", class: "baricon" %>New Mexico&nbsp;				 </a>
+	</div>
+</div>
+<hr>
+	</div> <!-- span -->
+
+
+	<!-- BEGIN SEARCH RESULTS -->
+
+	<% if @results.present? %>
+
+	  <% @results.each do |result| %>
+	    <p><%= result.inspect %></p>
+	    <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
+		<div class="span9">
+			<div class="row">
+				<div class="span1">
+					<fieldset>
+						<form>
+							<input type="checkbox"></input>
+						</form>
+					</fieldset>
+				</div> <!-- span -->
+				<div class="span6">
+					<a href="#"><h4 class="darkbrown"><%= result.variable_name %></h4></a>
+					<p class="searchbody"><%= result.subtopic%></p>
+					<p><%= image_tag "station.png", class: "icon" %>
+						<a href="#"><b><%= result.station_names %></b>/ <%= result.site_name%></a>
+						 --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name%> -- <%= result.timescale %></p>
+				</div> <!-- span -->
+				<div class="span2 searchright">
+					<h4><%= result.begin_date.year%> - <%= result.end_date.year %></h4>
+					<%= link_to image_tag("datastore_on.png"), search_path(result.entryid) %>
+				</div> <!-- span -->
+			</div> <!-- row -->
+			<hr>
+		</div> <!-- span -->
+	  <% end %>
+	  <% end %>
+
+
+</div> <!-- row -->

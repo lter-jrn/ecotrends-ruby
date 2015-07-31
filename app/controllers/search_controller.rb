@@ -3,7 +3,9 @@ class SearchController < ApplicationController
   def index
 
   end
-
+  def show
+    @data = ExtracatMetadata.get_values(params[:id])
+  end
   def create
     @results = ExtracatMetadata.search(search_params)
 
