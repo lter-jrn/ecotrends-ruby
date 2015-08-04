@@ -67,17 +67,21 @@
 	<div class="row">
 		<div class="span9">
 			<div class="row">
-				<div style="padding-left:20px;" class="span3">
+			  <div style="padding-left:20px;" class="span3">
+			    <% if @results.present? %>
 					<h1>Search Results</h1>
-					<p class="searchbody">24 results for: <b>Plant Productivity</b></p>
-				</div> <!-- span -->
+					<p class="searchbody"><%= @results.count %> results for: <b><%= @search_term %></b></p>
+			  </div> <!-- span -->
+			  <% end %>
 				<div style="margin-right: -20px; padding-top: 27px;" class="span6">
-					<fieldset>
-						<form>
-							<input class="searchinput"type="search" value="Plant Productivity"></input>
-						</form>
+				  <fieldset>
+
+				    <%= form_tag('/search') do  %>
+				      <%= text_field_tag :keywords %>
+				      <%= submit_tag %>
+	                            <% end %>
 					</fieldset>
-				</div> <!-- span -->
+				</div> <!-- span <input class="searchinput"type="search" value="Plant Productivity"></input> -->
 			</div> <!-- row -->
 		</div> <!-- span -->
 	</div> <!-- row -->
@@ -203,7 +207,6 @@
 	</div>
 </div>
 <hr>
-	</div> <!-- span -->
 
 
 	<!-- BEGIN SEARCH RESULTS -->
@@ -211,7 +214,6 @@
 	<% if @results.present? %>
 
 	  <% @results.each do |result| %>
-	    <p><%= result.inspect %></p>
 	    <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
 		<div class="span9">
 			<div class="row">

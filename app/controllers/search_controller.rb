@@ -8,14 +8,14 @@ class SearchController < ApplicationController
   end
   def create
     @results = ExtracatMetadata.search(search_params)
-
+    @search_term = params["keywords"]
     respond_to do |format|
       format.html { render :index }
     end
   end
 
   def search_params
-    params.permit(:site_name, :id)
+    params.permit(:site_name, :id, :keywords)
     #binding.pry
   end
   def search_setup

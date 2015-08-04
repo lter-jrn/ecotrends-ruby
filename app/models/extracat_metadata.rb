@@ -35,10 +35,12 @@ class ExtracatMetadata < ActiveRecord::Base
   end
   #search for metadata to display in results page
   def self.search(term_hash)
-    #take the term_hash and get values for that table
-    #for right now we'll just use the id
-    self.where(entryid: term_hash["id"])
-    #self.get_values(term_hash["id"])
+    #take the term_hash and get values for that table either id or keywords
+    if term_hash["keywords"].present?
+      self.where("keywords like ?", "%#{term_hash['keywords']}%")
+    else
+      self.where(entryid: term_hash["id"])
+    end
   end
   #returns the dataset
   def self.get_values(entry_id)
