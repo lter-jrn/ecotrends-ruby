@@ -2,7 +2,7 @@
 	<h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 	<ul class="search-side">
-	  <%= form_tag('/search') do  %>
+	  <%= form_tag('/search', method: :get) do  %>
 	    <%#= select_tag :site_name, options_for_select(@sites) %><br />
 	    <%= select_tag :id, options_for_select(@ids.map(&:entryid)) %><br />
 	    <%= submit_tag %>
@@ -78,8 +78,8 @@
 				<div style="margin-right: -20px; padding-top: 27px;" class="span6">
 				  <fieldset>
 
-				    <%= form_tag('/search') do  %>
-				      <%= text_field_tag :keywords %>
+				    <%= form_tag('/search', method: :get) do  %>
+				      <%= text_field_tag :keywords, @search_term %>
 				      <%= submit_tag %>
 	                            <% end %>
 					</fieldset>
@@ -201,20 +201,22 @@
     </div>
     </li>
 		</ul>
-<hr>
+		<hr>
+		<% if @search_term %>
 <div class="row">
 	<div class="span9">
-		<a href="#"><%= image_tag "delete.png", class: "baricon" %>Plant Productivity&nbsp;</a>
-		<a href="#"><%= image_tag "delete.png", class: "baricon" %>New Mexico&nbsp;				 </a>
+		<a href="#"><%= image_tag "delete.png", class: "baricon" %><%= @search_term %>&nbsp;</a>		 </a>
 	</div>
 </div>
 <hr>
+<% end %>
 
 
 	<!-- BEGIN SEARCH RESULTS -->
 
 	<% if @results.present? %>
 
+		<%= paginate @results %>
 	  <% @results.each do |result| %>
 	    <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
 		<div class="span9">
@@ -241,6 +243,8 @@
 			<hr>
 		</div> <!-- span -->
 	  <% end %>
+
+	  <%= paginate @results %>
 	  <% end %>
 
 
