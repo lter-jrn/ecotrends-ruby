@@ -26,6 +26,7 @@ gem 'twitter-bootstrap-rails'
 gem "therubyracer"
 gem 'less-rails', '~> 2.7.0' #   gem "less-rails"
 gem 'kaminari'
+gem "net-ldap"
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
