@@ -10,6 +10,6 @@ class User < ActiveRecord::Base
     User.clear_active_connections!
     fields = vals.fields
     vals.present? ? vals.values.map {|value_set| Hash[fields.zip(value_set)]} : []
-
   end
+
 end

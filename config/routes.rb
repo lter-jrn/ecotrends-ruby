@@ -1,4 +1,6 @@
 EcoTrends::Application.routes.draw do
+  match 'signup' => 'registration#new', via: :get
+
   # get 'search/index'
 
   # get 'search/create'

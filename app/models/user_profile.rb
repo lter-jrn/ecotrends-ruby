@@ -14,6 +14,14 @@ class UserProfile < ActiveRecord::Base
     User.clear_active_connections!
     fields = vals.fields
     vals.present? ? vals.values.map {|value_set| Hash[fields.zip(value_set)]} : []
+  end
 
+  def self.authenticate(the_uid, password)
+    the_user = self.get_by_uid(the_uid).first
+    if the_user
+      Digest::SHA1.base64digest(password) == the_user["passphrase"]
+    else
+      false
+    end
   end
 end
