@@ -55,7 +55,7 @@
               <li><%= link_to "Datastore", "/home/datastore"  %></li>
             </ul>
             <div class="welcome-block">
-							<p><i>Welcome, Joe Blow</i></p>
+							<p><i>Welcome, <%= session["current_user"] %></i></p>
 			        <ul>
 			        	<a href="/account"><li>Account</li></a>
 			        	<a href="/logout"><li>Log Out</li></a>

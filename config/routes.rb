@@ -1,6 +1,9 @@
 EcoTrends::Application.routes.draw do
+  get 'login' => 'login#show'
+  post 'login' => 'login#create'
+  get 'logout' => 'login#destroy'
   match 'signup' => 'registration#new', via: :get
-
+  post 'signup' => 'registration#create'
   # get 'search/index'
 
   # get 'search/create'

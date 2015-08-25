@@ -1,0 +1,13 @@
+<h1>Login</h1>
+
+<%= form_tag '/login' do |form| %>
+  <p>
+    <%= label_tag 'Username' %>: <%= text_field_tag :uid, nil, placeholder: "Enter Username"%>
+  </p>
+  <p>
+    <%= label_tag 'Password' %>: <%= password_field_tag :password %>
+  </p>
+  <p>
+    <%= submit_tag %>
+  </p>
+<% end %>

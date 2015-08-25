@@ -19,9 +19,13 @@ class UserProfile < ActiveRecord::Base
   def self.authenticate(the_uid, password)
     the_user = self.get_by_uid(the_uid).first
     if the_user
-      Digest::SHA1.base64digest(password) == the_user["passphrase"]
+      self.encrypt_password(password) == the_user["passphrase"] ? the_user : false
     else
       false
     end
+  end
+
+  def self.encrypt_password(password)
+    Digest::SHA1.base64digest(password)
   end
 end

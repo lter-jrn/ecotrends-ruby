@@ -1,0 +1,31 @@
+<h1>Sign Up for a new EcoTrends account</h1>
+<%= form_tag '/signup' do |form| %>
+  <p>
+    <%= label_tag 'Username' %>: <%= text_field_tag :uid, nil, placeholder: "Enter Username"%>
+  </p>
+  <p>
+    <%= label_tag 'Given Name' %>: <%= text_field_tag :gname, nil, placeholder: "Enter First Name"%>
+  </p>
+  <p>
+    <%= label_tag 'Last Name' %>: <%= text_field_tag :sname, nil, placeholder: "Enter Last Name"%>
+  </p>
+  <p>
+    <%= label_tag 'Organization' %>: <%= text_field_tag :org, nil, placeholder: "Enter Organization Name"%>
+  </p>
+  <p>
+    <%= label_tag 'Email' %>: <%= text_field_tag :email, nil, placeholder: "Enter Email"%>
+  </p>
+  <p>
+    <%= label_tag 'Phone' %>: <%= telephone_field_tag :phone, nil, placeholder: "Enter Phone #"%>
+  </p>
+  <p>
+    <%= label_tag 'Password' %>: <%= password_field_tag :password %>
+  </p>
+  <p>
+    <%= label_tag 'Password Confirmation' %>: <%= password_field_tag :password_confirmation %>
+  </p>
+  <p>
+    <%= submit_tag %>
+  </p>
+<% end %>
+<h1>Sign Up with an Affiliate Network Account</h1>
