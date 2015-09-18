@@ -40,6 +40,10 @@
     <%= label_tag 'Password Confirmation' %> <%= password_field_tag :password_confirmation %>
   </p>
   <p>
-    <%= submit_tag %>
+    <%= submit_tag "Register" %>
   </p>
 <% end %>
+
+  <p>
+    <i><%= link_to "Log In", signup_path%> if you are an existing member.</i>
+  </p>
