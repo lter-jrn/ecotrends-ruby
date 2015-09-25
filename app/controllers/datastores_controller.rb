@@ -16,4 +16,16 @@ class DatastoresController < ApplicationController
     end
     redirect_to datastores_path, notice: "Dataset was {is_not}saved"
   end
+
+  def destroy
+    is_not = "not "
+    @saved_dataset = SavedDataset.where(idsave: params[:id])
+    if @saved_dataset.present?
+      binding.pry
+      @saved_dataset.first.destroy
+      is_not = ""
+    end
+
+    redirect_to datastores_path, notice: "Dataset was #{is_not}deleted"
+  end
 end

@@ -31,7 +31,8 @@
 		  </div> <!-- span -->
 		  <div class="span2 searchright">
 		    <h4><%= result.extracat_metadata.begin_date.year%> - <%= result.extracat_metadata.end_date.year %></h4>
-		    <%= link_to image_tag("datastore_on.png"), search_path(result.extracat_metadata.entryid) %>
+		    <%= link_to image_tag("datastore_on.png"), search_path(result.extracat_metadata.entryid) %><hr/>
+		    <p><%= link_to 'Destroy?', datastore_path(result.idsave), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 		  </div> <!-- span -->
 			</div> <!-- row -->
 		</div> <!-- span -->
