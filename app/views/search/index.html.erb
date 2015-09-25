@@ -224,7 +224,7 @@
 		<div class="row">
 		  <div class="span1">
 		    <fieldset>
-			<%= check_box_tag :docid, result.docid.to_s, false, {multiple: true} %>&nbsp;&nbsp;
+			<%= check_box_tag :docid, result.docid.to_s, false, {multiple: true, name: 'docids[]'} %>&nbsp;&nbsp;
 		    </fieldset>
 		  </div> <!-- span -->
 		  <div class="span6">
@@ -242,7 +242,7 @@
 		<hr>
 	      </div> <!-- span -->
 	  <% end %>
-	  <%= submit_tag %>
+	  <%= submit_tag "Save To Datastore" %>
 	  <% end %>
 	  <%= paginate @results %>
 	  <% end %>
