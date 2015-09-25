@@ -11,6 +11,7 @@ class LoginController < ApplicationController
       if @user.present?
         #session stuff here
         session["current_user"] = @user["uid"]
+        session["iduser"] = @user["iduser"]
         the_route = '/search'
       end
     end
@@ -20,6 +21,8 @@ class LoginController < ApplicationController
   def destroy
     #destroy session here
     session["current_user"] = ""
+
+    session["iduser"] = ""
     redirect_to '/login'
   end
 

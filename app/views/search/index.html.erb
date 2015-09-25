@@ -216,34 +216,34 @@
 
 	<% if @results.present? %>
 
-		<%= paginate @results %>
-	  <% @results.each do |result| %>
-	    <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
-		<div class="span9">
-			<div class="row">
-				<div class="span1">
-					<fieldset>
-						<form>
-							<input type="checkbox"></input>
-						</form>
-					</fieldset>
-				</div> <!-- span -->
-				<div class="span6">
-					<a href="#"><h4 class="darkbrown"><%= result.variable_name %></h4></a>
-					<p class="searchbody"><%= result.subtopic%></p>
-					<p><%= image_tag "station.png", class: "icon" %>
-						<a href="#"><b><%= result.station_names %></b>/ <%= result.site_name%></a>
-						 --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name%> -- <%= result.timescale %></p>
-				</div> <!-- span -->
-				<div class="span2 searchright">
-					<h4><%= result.begin_date.year%> - <%= result.end_date.year %></h4>
-					<%= link_to image_tag("datastore_on.png"), search_path(result.entryid) %>
-				</div> <!-- span -->
-			</div> <!-- row -->
-			<hr>
-		</div> <!-- span -->
+	  <%= paginate @results %>
+	  <%= form_tag('/datastores') do %>
+	    <% @results.each do |result| %>
+	      <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
+	      <div class="span9">
+		<div class="row">
+		  <div class="span1">
+		    <fieldset>
+			<%= check_box_tag :docid, result.docid.to_s, false, {multiple: true} %>&nbsp;&nbsp;
+		    </fieldset>
+		  </div> <!-- span -->
+		  <div class="span6">
+		    <a href="#"><h4 class="darkbrown"><%= result.variable_name %></h4></a>
+		    <p class="searchbody"><%= result.subtopic%></p>
+		    <p><%= image_tag "station.png", class: "icon" %>
+		      <a href="#"><b><%= result.station_names %></b>/ <%= result.site_name%></a>
+		      --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name%> -- <%= result.timescale %></p>
+		  </div> <!-- span -->
+		  <div class="span2 searchright">
+		    <h4><%= result.begin_date.year%> - <%= result.end_date.year %></h4>
+		    <%= link_to image_tag("datastore_on.png"), search_path(result.entryid) %>
+		  </div> <!-- span -->
+		</div> <!-- row -->
+		<hr>
+	      </div> <!-- span -->
 	  <% end %>
-
+	  <%= submit_tag %>
+	  <% end %>
 	  <%= paginate @results %>
 	  <% end %>
 

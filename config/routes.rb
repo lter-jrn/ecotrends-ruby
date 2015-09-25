@@ -1,4 +1,6 @@
 EcoTrends::Application.routes.draw do
+  resources :datastores
+
   get 'login' => 'login#show'
   post 'login' => 'login#create'
   get 'logout' => 'login#destroy'

@@ -1,5 +1,6 @@
 class UserProfile < ActiveRecord::Base
   establish_connection(:user)
+  has_many :saved_datasets, foreign_key: 'iduser'
   #u = UserProfile.new(uid: "pjamm", regdate: DateTime.now, status:1, gname: "Philip", sname: "Test", net:"ECOTRENDS", org: "NSMU Test", email: "philip@ingram.com", phone: "212-555-1212")
   def self.table_name
     'user_profile'

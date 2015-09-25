@@ -1,6 +1,7 @@
 # This class is containing all the Meta Data to Search against and display in Search Results
 class ExtracatMetadata < ActiveRecord::Base
   establish_connection(:development)
+  has_many :saved_datasets, foreign_key: 'docid'
 # entryid
 # docid
 # rev

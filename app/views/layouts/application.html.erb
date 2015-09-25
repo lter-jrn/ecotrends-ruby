@@ -52,13 +52,13 @@
               <li><%= link_to "About EcoTrends", "/home/about"  %></li>
               <li><%= link_to "Glossary", "/home/glossary"  %></li>
               <li><%= link_to "Infographics", "/home/infographics"  %></li>
-              <li><%= link_to "Datastore", "/home/datastore"  %></li>
+              <li><%= link_to "Datastore", "/datastores"  %></li>
             </ul>
             <div class="welcome-block">
 
 			        <ul class="nav">
-				  <% if session["current_user"].present?%>
-				    <p><i>Welcome, <%= session["current_user"] %></i></p>
+				  <% if current_user.present?%>
+				    <p><i>Welcome, <%= current_user %></i></p>
 			            <a href="#"><li>Account</li></a>
 			            <a href="/logout"><li>Log Out</li></a>
 				  <% else %>
