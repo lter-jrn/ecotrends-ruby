@@ -21,7 +21,6 @@ class DatastoresController < ApplicationController
     is_not = "not "
     @saved_dataset = SavedDataset.where(idsave: params[:id])
     if @saved_dataset.present?
-      binding.pry
       @saved_dataset.first.destroy
       is_not = ""
     end
