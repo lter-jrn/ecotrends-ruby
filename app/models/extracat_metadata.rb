@@ -45,13 +45,14 @@ class ExtracatMetadata < ActiveRecord::Base
   end
   #returns the dataset
   def self.get_values(entry_id)
-    et_table_name = where(entryid: entry_id).first.real_table_name
+    data_record = where(entryid: entry_id).first
+    et_table_name = data_record.real_table_name
     search_connection = SearchDatum.connection
-    #binding.pry
     vals = search_connection.execute("SELECT * from #{et_table_name}")
     SearchDatum.clear_active_connections!
     fields = vals.fields
     #we may get to use a generic model if each of the fields are the same. time will tell.
-    vals.present? ? vals.values.map {|value_set| Hash[fields.zip(value_set)]} : []
+    val_set = vals.present? ? vals.values.map {|value_set| Hash[fields.zip(value_set)]} : []
+    return data_record, val_set
   end
 end

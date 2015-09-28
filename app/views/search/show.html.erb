@@ -1,5 +1,20 @@
 <h1>Data Results</h1>
-<p><%= link_to "back", search_index_path %></p>
-<% @data.each do |data| %>
-  <p><%= data %></p>
-<% end %>
+<p><%= link_to "back", search_index_path %> | <%= link_to "Print Version", search_path(params[:id], print: true) %></p>
+
+<% data = {
+    labels: @data.map {|d| d["year"]},
+    datasets: [
+        {
+            label: @data_record.variable_name,
+            fillColor: "rgba(220,220,220,0.2)",
+            strokeColor: "rgba(220,220,220,1)",
+            pointColor: "rgba(220,220,220,1)",
+            pointStrokeColor: "#fff",
+            pointHighlightFill: "#fff",
+            pointHighlightStroke: "rgba(220,220,220,1)",
+            data: @data.map {|d| d["observation"]}
+        }
+    ]
+} %>
+<% options = {width: 1000, generateLegend: true} %>
+<%= line_chart data, options %>

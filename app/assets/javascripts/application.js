@@ -15,4 +15,6 @@
 //= require twitter/bootstrap
 //= require load-image.min
 //= require load-image
+//= require Chart
+//= require excanvas
 //= require_tree .

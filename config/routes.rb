@@ -1,4 +1,5 @@
 EcoTrends::Application.routes.draw do
+  get "testcharts" => 'search#test'
   resources :datastores
 
   get 'login' => 'login#show'
