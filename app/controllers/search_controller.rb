@@ -1,3 +1,4 @@
+require 'csv'
 class SearchController < ApplicationController
   before_filter :search_setup, :only => [:index]
   layout :get_layout, only: :show
@@ -7,7 +8,26 @@ class SearchController < ApplicationController
   end
   def show
     @data_record, @data = ExtracatMetadata.get_values(params[:id])
+    respond_to do |format|
+      format.html
+      format.csv do
+          @csv_string = CSV.generate do |csv|
+
+          # header row
+            csv << [@data_record.timescale.gsub("ly", ""), @data_record.variable_name]
+            # data rows
+            @data.each do |datum|
+              csv << [datum["year"], datum["observation"]]
+            end
+          end
+          # send the data to the browser
+          send_data @csv_string,
+          :type => 'text/plain; charset=iso-8859-1; header=present',
+          :disposition => "attachment; filename=#{@data_record.variable_name}--#{@data_record.begin_date.to_date.year}-#{@data_record.end_date.to_date.year}.csv"
+      end
+    end
   end
+
   def test
 
   end

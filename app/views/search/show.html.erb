@@ -1,5 +1,5 @@
 <h1>Data Results</h1>
-<p><%= link_to "back", search_index_path %> | <%= link_to "Print Version", search_path(params[:id], print: true) %></p>
+<p><%= link_to "back", search_index_path %> | <%= link_to "Print Version", search_path(params[:id], print: true) %> | <%= link_to "CSV Download", search_path(params[:id], format: "csv") %></p>
 
 <% data = {
     labels: @data.map {|d| d["year"]},
