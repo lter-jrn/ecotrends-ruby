@@ -1,4 +1,5 @@
 EcoTrends::Application.routes.draw do
+  get "comparison" => 'datastores#compare', as: :comparison
   get "testcharts" => 'search#test'
   resources :datastores
 

@@ -53,6 +53,29 @@ class ExtracatMetadata < ActiveRecord::Base
     fields = vals.fields
     #we may get to use a generic model if each of the fields are the same. time will tell.
     val_set = vals.present? ? vals.values.map {|value_set| Hash[fields.zip(value_set)]} : []
-    return data_record, val_set
+    return data_record, val_set.map {|d| {:year => d["year"], observation: d["observation"]}}
+  end
+
+    #returns the dataset
+  def self.get_values_by_docid(doc_ids)
+    years = []
+    return_records = []
+    doc_ids.each do |doc_id|
+      hash_rec = {}
+      data_record = where(docid: doc_id).first
+      et_table_name = data_record.real_table_name
+      search_connection = SearchDatum.connection
+      vals = search_connection.execute("SELECT * from #{et_table_name}")
+      SearchDatum.clear_active_connections!
+      fields = vals.fields
+      #we may get to use a generic model if each of the fields are the same. time will tell.
+      val_set = vals.present? ? vals.values.map {|value_set| Hash[fields.zip(value_set)]} : []
+      #binding.pry
+      final_hash = val_set.each {|d| hash_rec.merge!(d["year"] => d["observation"])}
+      #binding.pry
+      years += hash_rec.keys
+      return_records << {record: data_record, datum: hash_rec.sort.to_h}
+    end
+    return return_records, years.sort.flatten.uniq
   end
 end

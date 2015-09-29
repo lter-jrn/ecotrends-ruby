@@ -1,0 +1,4 @@
+<h1>Compare Datasets</h1>
+<h1>Data Results</h1>
+<p><%= link_to "back", search_index_path %> | <%= link_to "Print Version", comparison_path(params[:id], print: true) %> <%#= link_to "CSV Download", search_path(params[:id], format: "csv") %></p>
+<%= line_chart @data, {width: 1000, generateLegend: true} %>

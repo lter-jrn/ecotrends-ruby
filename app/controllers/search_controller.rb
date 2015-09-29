@@ -17,7 +17,7 @@ class SearchController < ApplicationController
             csv << [@data_record.timescale.gsub("ly", ""), @data_record.variable_name]
             # data rows
             @data.each do |datum|
-              csv << [datum["year"], datum["observation"]]
+              csv << [datum[:year], datum[:observation]]
             end
           end
           # send the data to the browser
@@ -31,21 +31,18 @@ class SearchController < ApplicationController
   def test
 
   end
-  # def create
-  #   respond_to do |format|
-  #     format.html { render :index }
-  #   end
-  # end
+
+  private
 
   def search_params
     params.permit(:site_name, :id, :keywords, :page)
   end
+
   def search_setup
     @sites = ExtracatMetadata.sites
     @ids = ExtracatMetadata.limit(20)
   end
 
-  private
   def get_layout
     if params[:print]
       "print"
@@ -53,4 +50,5 @@ class SearchController < ApplicationController
       "application"
     end
   end
+
 end

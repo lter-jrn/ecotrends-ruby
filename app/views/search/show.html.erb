@@ -2,7 +2,7 @@
 <p><%= link_to "back", search_index_path %> | <%= link_to "Print Version", search_path(params[:id], print: true) %> | <%= link_to "CSV Download", search_path(params[:id], format: "csv") %></p>
 
 <% data = {
-    labels: @data.map {|d| d["year"]},
+    labels: @data.map {|d| d[:year]},
     datasets: [
         {
             label: @data_record.variable_name,
@@ -12,7 +12,7 @@
             pointStrokeColor: "#fff",
             pointHighlightFill: "#fff",
             pointHighlightStroke: "rgba(220,220,220,1)",
-            data: @data.map {|d| d["observation"]}
+            data: @data.map {|d| d[:observation]}
         }
     ]
 } %>

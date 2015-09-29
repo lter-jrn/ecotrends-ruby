@@ -1,41 +1,42 @@
 <div class="row">
-	<div class="span12 hover">
-		<h1>Data Store</h1>
-		<h5>Your Saved Datasets | Go to <%= link_to "Search Page", search_index_path%></h5>
-	</div> <!-- span -->
+  <div class="span12 hover">
+    <h1>Data Store</h1>
+    <h5>Your Saved Datasets | Go to <%= link_to "Search Page", search_index_path%></h5>
+  </div> <!-- span -->
 </div> <!-- row -->
 <div class="row">
-	<div class="span12 headerbar">
-		<button class="btn">Compare Selected</button>
-	</div> <!-- span -->
+
+
+  <%= form_tag('/comparison', method: :get) do %>
+    <div class="span12 headerbar">
+      <button class="btn">Compare Selected</button>
+    </div> <!-- span -->
 </div> <!-- row -->
 
 <!-- BEGIN SEARCH RESULTS -->
-
 <% @datastores.each do |result| %>
-	<div class="row">
-		<div class="span12">
-			<div class="row">
-				<div class="span1">
-					<fieldset>
-						<form>
-							<input type="checkbox"></input>
-						</form>
-					</fieldset>
-				</div> <!-- span -->
-				<div class="span9">
-					<a href="#"><h4 class="darkbrown"><%= result.extracat_metadata.variable_name %></h4></a>
-					<p class="searchbody"></p>
-					<p><%= image_tag "station.png", class: "icon" %><%= result.extracat_metadata.station_names %></b>/ <%= result.extracat_metadata.site_name%></a>
-		      --<%= result.extracat_metadata.topic %> / <%= result.extracat_metadata.subtopic %> -- <%= result.extracat_metadata.unit_name%> -- <%= result.extracat_metadata.timescale %></p>
-		  </div> <!-- span -->
-		  <div class="span2 searchright">
-		    <h4><%= result.extracat_metadata.begin_date.year%> - <%= result.extracat_metadata.end_date.year %></h4>
-		    <%= link_to image_tag("datastore_on.png"), search_path(result.extracat_metadata.entryid) %><hr/>
-		    <p><%= link_to 'Destroy?', datastore_path(result.idsave), method: :delete, data: { confirm: 'Are you sure?' } %></p>
-		  </div> <!-- span -->
-			</div> <!-- row -->
-		</div> <!-- span -->
-	</div> <!-- row -->
-<hr>
-<% end %>
+  <div class="row">
+    <div class="span12">
+      <div class="row">
+	<div class="span1">
+	  <fieldset>
+	      <%= check_box_tag :docid, result.docid.to_s, false, {multiple: true, name: 'docids[]'} %>&nbsp;&nbsp;
+	  </fieldset>
+	</div> <!-- span -->
+	<div class="span9">
+	  <a href="#"><h4 class="darkbrown"><%= result.extracat_metadata.variable_name %></h4></a>
+	  <p class="searchbody"></p>
+	  <p><%= image_tag "station.png", class: "icon" %><%= result.extracat_metadata.station_names %></b>/ <%= result.extracat_metadata.site_name%></a>
+	    --<%= result.extracat_metadata.topic %> / <%= result.extracat_metadata.subtopic %> -- <%= result.extracat_metadata.unit_name%> -- <%= result.extracat_metadata.timescale %></p>
+	</div> <!-- span -->
+	<div class="span2 searchright">
+	  <h4><%= result.extracat_metadata.begin_date.year%> - <%= result.extracat_metadata.end_date.year %></h4>
+	  <%= link_to image_tag("datastore_on.png"), search_path(result.extracat_metadata.entryid) %><hr/>
+	  <p><%= link_to 'Destroy?', datastore_path(result.idsave), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	</div> <!-- span -->
+      </div> <!-- row -->
+    </div> <!-- span -->
+  </div> <!-- row -->
+  <hr>
+  <% end %>
+  <% end %> <!-- form end one hopes -->
