@@ -228,7 +228,7 @@
 		    </fieldset>
 		  </div> <!-- span -->
 		  <div class="span6">
-		    <a href="#"><h4 class="darkbrown"><%= result.variable_name %></h4></a>
+		    <a href="#"><h4 class="darkbrown"><%= link_to  result.variable_name, search_path(result.entryid) %></h4></a>
 		    <p class="searchbody"><%= result.subtopic%></p>
 		    <p><%= image_tag "station.png", class: "icon" %>
 		      <a href="#"><b><%= result.station_names %></b>/ <%= result.site_name%></a>

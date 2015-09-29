@@ -69,9 +69,7 @@ class DatastoresController < ApplicationController
   def clean_up_data(data_set, labels)
     puts " I am dataset: #{data_set}"
     labels.map do |year|
-      z = data_set[:datum].has_key?(year) ? data_set[:datum][year] : nil
-      puts z
-      z
+      data_set[:datum].has_key?(year.to_s) ? data_set[:datum][year.to_s] : nil
     end
   end
 

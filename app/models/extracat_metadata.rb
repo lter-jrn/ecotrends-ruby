@@ -76,6 +76,13 @@ class ExtracatMetadata < ActiveRecord::Base
       years += hash_rec.keys
       return_records << {record: data_record, datum: hash_rec.sort.to_h}
     end
-    return return_records, years.sort.flatten.uniq
+    return return_records, self.year_range_for_labels(years)
+  end
+
+  def self.year_range_for_labels(years)
+    new_years = years.sort.flatten.uniq
+    minn = new_years.min.to_i
+    maxx = new_years.max.to_i
+    (minn..maxx).to_a
   end
 end
