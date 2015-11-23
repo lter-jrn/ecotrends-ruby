@@ -9,11 +9,13 @@ class RegistrationController < ApplicationController
     if params["password"].present? && (params["password"] == params["password_confirmation"])
       network = "ECOTRENDS"
       if params["network"].present?
-        if UserProfile.ldap_authenticate(params["network"], params["uid"], params["password"])
+
+        if muck = UserProfile.ldap_authenticate(params["network"], params["uid"], params["password"])
           network = params["network"]
         else
           network = ""
         end
+        Rails.logger.info(muck.inspect)
       end
       if network.present?
         @user = UserProfile.new(regdate: DateTime.now, uid: params["uid"], status: 1, gname: params["gname"], sname: params["sname"], net: network, org: params["org"], email: params["email"], phone: params["phone"], passphrase: UserProfile.encrypt_password(params["password"]))

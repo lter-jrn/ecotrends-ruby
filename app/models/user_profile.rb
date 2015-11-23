@@ -36,7 +36,8 @@ class UserProfile < ActiveRecord::Base
 # ldap.authenticate "uid=pingram,o=LTER,dc=ecoinformatics,dc=org", “mypassword”
 # ldap.bind => true
   def self.ldap_authenticate(network, the_uid, password)
-    the_network, ou_statement = self.set_network_and_statement(the_uid, network) #get the whole statement here instead of just the ou. adjust for new LTER ldap.
+    the_network = self.get_network(network)
+    ou_statement = self.set_statement(the_uid, network) #get the whole statement here instead of just the ou. adjust for new LTER ldap.
     ldap = Net::LDAP.new
     ldap.host = the_network
     ldap.authenticate(ou_statement, password)
@@ -56,13 +57,21 @@ class UserProfile < ActiveRecord::Base
     Digest::SHA1.base64digest(password)
   end
 
+  def self.get_network(network)
+    if ["LTER"].include? network
+      "ldap.lternet.edu"
+    else
+      "ldap.ecoinformatics.org"
+    end
+  end
+
   def self.set_network_and_statement(the_uid, network)
     if ["NCEAS", "DataONE", "Kepler"].include? network
-     return "ldap.ecoinformatics.org", "uid=#{the_uid},ou=Account,dc=ecoinformatics,dc=org"
+      "uid=#{the_uid},ou=Account,dc=ecoinformatics,dc=org"
     elsif ["LTER"].include? network
-      return "ldap.lternet.edu", "uid=#{the_uid},o=LTER,dc=ecoinformatics,dc=org""o=LTER"
+      "uid=#{the_uid},o=LTER,dc=ecoinformatics,dc=org"
     else
-      return "ldap.ecoinformatics.org", "uid=#{the_uid},o=unaffiliated,dc=ecoinformatics,dc=org" ""
+      "uid=#{the_uid},o=unaffiliated,dc=ecoinformatics,dc=org"
     end
   end
 end
