@@ -65,7 +65,7 @@ class UserProfile < ActiveRecord::Base
     end
   end
 
-  def self.set_network_and_statement(the_uid, network)
+  def self.set_statement(the_uid, network)
     if ["NCEAS", "DataONE", "Kepler"].include? network
       "uid=#{the_uid},ou=Account,dc=ecoinformatics,dc=org"
     elsif ["LTER"].include? network
