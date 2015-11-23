@@ -1,3 +1,4 @@
+# coding: utf-8
 class UserProfile < ActiveRecord::Base
   establish_connection(:user)
   has_many :saved_datasets, foreign_key: 'iduser'
@@ -31,12 +32,14 @@ class UserProfile < ActiveRecord::Base
       UserProfile.ecotrend_authenticate(params["uid"], params["password"])
     end
   end
-
+# ldap = Net::LDAP.new(host: "ldap.lternet.edu", base: "o=LTER,dc=ecoinformatics,dc=org”)
+# ldap.authenticate "uid=pingram,o=LTER,dc=ecoinformatics,dc=org", “mypassword”
+# ldap.bind => true
   def self.ldap_authenticate(network, the_uid, password)
-    ou_statement = self.set_ou(network)
+    the_network, ou_statement = self.set_network_and_statement(the_uid, network) #get the whole statement here instead of just the ou. adjust for new LTER ldap.
     ldap = Net::LDAP.new
-    ldap.host = "ldap.ecoinformatics.org"
-    ldap.authenticate("uid=#{the_uid},#{ou_statement},dc=ecoinformatics,dc=org", password)
+    ldap.host = the_network
+    ldap.authenticate(ou_statement, password)
     ldap.bind
   end
 
@@ -53,11 +56,13 @@ class UserProfile < ActiveRecord::Base
     Digest::SHA1.base64digest(password)
   end
 
-  def self.set_ou(network)
+  def self.set_network_and_statement(the_uid, network)
     if ["NCEAS", "DataONE", "Kepler"].include? network
-      "ou=Account"
+     return "ldap.ecoinformatics.org", "uid=#{the_uid},ou=Account,dc=ecoinformatics,dc=org"
+    elsif ["LTER"].include? network
+      return "ldap.lternet.edu", "uid=#{the_uid},o=LTER,dc=ecoinformatics,dc=org""o=LTER"
     else
-      "o=unaffiliated"
+      return "ldap.ecoinformatics.org", "uid=#{the_uid},o=unaffiliated,dc=ecoinformatics,dc=org" ""
     end
   end
 end
