@@ -3,8 +3,12 @@ class SearchController < ApplicationController
   before_filter :search_setup, :only => [:index]
   layout :get_layout, only: :show
   def index
-    @results = ExtracatMetadata.search(search_params).page(params[:page])
+    binding.pry
+    @search = ExtracatMetadata.search(search_params)
+    @results = @search.page(params[:page])
     @search_term = params["keywords"]
+    @sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
+    @variables = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
   end
   def show
     @data_record, @data = ExtracatMetadata.get_values(params[:id])
@@ -35,7 +39,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :keywords, :page)
+    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site)
   end
 
   def search_setup

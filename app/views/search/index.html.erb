@@ -1,64 +1,39 @@
 <div class="span3">
+  <h3>Filter Results</h3>
 	<h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 	<ul class="search-side">
-	  <%= form_tag('/search', method: :get) do  %>
-	    <%#= select_tag :site_name, options_for_select(@sites) %><br />
-	    <%= select_tag :id, options_for_select(@ids.map(&:entryid)) %><br />
-	    <%= submit_tag %>
+	  <%= form_tag(request.fullpath, method: :get) do  %>
+	    <%= hidden_field_tag :keywords, @search_term %>
+	    <% @sites.each do |site| %>
+	      <li><%= check_box_tag :site, site %> <%= site %></li>
+	    <% end %>
+	  <%= submit_tag %>
 	  <% end %>
-		<a href="#"><li>All Sites</li>														</a>
-		<a href="#"><li><b>Arctic LTER</b></li>										</a>
-		<a href="#"><li>Baltimore Ecosystem Study LTER</li>				</a>
-		<a href="#"><li>Bent Creek Experimental Forest</li>				</a>
-		<a href="#"><li>Blacks Mountain Experimental Forest</li>	</a>
-		<a href="#"><li>Bonanza Creek										 </li>		</a>
-		<a href="#"><li>California Current Ecosytem			 </li>		</a>
-		<a href="#"><li>Cascade Head Experimental Forest </li>		</a>
-		<a href="#"><li>Caspar Creek Experimental Waters.</li>		</a>
-		<a href="#"><li>Cedar Creek Ecosystem Science Reserve</li></a>
-		<a href="#"><li>Central Arizona - Phoenix Urban LTER</li>	</a>
-		<a href="#"><li>Coweeta													 </li>		</a>
-		<a href="#"><li>Crossett Experimental Forest		 </li>		</a>
-		<a href="#"><li><b>Show More &#x25BC;</b></li>		</a>
 	</ul>
 	<hr>
 
-	<h4><%= image_tag "networkicon.png", class: "baricon" %><a href="#">Networks</a><span style="float:right;"><a href="#">All</a></span></h4>
+	<h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">Date Range</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 	<ul class="search-side">
-		<a href="#"><li>All Networks</li>														</a>
-		<a href="#"><li>LTER</li>										</a>
-		<a href="#"><li>USDA-ARS</li>				</a>
-		<a href="#"><li>LTAR</li>				</a>
-		<a href="#"><li>USFS</li>	</a>
+	  <%= form_tag(request.fullpath, method: :get) do  %>
+	    <%= hidden_field_tag :keywords, @search_term %>
+	      <li>Min Date: <%= text_field_tag :min_date %></li>
+	      <li>Max Date: <%= text_field_tag :max_date %></li>
+	  <% end %>
 	</ul>
-	<hr>
-
-	<h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">EcoSystem Types</a><span style="float:right;"><a href="#">+/-</a></span></h4>
-	<hr>
-	<ul class="search-side">
-		<a href="#"><li>All Ecosystems</li>														</a>
-		<a href="#"><li><b>Apline &amp; Arctic</b></li>										</a>
-		<a href="#"><li>Aridlands</li>				</a>
-		<a href="#"><li>Eastern Forrest</li>				</a>
-		<a href="#"><li>Rock &amp; Ice</li>	</a>
-		<a href="#"><li>Western Forrest</li>	</a>
-		<a href="#"><li>Other</li>	</a>
-	</ul>
-	<hr>
-
-	<h4><%= image_tag "topicicon.png", class: "baricon" %><a href="#">Topics</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 
 		<h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Variables Measured</a><span style="float:right;"><a href="#">+/-</a></span></h4>
 	<hr>
 	<ul class="search-side">
-		<a href="#"><li>All Variables</li>														</a>
-		<a href="#"><li><b>Density</b></li>										</a>
-		<a href="#"><li>Biomass</li>				</a>
-		<a href="#"><li>Productivity</li>				</a>
-		<a href="#"><li>Diversity of Richness</li>	</a>
+	  <%= form_tag(request.fullpath, method: :get) do  %>
+	    <%= hidden_field_tag :keywords, @search_term %>
+	    <% @variables.each do |variable| %>
+	      <li><%= check_box_tag :variable_name, variable %> <%= variable %></li>
+	  <% end %>
+	  <%= submit_tag %>
+	  <% end %>
 	</ul>
 
 </div> <!-- span -->
