@@ -3,7 +3,6 @@ class SearchController < ApplicationController
   before_filter :search_setup, :only => [:index]
   layout :get_layout, only: :show
   def index
-    binding.pry
     @search = ExtracatMetadata.search(search_params)
     @results = @search.page(params[:page])
     @search_term = params["keywords"]
