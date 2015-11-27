@@ -4,10 +4,14 @@ class SearchController < ApplicationController
   layout :get_layout, only: :show
   def index
     @search = ExtracatMetadata.search(search_params)
-    @results = @search.page(params[:page])
-    @search_term = params["keywords"]
-    @sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
-    @variables = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
+    @variables = []
+    @the_sites = []
+    unless @search.blank?
+      @results = @search.page(params[:page])
+      @search_term = params["keywords"]
+      @the_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
+      @variables = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
+    end
   end
   def show
     @data_record, @data = ExtracatMetadata.get_values(params[:id])

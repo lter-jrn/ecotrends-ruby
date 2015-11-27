@@ -5,7 +5,7 @@
 	<ul class="search-side">
 	  <%= form_tag(request.fullpath, method: :get) do  %>
 	    <%= hidden_field_tag :keywords, @search_term %>
-	    <% @sites.each do |site| %>
+	    <% @the_sites.each do |site| %>
 	      <li><%= check_box_tag :site, site %> <%= site %></li>
 	    <% end %>
 	  <%= submit_tag %>
@@ -29,7 +29,7 @@
 	<ul class="search-side">
 	  <%= form_tag(request.fullpath, method: :get) do  %>
 	    <%= hidden_field_tag :keywords, @search_term %>
-	    <% @variables.each do |variable| %>
+	    <% @variables.map do |variable| %>
 	      <li><%= check_box_tag :variable_name, variable %> <%= variable %></li>
 	  <% end %>
 	  <%= submit_tag %>
