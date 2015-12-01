@@ -49,10 +49,16 @@
 	          <a class="brand" href="/home/index.html"><%= image_tag "EcoTrends-logo-large.png" %></a>
 	          <div class="container nav-collapse">
 	            <div class="welcome-block">
-		      <p>
-			<i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
-			<button class="btn">Log In</button>
-		      </p>
+				  <% if current_user.present?%>
+				    <p><i>Welcome, <%= current_user %></i>
+			            <a href="#"><li>Account</li></a>
+			            <a href="/logout"><li>Log Out</li></a></p>
+				  <% else %>
+				    <p>
+				      <i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
+				      <%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
+				    </p>
+				  <% end %>
 							</div>
 							<div class="row">
 								<div class="span12">
@@ -103,10 +109,16 @@
 	          <div class="container nav-collapse">
 	            <div class="welcome-block">
 
-		      <p>
-			<i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
-			<button class="btn">Log In</button>
-		      </p>
+				  <% if current_user.present?%>
+				    <p><i>Welcome, <%= current_user %></i>
+			            <a href="#"><li>Account</li></a>
+			            <a href="/logout"><li>Log Out</li></a></p>
+				  <% else %>
+				    <p>
+				      <i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
+				      <%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
+				    </p>
+				  <% end %>
 							</div>
 							<div class="row">
 								<div class="span12">
@@ -157,10 +169,16 @@
 	          <div class="container nav-collapse">
 	            <div class="welcome-block">
 
-		      <p>
-			<i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
-			<button class="btn">Log In</button>
-		      </p>
+				  <% if current_user.present?%>
+				    <p><i>Welcome, <%= current_user %></i>
+			            <a href="#"><li>Account</li></a>
+			            <a href="/logout"><li>Log Out</li></a></p>
+				  <% else %>
+				    <p>
+				      <i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
+				      <%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
+				    </p>
+				  <% end %>
 							</div>
 							<div class="row">
 								<div class="span12">
@@ -211,10 +229,16 @@
 	          <div class="container nav-collapse">
 	            <div class="welcome-block">
 
-		      <p>
-			<i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
-			<button class="btn">Log In</button>
-		      </p>
+				  <% if current_user.present?%>
+				    <p><i>Welcome, <%= current_user %></i>
+			            <a href="#"><li>Account</li></a>
+			            <a href="/logout"><li>Log Out</li></a></p>
+				  <% else %>
+				    <p>
+				      <i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
+				      <%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
+				    </p>
+				  <% end %>
 							</div>
 
 							<div class="row">
