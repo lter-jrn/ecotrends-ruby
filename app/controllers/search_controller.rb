@@ -17,6 +17,8 @@ class SearchController < ApplicationController
   end
   def show
     @data_record, @data = ExtracatMetadata.get_values(params[:id])
+    @show_lines = params[:show_lines].blank? ? true : false
+    @show_plots = params[:show_plots].blank? ? true : false
     respond_to do |format|
       format.html
       format.csv do

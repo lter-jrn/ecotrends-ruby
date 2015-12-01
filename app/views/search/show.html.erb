@@ -1,5 +1,5 @@
 <h1>Data Results</h1>
-<p><%= link_to "back", search_index_path %> | <%= link_to "Print Version", search_path(params[:id], print: true) %> | <%= link_to "CSV Download", search_path(params[:id], format: "csv") %></p>
+<p><%= link_to "back", search_index_path %> | <%= link_to "Print Version", search_path(params[:id], print: true) %> | <%= link_to "CSV Download", search_path(params[:id], format: "csv") %> | <%= link_to "Turn Off Grid Lines", search_path(params[:id], show_lines: true) %> | <%= link_to "Turn Off Plot Points", search_path(params[:id], show_plots: true) %> | <%= link_to "Turn Off Both Grid and Plot Points", search_path(params[:id], show_lines: true, show_plots: true) %></p>
 
 <% data = {
     labels: @data.map {|d| d[:year]},
@@ -16,5 +16,5 @@
         }
     ]
 } %>
-<% options = {width: 1000, generateLegend: true} %>
+<% options = {width: 1000, generateLegend: true, scaleShowGridLines: @show_lines, pointDot: @show_plots} %>
 <%= line_chart data, options %>
