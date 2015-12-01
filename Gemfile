@@ -23,6 +23,7 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'twitter-bootstrap-rails'
+gem 'bootstrap-datepicker-rails'
 gem "therubyracer"
 gem 'less-rails', '~> 2.7.0' #   gem "less-rails"
 gem 'kaminari'

@@ -8,6 +8,8 @@ class SearchController < ApplicationController
     @the_sites = []
     unless @search.blank?
       @results = @search.page(params[:page])
+      @min_date = params[:min_date]
+      @max_date = params[:max_date]
       @search_term = params["keywords"]
       @the_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
       @variables = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
@@ -42,7 +44,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site)
+    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site, :min_date, :max_date)
   end
 
   def search_setup

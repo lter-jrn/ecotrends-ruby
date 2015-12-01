@@ -18,8 +18,9 @@
 	<ul class="search-side">
 	  <%= form_tag(request.fullpath, method: :get) do  %>
 	    <%= hidden_field_tag :keywords, @search_term %>
-	      <li>Min Date: <%= text_field_tag :min_date %></li>
-	      <li>Max Date: <%= text_field_tag :max_date %></li>
+	      <li>Min Date: <%= text_field_tag :min_date, @min_date, class: "datepicker" %></li>
+	      <li>Max Date: <%= text_field_tag :max_date, @max_date, class: "datepicker" %></li>
+	  <%= submit_tag %>
 	  <% end %>
 	</ul>
 	<hr>
@@ -55,7 +56,7 @@
 
 				    <%= form_tag('/search', method: :get) do  %>
 				      <%= text_field_tag :keywords, @search_term %>
-				      <%= submit_tag %>
+				      <%= submit_tag "Search" %>
 	                            <% end %>
 					</fieldset>
 				</div> <!-- span <input class="searchinput"type="search" value="Plant Productivity"></input> -->

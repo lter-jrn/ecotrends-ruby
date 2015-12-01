@@ -46,6 +46,17 @@ class ExtracatMetadata < ActiveRecord::Base
     if term_hash["site"].present?
       keyword_search = keyword_search.where("site_name" => term_hash["site"])
     end
+    if term_hash["min_date"].present? && term_hash["max_date"].blank?
+      keyword_search = keyword_search.where("begin_date > ?", term_hash["min_date"])
+    end
+    if term_hash["max_date"].present? && term_hash["min_date"].blank?
+      keyword_search = keyword_search.where("end_date < ?", term_hash["max_date"])
+    end
+
+    if term_hash["max_date"].present? && term_hash["min_date"].present?
+      keyword_search = keyword_search.where("begin_date > ? and end_date < ?", term_hash["min_date"], term_hash["max_date"])
+    end
+
     keyword_search
   end
   #returns the dataset

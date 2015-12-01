@@ -17,4 +17,8 @@
 //= require load-image
 //= require Chart
 //= require excanvas
+//= require bootstrap-datepicker
 //= require_tree .
+$('.datepicker').datepicker({	format: 'yyyy-mm-dd'}).on('changeDate', function(e){
+        $('.datepicker').datepicker('hide');
+        });
