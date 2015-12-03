@@ -1,7 +1,7 @@
 <div style="margin-bottom: 60px;" class="row">
           <div class="span7">
             <h1>Ecological Data on Demand</h1>
-            <h5>The EcoTrends Project is designed to promote and enable the use and synthesis of long-term data to examine trends in the Earth's ecosystems.</h5>
+            <h5>The EcoTrends Project is designed to promote and enable the use and synthesis of long-term data to examine trends in the Earth's ecosystems.</h5>
             <p>The Earth's environment is changing at local, regional, and global scales. Dramatic changes have occurred over the past century in climate, land cover, and habitat availability with important consequences for plant, animal, microbial, and human populations. Long-term data provide the only means to assess the rate and direction of change, to distinguish directional trends from short-term variability, and to forecast environmental conditions in the future.</p>
           </div> <!-- span -->
           <div class="span5">
@@ -10,7 +10,7 @@
           			<%= image_tag "large-datastore.png" %>
           		</div> <!-- span -->
           		<div class="span4">
-								<h1>My Data Store</h1>
+								<h1><%= link_to "My Data Store", datastores_path%></h1>
 								<p>Save Datasets for easy retrieval later. Compare, chart or just download them for your research. </p>
           		</div> <!-- span -->
           	</div> <!-- row -->
@@ -19,7 +19,7 @@
           			<%= image_tag "large-charting.png" %>
           		</div> <!-- span -->
           		<div class="span4">
-								<h1>Powerful Charting</h1>
+								<h1><%= link_to "Powerful Charting", home_infographics_path%></h1>
 								<p>Build charts to visualize values within our data sets. </p>
           		</div> <!-- span -->
           	</div> <!-- row -->
@@ -28,7 +28,7 @@
           			<%= image_tag "large-glossary.png" %>
           		</div> <!-- span -->
           		<div class="span4">
-								<h1>Glossary</h1>
+								<h1><%= link_to "Glossary", home_glossary_path%></h1>
 								<p>Use our Glossary to stay informed on terminology.</p>
           		</div> <!-- span -->
           	</div> <!-- row -->

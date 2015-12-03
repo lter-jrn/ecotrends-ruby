@@ -1,4 +1,5 @@
 class LoginController < ApplicationController
+  skip_before_filter :allow_only_signed_in
   def show
 
   end

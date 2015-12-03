@@ -13,7 +13,7 @@
     <%= label_tag 'Organization' %> <%= text_field_tag :org, nil, placeholder: "Enter Organization Name"%>
   </p>
   <p>
-    <%= label_tag 'Email' %> <%= text_field_tag :email, nil, placeholder: "Enter Email"%>
+    <%= label_tag 'Email' %> <%= text_field_tag :email, params[:email], placeholder: "Enter Email"%>
   </p>
   <p>
     <%= label_tag 'Phone' %> <%= telephone_field_tag :phone, nil, placeholder: "Enter Phone #"%>

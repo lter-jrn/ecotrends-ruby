@@ -82,13 +82,13 @@
 									</div> <!-- span -->
 									<div style="float: right;" class="span3">
 										<h1 class="splashheader">Thousands of Datasets...</h1>
-										<form>
+										<%= form_tag '/signup' , method: :get do %>
 											<fieldset>
-										    <input type="text" placeholder="E-mail Address">
+										    <%= text_field_tag :email, "", placeholder: "E-mail Address" %>
 										    <br>
 												<button type="submit" class="btn btn-primary">Sign Up</button>
 											</fieldset>
-										</form>
+										<% end %>
 									</div> <!-- span -->
 								</div> <!-- span -->
 							</div> <!-- row -->
@@ -141,14 +141,14 @@
 
 									</div> <!-- span -->
 									<div style="float: right;" class="span3">
-										<h1 class="splashheader">Thousands of Datasets...</h1>
-										<form>
+									  <h1 class="splashheader">Thousands of Datasets...</h1>
+									  <%= form_tag '/signup' , method: :get do %>
 											<fieldset>
-										    <input type="text" placeholder="E-mail Address">
+										    <%= text_field_tag :email,  "",placeholder: "E-mail Address" %>
 										    <br>
 												<button type="submit" class="btn btn-primary">Sign Up</button>
 											</fieldset>
-										</form>
+									<% end %>
 									</div> <!-- span -->
 								</div> <!-- span -->
 							</div> <!-- row -->
@@ -201,14 +201,14 @@
 
 									</div> <!-- span -->
 									<div style="float: right;" class="span3">
-										<h1 class="splashheader">Thousands of Datasets...</h1>
-										<form>
+									  <h1 class="splashheader">Thousands of Datasets...</h1>
+									  <%= form_tag '/signup' , method: :get do %>
 											<fieldset>
-										    <input type="text" placeholder="E-mail Address">
+										    <%= text_field_tag :email,  "",placeholder: "E-mail Address" %>
 										    <br>
 												<button type="submit" class="btn btn-primary">Sign Up</button>
 											</fieldset>
-										</form>
+										<% end %>
 									</div> <!-- span -->
 								</div> <!-- span -->
 							</div> <!-- row -->
@@ -263,13 +263,13 @@
 									</div> <!-- span -->
 									<div style="float: right;" class="span3">
 										<h1 class="splashheader">Thousands of Datasets...</h1>
-										<form>
+			<%= form_tag '/signup' , method: :get do %>
 											<fieldset>
-										    <input type="text" placeholder="E-mail Address">
+										    <%= text_field_tag :email,  "",placeholder: "E-mail Address" %>
 										    <br>
 												<button type="submit" class="btn btn-primary">Sign Up</button>
 											</fieldset>
-										</form>
+										<% end %>
 									</div> <!-- span -->
 								</div> <!-- span -->
 							</div> <!-- row -->
