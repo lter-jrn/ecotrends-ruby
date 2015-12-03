@@ -38,7 +38,7 @@
   </head>
   <body style="padding-top: 0px;">
 		<div id="bg_containers">
-	    <div class="navbar navbar-fixed-top splash-gallery1">
+	    <div class="navbar navbar-fixed-top" id="slideit">
 	      <div class="navbar-inner-splash">
 	        <div class="container">
 	          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
@@ -97,188 +97,6 @@
 	      </div>
 	    </div>
 
-	    <div class="navbar navbar-fixed-top splash-gallery2">
-	      <div class="navbar-inner-splash">
-	        <div class="container">
-	          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </a>
-	          <a class="brand" href="/home/index.html"><%= image_tag "EcoTrends-logo-large.png" %></a>
-	          <div class="container nav-collapse">
-	            <div class="welcome-block">
-
-				  <% if current_user.present?%>
-				    <p><i>Welcome, <%= current_user %></i>
-			            <a href="#"><li>Account</li></a>
-			            <a href="/logout"><li>Log Out</li></a></p>
-				  <% else %>
-				    <p>
-				      <i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
-				      <%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
-				    </p>
-				  <% end %>
-							</div>
-							<div class="row">
-								<div class="span12">
-									<div class="span8 datapoints">
-
-										<div class="row">
-											<div class="span3">
-												<%= image_tag "participating-sites.png" %>
-											</div> <!-- span -->
-											<div class="span5">
-												<%= image_tag "available-datasets.png" %>
-											</div> <!-- span -->
-										</div> <!-- row -->
-
-										<div class="row">
-											<div class="span8">
-												<%= image_tag  "earliest-dataset.png", style:"margin-top: 25px;" %>
-											</div> <!-- span -->
-										</div> <!-- row -->
-
-									</div> <!-- span -->
-									<div style="float: right;" class="span3">
-									  <h1 class="splashheader">Thousands of Datasets...</h1>
-									  <%= form_tag '/signup' , method: :get do %>
-											<fieldset>
-										    <%= text_field_tag :email,  "",placeholder: "E-mail Address" %>
-										    <br>
-												<button type="submit" class="btn btn-primary">Sign Up</button>
-											</fieldset>
-									<% end %>
-									</div> <!-- span -->
-								</div> <!-- span -->
-							</div> <!-- row -->
-	          </div><!--/.nav-collapse -->
-	        </div>
-	      </div>
-	    </div>
-
-	    <div class="navbar navbar-fixed-top splash-gallery3">
-	      <div class="navbar-inner-splash">
-	        <div class="container">
-	          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </a>
-	          <a class="brand" href="/home/index.html"><%= image_tag "EcoTrends-logo-large.png" %></a>
-	          <div class="container nav-collapse">
-	            <div class="welcome-block">
-
-				  <% if current_user.present?%>
-				    <p><i>Welcome, <%= current_user %></i>
-			            <a href="#"><li>Account</li></a>
-			            <a href="/logout"><li>Log Out</li></a></p>
-				  <% else %>
-				    <p>
-				      <i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
-				      <%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
-				    </p>
-				  <% end %>
-							</div>
-							<div class="row">
-								<div class="span12">
-									<div class="span8 datapoints">
-
-										<div class="row">
-											<div class="span3">
-												<%= image_tag "participating-sites.png" %>
-											</div> <!-- span -->
-											<div class="span5">
-												<%= image_tag "available-datasets.png" %>
-											</div> <!-- span -->
-										</div> <!-- row -->
-
-										<div class="row">
-											<div class="span8">
-												<%= image_tag  "earliest-dataset.png", style:"margin-top: 25px;" %>
-											</div> <!-- span -->
-										</div> <!-- row -->
-
-									</div> <!-- span -->
-									<div style="float: right;" class="span3">
-									  <h1 class="splashheader">Thousands of Datasets...</h1>
-									  <%= form_tag '/signup' , method: :get do %>
-											<fieldset>
-										    <%= text_field_tag :email,  "",placeholder: "E-mail Address" %>
-										    <br>
-												<button type="submit" class="btn btn-primary">Sign Up</button>
-											</fieldset>
-										<% end %>
-									</div> <!-- span -->
-								</div> <!-- span -->
-							</div> <!-- row -->
-	          </div><!--/.nav-collapse -->
-	        </div>
-	      </div>
-	    </div>
-
-	    <div class="navbar navbar-fixed-top splash-gallery4">
-	      <div class="navbar-inner-splash">
-	        <div class="container">
-	          <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	            <span class="icon-bar"></span>
-	          </a>
-	          <a class="brand" href="/home/index.html"><%= image_tag "EcoTrends-logo-large.png" %></a>
-	          <div class="container nav-collapse">
-	            <div class="welcome-block">
-
-				  <% if current_user.present?%>
-				    <p><i>Welcome, <%= current_user %></i>
-			            <a href="#"><li>Account</li></a>
-			            <a href="/logout"><li>Log Out</li></a></p>
-				  <% else %>
-				    <p>
-				      <i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
-				      <%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
-				    </p>
-				  <% end %>
-							</div>
-
-							<div class="row">
-								<div class="span12">
-									<div class="span8 datapoints">
-
-										<div class="row">
-											<div class="span3">
-												<%= image_tag "participating-sites.png" %>
-											</div> <!-- span -->
-											<div class="span5">
-												<%= image_tag "available-datasets.png" %>
-											</div> <!-- span -->
-										</div> <!-- row -->
-
-										<div class="row">
-											<div class="span8">
-												<%= image_tag  "earliest-dataset.png", style:"margin-top: 25px;" %>
-											</div> <!-- span -->
-										</div> <!-- row -->
-
-									</div> <!-- span -->
-									<div style="float: right;" class="span3">
-										<h1 class="splashheader">Thousands of Datasets...</h1>
-			<%= form_tag '/signup' , method: :get do %>
-											<fieldset>
-										    <%= text_field_tag :email,  "",placeholder: "E-mail Address" %>
-										    <br>
-												<button type="submit" class="btn btn-primary">Sign Up</button>
-											</fieldset>
-										<% end %>
-									</div> <!-- span -->
-								</div> <!-- span -->
-							</div> <!-- row -->
-
-	          </div><!--/.nav-collapse -->
-	        </div>
-	      </div>
-	    </div>
-
 		</div>
 
     <div style="top: 400px; position: relative;" class="container">
@@ -305,16 +123,24 @@
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <%= javascript_include_tag "application" %>
-    <script type="text/javascript">
-
-		$(document).ready(function(){
-
-		    $('#bg_containers').cycle({
-				fx: 'fade', speed: '1000' // choose your transition type, ex: fade, scrollUp, shuffle, etc...
-			});
-
-		});
-		</script>
+<script type="text/javascript">
+  $(window).load(function() {
+  var i =0;
+  var images = ['splash-gallery1','splash-gallery2','splash-gallery3', 'splash-gallery4'];
+   var image = $('#slideit');
+   image.addClass('splash-gallery1');
+                //Change image at regular intervals
+   setInterval(function(){
+     image.removeClass('splash-gallery1', 50);
+     image.removeClass('splash-gallery2', 50);
+     image.removeClass('splash-gallery3', 50);
+     image.removeClass('splash-gallery4', 50);
+   image.addClass(images [i++], 50).fadeIn();
+   if(i == images.length)
+    i = 0;
+  }, 5000);
+ });
+    </script>
 
   </body>
 </html>
