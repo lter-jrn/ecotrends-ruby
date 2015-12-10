@@ -52,5 +52,28 @@ $(function () {
         }
     });
 
+    $(".location_link").click(function(e){
+	e.preventDefault();
+	if ($(this).hasClass("bold")) {
+	    // single choice in string
+	    var nuts = $("#site_filter").val().replace(String(this.id), "");
+	    $("#site_filter").val(nuts);
+	    console.log($("#site_filter").val().replace(String(this.id), ""));
+	    if($("#site_filter").val() == ' ') {
+		$("#all_locations").addClass("bold");
+	    }
 
+	}
+	else {
+	    if ($("#site_filter").val() == '') {
+		$("#all_locations").removeClass("bold");
+		$("#site_filter").val(this.id);
+	    }
+	    else {
+		var stuff = $("#site_filter").val() + " " + this.id;
+		$("#site_filter").val(stuff);
+	    }
+	}
+	$(this).toggle("bold")
+    });
 });

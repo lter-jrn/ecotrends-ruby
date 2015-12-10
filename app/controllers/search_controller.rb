@@ -4,13 +4,19 @@ class SearchController < ApplicationController
   layout :get_layout, only: :show
   def index
     @search = ExtracatMetadata.search(search_params)
+    @items = ExtracatMetadata.group(:site, :site_name).select(:site, :site_name).order(:site_name => "ASC").to_a
+    #starts here: Used to split the locations into groups of 20
+    items, @items = @items.dup, []
+    @items.push(items.shift(20)) until items.empty?
+    # ends here
     @variables = []
     @the_sites = []
+    @sites_filtered = params[:site_filter].present? ? params[:site_filter].split() : []
     unless @search.blank?
       @results = @search.page(params[:page])
       @min_date = params[:min_date]
       @max_date = params[:max_date]
-      @search_term = params["keywords"]
+      @search_term = params[:keywords]
       @the_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
       @variables = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
     end
@@ -46,7 +52,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site, :min_date, :max_date)
+    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site, :min_date, :max_date, :site_filter)
   end
 
   def search_setup

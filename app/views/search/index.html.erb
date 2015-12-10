@@ -1,227 +1,183 @@
 <div class="span3">
   <h3>Filter Results</h3>
-	<h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
-	<hr>
-	<ul class="search-side">
-	  <%= form_tag(request.fullpath, method: :get) do  %>
-	    <%= hidden_field_tag :keywords, @search_term %>
-	    <% @the_sites.each do |site| %>
-	      <li><%= check_box_tag :site, site %> <%= site %></li>
-	    <% end %>
-	  <%= submit_tag %>
-	  <% end %>
-	</ul>
-	<hr>
+  <h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+  <hr>
+  <ul class="search-side">
+    <%= form_tag(request.fullpath, method: :get) do  %>
+      <%= hidden_field_tag :keywords, @search_term %>
+      <% @the_sites.each do |site| %>
+	<li><%= check_box_tag :site, site %> <%= site %></li>
+    <% end %>
+    <%= submit_tag %>
+    <% end %>
+  </ul>
+  <hr>
 
-	<h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">Date Range</a><span style="float:right;"><a href="#">+/-</a></span></h4>
-	<hr>
-	<ul class="search-side">
-	  <%= form_tag(request.fullpath, method: :get) do  %>
-	    <%= hidden_field_tag :keywords, @search_term %>
-	      <li>Min Date: <%= text_field_tag :min_date, @min_date, class: "datepicker" %></li>
-	      <li>Max Date: <%= text_field_tag :max_date, @max_date, class: "datepicker" %></li>
-	  <%= submit_tag %>
-	  <% end %>
-	</ul>
-	<hr>
+  <h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">Date Range</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+  <hr>
+  <ul class="search-side">
+    <%= form_tag(request.fullpath, method: :get) do  %>
+      <%= hidden_field_tag :keywords, @search_term %>
+      <li>Min Date: <%= text_field_tag :min_date, @min_date, class: "datepicker" %></li>
+      <li>Max Date: <%= text_field_tag :max_date, @max_date, class: "datepicker" %></li>
+      <%= submit_tag %>
+    <% end %>
+  </ul>
+  <hr>
 
-		<h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Variables Measured</a><span style="float:right;"><a href="#">+/-</a></span></h4>
-	<hr>
-	<ul class="search-side">
-	  <%= form_tag(request.fullpath, method: :get) do  %>
-	    <%= hidden_field_tag :keywords, @search_term %>
-	    <% @variables.map do |variable| %>
-	      <li><%= check_box_tag :variable_name, variable %> <%= variable %></li>
-	  <% end %>
-	  <%= submit_tag %>
-	  <% end %>
-	</ul>
+  <h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Variables Measured</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+  <hr>
+  <ul class="search-side">
+    <%= form_tag(request.fullpath, method: :get) do  %>
+      <%= hidden_field_tag :keywords, @search_term %>
+      <% @variables.map do |variable| %>
+	<li><%= check_box_tag :variable_name, variable %> <%= variable %></li>
+    <% end %>
+    <%= submit_tag %>
+    <% end %>
+  </ul>
 
 </div> <!-- span -->
 
 <div class="span searchbar">
-	<div class="row">
-		<div class="span9">
-			<div class="row">
-			  <div style="padding-left:20px;" class="span3">
-			    <% if @results.present? %>
-					<h1>Search Results</h1>
-					<p class="searchbody"><%= @results.count %> results for: <b><%= @search_term %></b></p>
-	  <% else %>
-					<h1>Search</h1>
-			  <% end %>
-			  </div> <!-- span -->
-				<div style="margin-right: -20px; padding-top: 27px;" class="span6">
-				  <fieldset>
+  <div class="row">
+    <div class="span9">
+      <div class="row">
+	<div style="padding-left:20px;" class="span3">
+	  <% if @results.present? %>
+	    <h1>Search Results</h1>
+	    <p class="searchbody"><%= @results.count %> results for: <b><%= @search_term %></b></p>
+    <% else %>
+	    <h1>Search</h1>
+    <% end %>
+	</div> <!-- span -->
+	<div style="margin-right: -20px; padding-top: 27px;" class="span6">
+	  <fieldset>
 
-				    <%= form_tag('/search', method: :get) do  %>
-				      <%= text_field_tag :keywords, @search_term %>
-				      <%= submit_tag "Search" %>
-	                            <% end %>
-					</fieldset>
-				</div> <!-- span <input class="searchinput"type="search" value="Plant Productivity"></input> -->
-			</div> <!-- row -->
-		</div> <!-- span -->
-	</div> <!-- row -->
+	    <%= form_tag('/search', method: :get) do  %>
+	      <%= text_field_tag :keywords, @search_term %>
+	      <%= hidden_field_tag :site_filter, params[:site_filter] %>
+	      <%= submit_tag "Search" %>
+    <% end %>
+	  </fieldset>
+	</div> <!-- span <input class="searchinput"type="search" value="Plant Productivity"></input> -->
+      </div> <!-- row -->
+    </div> <!-- span -->
+  </div> <!-- row -->
 </div> <!-- span -->
 
 <div class="row">
-	<div class="span9">
-		<ul class='inline'>
-  <li class='active'>
-    <h4><%= image_tag "topicicon.png", class: "baricon" %>Topic</h4>
-  </li>
-  <li>
-    <div class="dropdown">
-      <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-        <h4><%= image_tag "globeicon.png", class: "baricon" %>Location</h4>
-      </a>
-      <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-      	<div class="row">
-      		<div class="span10">
-	      		<div class="span2">
-			        <li>
-			        	<h4>STATE</h4>
-									<a href="#">ALL									<br></a>
-									<a href="#">Alabama							<br></a>
-									<a href="#">Alaska							<br></a>
-									<a href="#">Arizona							<br></a>
-									<a href="#">Arkansas						<br></a>
-									<a href="#">California					<br></a>
-									<a href="#">Colorado						<br></a>
-									<a href="#">Connecticut					<br></a>
-									<a href="#">Delaware						<br></a>
-									<a href="#">District of Columbia<br></a>
-									<a href="#">Florida							<br></a>
-									<a href="#">Georgia							<br></a>
-									<a href="#">Hawaii							<br></a>
-									<a href="#">Idaho								<br></a>
-									<a href="#">Illinois						<br></a>
-									<a href="#">Indiana							<br></a>
-									<a href="#">Iowa								<br></a>
-									<a href="#">Kansas							<br></a>
-									<a href="#">Kentucky						<br></a>
-									<a href="#">Louisiana						<br></a>
-			        </li>
-			        <li class="divider"></li>
-	      		</div> <!-- span -->
-	      		<div class="span2">
-			        <li>
-								<a href="#">Maryland			<br></a>
-								<a href="#">Massachusetts	<br></a>
-								<a href="#">Michigan			<br></a>
-								<a href="#">Minnesota			<br></a>
-								<a href="#">Mississippi		<br></a>
-								<a href="#">Missouri			<br></a>
-								<a href="#">Motntana			<br></a>
-								<a href="#">Nebraska			<br></a>
-								<a href="#">Nevada				<br></a>
-								<a href="#">New Hampshire	<br></a>
-								<a href="#">New Jersey		<br></a>
-								<a href="#">New Mexico		<br></a>
-								<a href="#">New York			<br></a>
-								<a href="#">North Carolina<br></a>
-								<a href="#">North Dakota	<br></a>
-								<a href="#">Ohio					<br></a>
-								<a href="#">Oklahoma			<br></a>
-								<a href="#">Oregon				<br></a>
-								<a href="#">Pennsylvania	<br></a>
-								<a href="#">Rhode Island	<br></a>
-								<a href="#">South Carolina<br></a>
-			        </li>
-			        <li class="divider"></li>
-	      		</div> <!-- span -->
+  <div class="span9">
+    <ul class='inline'>
+      <li>
+	<div class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <h4><%= image_tag "globeicon.png", class: "baricon" %>Location</h4>
+	  </a>
+	  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      	    <div class="row">
+      	      <div class="span10">
+	      	<div class="span2">
+		  <li>
+		    <h4>Sites </h4>
+		    <span class="<%= "bold" if params[:site_filter].blank? %>" id="all_locations"><small>All</small></span><br />
+		    <% @items[0].each do |item| %>
+		      <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
+		    <% end %>
+		  </li>
+		  <li class="divider"></li>
+	      	</div> <!-- span -->
+	      	<div class="span2">
+		    <% @items[1].each do |item| %>
+		      <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
+		    <% end %>
+		  </li>
+		  <li class="divider"></li>
+	      	</div> <!-- span -->
 
-	      		<div class="span2">
-			        <li>
-								<a href="#">South Dakota <br></a>
-								<a href="#">Tennessee		 <br></a>
-								<a href="#">Texas				 <br></a>
-								<a href="#">Utah				 <br></a>
-								<a href="#">Vermont			 <br></a>
-								<a href="#">Virginia		 <br></a>
-								<a href="#">Washington	 <br></a>
-								<a href="#">West Virginia<br></a>
-								<a href="#">Wisconsin		 <br></a>
-								<a href="#">Wyoming			 <br></a>
-			        </li>
-			        <li class="divider"></li>
-	      		</div> <!-- span -->
+	      	<div class="span2">
+		  <li>
+		    <% @items[2].each do |item| %>
+		      <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
+		    <% end %>
+		  </li>
+		  <li class="divider"></li>
+	      	</div> <!-- span -->
 
-	      		<div class="span2">
-			        <li>
-								<h4>ECOSYSTEM TYPE</h4>
-								<a href="#">ALL															<br></a>
-								<a href="#">Aridlands												<br></a>
-								<a href="#">Temperate grasslands and savannas<br></a>
-								<a href="#">Eastern Forrest									<br></a>
-								<a href="#">Western Forrest									<br></a>
-								<a href="#">Alpine and arctic								<br></a>
-								<a href="#">Rock and Ice											<br></a>
-								<a href="#">Other														<br></a>
-								<br>
-								<h4>NETWORKS</h4>
-								<a href="#">ALL			<br></a>
-								<a href="#">LTER		<br></a>
-								<a href="#">USDA-ARS<br></a>
-								<a href="#">LTAR		<br></a>
-								<a href="#">USFS		<br></a>
-			        </li>
-			        <li class="divider"></li>
-	      		</div> <!-- span -->
+	      	<div class="span2">
+		  <li>
+		    <h4>ECOSYSTEM TYPE</h4>
+		    <a href="#">ALL															<br></a>
+		    <a href="#">Aridlands												<br></a>
+		    <a href="#">Temperate grasslands and savannas<br></a>
+		    <a href="#">Eastern Forrest									<br></a>
+		    <a href="#">Western Forrest									<br></a>
+		    <a href="#">Alpine and arctic								<br></a>
+		    <a href="#">Rock and Ice											<br></a>
+		    <a href="#">Other														<br></a>
+		    <br>
+		    <h4>NETWORKS</h4>
+		    <a href="#">ALL			<br></a>
+		    <a href="#">LTER		<br></a>
+		    <a href="#">USDA-ARS<br></a>
+		    <a href="#">LTAR		<br></a>
+		    <a href="#">USFS		<br></a>
+		  </li>
+		  <li class="divider"></li>
+	      	</div> <!-- span -->
 
 
-      		</div> <!-- span -->
-      	</div> <!-- row -->
-      </ul>
-    </div>
-    </li>
-		</ul>
-		<hr>
-		<% if @search_term %>
-<div class="row">
-	<div class="span9">
-		<a href="#"><%= image_tag "delete.png", class: "baricon" %><%= @search_term %>&nbsp;</a>		 </a>
+      	      </div> <!-- span -->
+      	    </div> <!-- row -->
+	  </ul>
 	</div>
-</div>
-<hr>
-<% end %>
+      </li>
+    </ul>
+    <hr>
+    <% if @search_term %>
+      <div class="row">
+	<div class="span9">
+	  <a href="#"><%= image_tag "delete.png", class: "baricon" %><%= @search_term %>&nbsp;</a>		 </a>
+	</div>
+      </div>
+      <hr>
+    <% end %>
 
 
-	<!-- BEGIN SEARCH RESULTS -->
+    <!-- BEGIN SEARCH RESULTS -->
 
-	<% if @results.present? %>
+    <% if @results.present? %>
 
-	  <%= paginate @results %>
-	  <%= form_tag('/datastores') do %>
-	    <% @results.each do |result| %>
-	      <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
-	      <div class="span9">
-		<div class="row">
-		  <div class="span1">
-		    <fieldset>
-			<%= check_box_tag :docid, result.docid.to_s, false, {multiple: true, name: 'docids[]'} %>&nbsp;&nbsp;
-		    </fieldset>
-		  </div> <!-- span -->
-		  <div class="span6">
-		    <a href="#"><h4 class="darkbrown"><%= link_to  result.variable_name, search_path(result.entryid) %></h4></a>
-		    <p class="searchbody"><%= result.subtopic%></p>
-		    <p><%= image_tag "station.png", class: "icon" %>
-		      <a href="#"><b><%= result.station_names %></b>/ <%= result.site_name%></a>
-		      --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name%> -- <%= result.timescale %></p>
-		  </div> <!-- span -->
-		  <div class="span2 searchright">
-		    <h4><%= result.begin_date.year%> - <%= result.end_date.year %></h4>
-		    <%= link_to image_tag("datastore_on.png"), search_path(result.entryid) %>
-		  </div> <!-- span -->
-		</div> <!-- row -->
-		<hr>
+      <%= paginate @results %>
+      <%= form_tag('/datastores') do %>
+	<% @results.each do |result| %>
+	  <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
+	  <div class="span9">
+	    <div class="row">
+	      <div class="span1">
+		<fieldset>
+		  <%= check_box_tag :docid, result.docid.to_s, false, {multiple: true, name: 'docids[]'} %>&nbsp;&nbsp;
+		</fieldset>
 	      </div> <!-- span -->
-	  <% end %>
-	  <%= submit_tag "Save To Datastore" %>
-	  <% end %>
-	  <%= paginate @results %>
-	  <% end %>
+	      <div class="span6">
+		<a href="#"><h4 class="darkbrown"><%= link_to  result.variable_name, search_path(result.entryid) %></h4></a>
+		<p class="searchbody"><%= result.subtopic%></p>
+		<p><%= image_tag "station.png", class: "icon" %>
+		  <a href="#"><b><%= result.station_names %></b>/ <%= result.site_name%></a>
+		  --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name%> -- <%= result.timescale %></p>
+	      </div> <!-- span -->
+	      <div class="span2 searchright">
+		<h4><%= result.begin_date.year%> - <%= result.end_date.year %></h4>
+		<%= link_to image_tag("datastore_on.png"), search_path(result.entryid) %>
+	      </div> <!-- span -->
+	    </div> <!-- row -->
+	    <hr>
+	  </div> <!-- span -->
+    <% end %>
+    <%= submit_tag "Save To Datastore" %>
+    <% end %>
+    <%= paginate @results %>
+    <% end %>
 
 
-</div> <!-- row -->
+  </div> <!-- row -->
