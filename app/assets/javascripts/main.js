@@ -59,12 +59,14 @@ $(function () {
 	    var nuts = $("#site_filter").val().replace(String(this.id), "");
 	    $("#site_filter").val(nuts);
 	    console.log($("#site_filter").val().replace(String(this.id), ""));
-	    if($("#site_filter").val() == ' ') {
+	    if($("#site_filter").val() == ' ' || $("#site_filter").val() == ' ') {
 		$("#all_locations").addClass("bold");
 	    }
+	    $(this).removeClass("bold");
 
 	}
 	else {
+	    $(this).addClass("bold");
 	    if ($("#site_filter").val() == '') {
 		$("#all_locations").removeClass("bold");
 		$("#site_filter").val(this.id);
@@ -74,6 +76,5 @@ $(function () {
 		$("#site_filter").val(stuff);
 	    }
 	}
-	$(this).toggle("bold")
     });
 });
