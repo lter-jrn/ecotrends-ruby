@@ -77,4 +77,29 @@ $(function () {
 	    }
 	}
     });
+    $("[name='shooby']").bootstrapSwitch({size: 'mini',
+					  onSwitchChange: function(event, state) {
+					      if ($("#shonby").is(":checked")) {
+						  console.log("i am i said");
+						  $("#both_off").val(false);
+					      }
+					      else {
+						  $("#both_off").val(true);
+					      }
+						  $("#formmy").submit();
+					      }
+					 });
+
+    $("[name='shonby']").bootstrapSwitch({size: 'mini',
+					  onSwitchChange: function(event, state) {
+					      if ($("#shooby").is(":checked")) {
+						  console.log("i am i said");
+						  $("#both_off").val(false);
+					      }
+					      else {
+						  $("#both_off").val(true);
+					      }
+						  $("#formmy").submit();
+					      }
+					     });
 });
