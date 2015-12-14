@@ -1,4 +1,5 @@
 class RegistrationController < ApplicationController
+    skip_before_filter :allow_only_signed_in
   #u= UserProfile.new(uid: "pjamm", regdate: DateTime.now, status:1, gname: "Philip", sname: "Test", net:"ECOTRENDS", org: "NSMU Test", email: "philip@ingram.com", phone: "212-555-1212")
   def new
     @user = UserProfile.new
