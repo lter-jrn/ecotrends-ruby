@@ -25,9 +25,14 @@ class SearchController < ApplicationController
     @data_record, @data = ExtracatMetadata.get_values(params[:id])
     @show_lines = params[:shooby].blank? ? true : false
     @show_plots = params[:shonby].blank? ? true : false
-    if (@show_plots.blank? && @show_lines.blank?) && params[:both_off].present?
-      @show_lines = false
-      @show_plots = false
+    if params[:both_off].present?
+      if (@show_plots.present? && @show_lines.present?) && (params[:both_off] == "true")
+        @show_lines = false
+        @show_plots = false
+      elsif (@show_plots.blank? && @show_lines.blank?) && params[:both_off] == "false"
+        @show_lines = true
+        @show_plots = true
+      end
     end
     respond_to do |format|
       format.html
