@@ -78,6 +78,7 @@ class ExtracatMetadata < ActiveRecord::Base
 
     #returns the dataset
   def self.get_values_by_docid(doc_ids)
+    doc_ids = doc_ids.split if doc_ids.is_a?(String)
     years = []
     return_records = []
     doc_ids.each do |doc_id|
