@@ -101,5 +101,8 @@ $(function () {
 					      }
 						  $("#formmy").submit();
 					      }
-					     });
+					 });
+    $(".triggerbox").change(function(){
+	this.form.submit()
+    })
 });

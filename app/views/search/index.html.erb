@@ -1,14 +1,14 @@
 <div class="span3">
-  <h3>Filter Results</h3>
+  <h3>Filter Results <small><%= link_to "Clear", search_index_path(keywords: @search_term)%></small></h3>
   <h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
   <hr>
   <ul class="search-side">
-    <%= form_tag(request.fullpath, method: :get) do  %>
+    <%= form_tag(search_index_path, method: :get) do  %>
       <%= hidden_field_tag :keywords, @search_term %>
+      <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
       <% @the_sites.each do |site| %>
-	<li><%= check_box_tag :site, site %> <%= site %></li>
+	<li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
     <% end %>
-    <%= submit_tag %>
     <% end %>
   </ul>
   <hr>
@@ -18,6 +18,8 @@
   <ul class="search-side">
     <%= form_tag(request.fullpath, method: :get) do  %>
       <%= hidden_field_tag :keywords, @search_term %>
+      <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
+      <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
       <li>Min Date: <%= text_field_tag :min_date, @min_date, class: "datepicker" %></li>
       <li>Max Date: <%= text_field_tag :max_date, @max_date, class: "datepicker" %></li>
       <%= submit_tag %>
@@ -30,10 +32,10 @@
   <ul class="search-side">
     <%= form_tag(request.fullpath, method: :get) do  %>
       <%= hidden_field_tag :keywords, @search_term %>
+      <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
       <% @variables.map do |variable| %>
-	<li><%= check_box_tag :variable_name, variable %> <%= variable %></li>
+	<li><input type="checkbox" name="variable_name" class="triggerbox" value="<%= variable %>"> <%= variable %></li>
     <% end %>
-    <%= submit_tag %>
     <% end %>
   </ul>
 
@@ -105,24 +107,6 @@
 	      	</div> <!-- span -->
 
 	      	<div class="span2">
-		  <li>
-		    <h4>ECOSYSTEM TYPE</h4>
-		    <a href="#">ALL															<br></a>
-		    <a href="#">Aridlands												<br></a>
-		    <a href="#">Temperate grasslands and savannas<br></a>
-		    <a href="#">Eastern Forrest									<br></a>
-		    <a href="#">Western Forrest									<br></a>
-		    <a href="#">Alpine and arctic								<br></a>
-		    <a href="#">Rock and Ice											<br></a>
-		    <a href="#">Other														<br></a>
-		    <br>
-		    <h4>NETWORKS</h4>
-		    <a href="#">ALL			<br></a>
-		    <a href="#">LTER		<br></a>
-		    <a href="#">USDA-ARS<br></a>
-		    <a href="#">LTAR		<br></a>
-		    <a href="#">USFS		<br></a>
-		  </li>
 		  <li class="divider"></li>
 	      	</div> <!-- span -->
 
@@ -137,7 +121,7 @@
     <% if @search_term %>
       <div class="row">
 	<div class="span9">
-	  <a href="#"><%= image_tag "delete.png", class: "baricon" %><%= @search_term %>&nbsp;</a>		 </a>
+	  <a href="/search"><%= image_tag "delete.png", class: "baricon" %><%= @search_term %>&nbsp;</a>		 </a>
 	</div>
       </div>
       <hr>

@@ -14,8 +14,8 @@ class SearchController < ApplicationController
     @sites_filtered = params[:site_filter].present? ? params[:site_filter].split() : []
     unless @search.blank?
       @results = @search.page(params[:page])
-      @min_date = params[:min_date]
-      @max_date = params[:max_date]
+      @min_date = params[:min_date] || @search.map(&:begin_date).min
+      @max_date = params[:max_date] || @search.map(&:end_date).max
       @search_term = params[:keywords]
       @the_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
       @variables = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
