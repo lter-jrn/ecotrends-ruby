@@ -34,6 +34,8 @@ EcoTrends::Application.routes.draw do
 
   get "home/dataset2"
 
+  get "policies" => "home#policies"
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

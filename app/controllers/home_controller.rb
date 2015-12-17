@@ -61,4 +61,8 @@ class HomeController < ApplicationController
 
   def dataset2
   end
+
+  def policies
+
+  end
 end

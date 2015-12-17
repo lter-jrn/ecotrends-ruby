@@ -80,19 +80,56 @@
             <%= yield %>
         </div><!--/row-->
         <hr>
+	<footer>
+	  <%= render partial: 'splash/footer' %>
 
-      <footer>
-				<div class="footbox">
-		      <ul>
-		      	<a href="/policies"><li>Policies |&nbsp</li></a>
-		      	<a href="/guidelines"><li>Guidelines |&nbsp</li></a>
-		      	<a href="/contact"><li>Contact Us |&nbsp</li></a>
-		      	<a href="/publications"><li>Publications</li></a>
-		      </ul>
-		      <p>All Rights Reserved. EcoTrends &copy; 2013.</p>
-				</div> <!-- /footbox -->
-      </footer>
-
+		      <p style="padding-top: 1.0em;">The EcoTrends project is funded by the National Science Foundation (NSF)
+           and the USDA Agricultural Research Service (USDA-ARS) Jornada Experimental Range.
+           Collaborators include: the Long-Term Ecological Research (LTER) Network Office,
+           USDA-ARS, USDA Forest Service (USDA-FS), National Center for Ecological Analysis
+           and Synthesis (NCEAS), Department of Energy (DOE), US Geological Survey (USGS),
+           New Mexico State University (NMSU), Ecological Society of America (ESA),
+           and state institutions. This project would
+           not be possible without the continued assistance and involvement of scientists,
+           information managers, support staff, and students from each long-term site.
+           Please click on the logos below to visit our collaborators' websites.
+        </p>
+        <div style="text-align: center;">
+          <a href="http://www.fs.fed.us/" target="_blank">
+	    <%= image_tag 'FS.gif', width: "68", height: "72", border: "0"%>
+            </a>
+            <a href="http://www.ars.usda.gov" target="_blank">
+	    <%= image_tag 'ARS2.gif', width: "72", height: "72", border: "0"%>
+            </a>
+            <a href="http://www.nceas.ucsb.edu" target="_blank">
+	    <%= image_tag 'NCEAS.gif', width: "71", height: "72", border: "0"%>
+            </a>
+            <a href="http://www.lternet.edu/" target="_blank">
+	    <%= image_tag 'LTER_small.gif', width: "57", height: "72", border: "0"%>
+            </a> <a href="http://www.nsf.gov/" target="_blank">
+	    <%= image_tag 'NSF.gif', width: "72", height: "72", border: "0"%>
+            </a>
+            <a href="http://www.USGS.gov/" target="_blank">
+	    <%= image_tag 'USGS.gif', width: "89", height: "72", border: "0"%>
+            </a>
+            <a href="http://www.nmsu.edu/" target="_blank">
+	    <%= image_tag 'nmsu.gif', width: "66", height: "72", border: "0"%>
+            </a>
+            <a href="http://www.energy.gov/" target="_blank">
+	    <%= image_tag 'doe.gif', width: "72", height: "72", border: "0"%>
+            </a>
+            <a href="http://www.esa.org/" target="_blank">
+	    <%= image_tag 'esa.png', width: "83", height: "68", border: "0"%>
+            </a>
+        </div>
+	<p><strong>Disclaimer and Legal Statement:</strong> This material is based upon work supported by
+           the National Science Foundation under Grant number DEB-0080412. Any opinions,
+           findings, conclusions, or recommendations expressed in the material are those
+           of the author(s) and do not necessarily reflect the views of the National
+           Science Foundation or New Mexico State University.
+        </p>
+		      <p>All Rights Reserved. EcoTrends &copy; 2015.</p>
+	</footer>
     </div> <!-- /container -->
 
     <!-- Javascripts

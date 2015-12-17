@@ -105,19 +105,9 @@
       <div class="span12">
         <%= yield %>
       </div>
-
       <footer>
-	<div class="footbox">
-	  <ul>
-	    <a href="/policies"><li>Policies |&nbsp</li></a>
-	    <a href="/guidelines"><li>Guidelines |&nbsp</li></a>
-	    <a href="/contact"><li>Contact Us |&nbsp</li></a>
-	    <a href="/publications"><li>Publications</li></a>
-	  </ul>
-	  <p>All Rights Reserved. EcoTrends &copy; 2013.</p>
-	</div> <!-- /footbox -->
+	<%= render partial: "splash/footer" %>
       </footer>
-
 
     </div> <!-- /container -->
 
