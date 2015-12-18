@@ -54,12 +54,10 @@ class DatastoresController < ApplicationController
   end
   #probably don't need map but just going with flow.
   def set_dataset_array(labels)
-    puts labels
     arr = []
     @dataset_array.each_with_index do |data_set, index|
       arr << prettify_data_set(data_set, index, labels)
     end
-    puts arr
     arr
   end
 
@@ -78,7 +76,6 @@ class DatastoresController < ApplicationController
   end
 
   def clean_up_data(data_set, labels)
-    puts " I am dataset: #{data_set}"
     labels.map do |year|
       data_set[:datum].has_key?(year.to_s) ? data_set[:datum][year.to_s] : nil
     end

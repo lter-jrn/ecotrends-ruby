@@ -73,7 +73,7 @@ class ExtracatMetadata < ActiveRecord::Base
     fields = vals.fields
     #we may get to use a generic model if each of the fields are the same. time will tell.
     val_set = vals.present? ? vals.values.map {|value_set| Hash[fields.zip(value_set)]} : []
-    return data_record, val_set.map {|d| {:year => d["year"], observation: d["observation"]}}
+    return data_record, self.get_valset(val_set, data_record.timescale == "yearly")
   end
 
     #returns the dataset
@@ -92,18 +92,24 @@ class ExtracatMetadata < ActiveRecord::Base
       #we may get to use a generic model if each of the fields are the same. time will tell.
       val_set = vals.present? ? vals.values.map {|value_set| Hash[fields.zip(value_set)]} : []
       #binding.pry
-      final_hash = val_set.each {|d| hash_rec.merge!(d["year"] => d["observation"])}
+      final_hash = val_set.each {|d| hash_rec.merge!(d["start_date"].to_date.strftime("%Y-%m-%d") => d["observation"])}
       #binding.pry
       years += hash_rec.keys
       return_records << {record: data_record, datum: hash_rec.sort.to_h}
     end
     return return_records, self.year_range_for_labels(years)
   end
-
+  #here for now, must be an array
   def self.year_range_for_labels(years)
-    new_years = years.sort.flatten.uniq
-    minn = new_years.min.to_i
-    maxx = new_years.max.to_i
-    (minn..maxx).to_a
+    years.sort.flatten.uniq
+  end
+
+  def self.get_valset(val_set, is_yearly = true)
+    if is_yearly
+      val_set.map {|d| {:year => d["year"], observation: d["observation"]}}
+    else
+      val_set.map {|d| {:year => d["start_date"].to_date.strftime("%Y-%m-%d"), observation: d["observation"]}}
+    end
+
   end
 end

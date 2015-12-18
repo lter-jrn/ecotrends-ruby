@@ -51,7 +51,9 @@ EcoTrends::Application.configure do
 
   # Disable delivery errors, bad email addresses will be ignored
   # config.action_mailer.raise_delivery_errors = false
-
+  config.action_mailer.smtp_settings {
+    address: "smtp.nmsu.edu"
+  }
   # Enable threaded mode
   # config.threadsafe!
 

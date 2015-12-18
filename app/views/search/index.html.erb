@@ -133,6 +133,9 @@
     <% if @results.present? %>
 
       <%= paginate @results %>
+      <div class="span9">
+	<p><strong>Click to Add<br /> to Datastore</strong></p>
+      </div>
       <%= form_tag('/datastores') do %>
 	<% @results.each do |result| %>
 	  <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
@@ -144,10 +147,10 @@
 		</fieldset>
 	      </div> <!-- span -->
 	      <div class="span6">
-		<a href="#"><h4 class="darkbrown"><%= link_to  result.variable_name, search_path(result.entryid) %></h4></a>
+		<h4 class="darkbrown"><%= link_to  result.variable_name, search_path(result.entryid) %></h4>
 		<p class="searchbody"><%= result.subtopic%></p>
 		<p><%= image_tag "station.png", class: "icon" %>
-		  <a href="#"><b><%= result.station_names %></b>/ <%= result.site_name%></a>
+		  <b><%= result.station_names %></b> <%= result.site_name%>
 		  --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name%> -- <%= result.timescale %></p>
 	      </div> <!-- span -->
 	      <div class="span2 searchright">
