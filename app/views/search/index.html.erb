@@ -1,5 +1,5 @@
 <div class="span3">
-  <h3>Filter Results <small><%= link_to "Clear", search_index_path(keywords: @search_term)%></small></h3>
+  <h3>Filter Results <small><%= link_to "Clear", search_index_path %></small></h3>
   <h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
   <hr>
   <ul class="search-side">
@@ -8,8 +8,19 @@
       <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
       <% @the_sites.each do |site| %>
 	<li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
+      <% end %>
+      <% if @more_sites.present? %>
+
+	<li class="moresites"><b>Show More &#x25BC;</b></li>
+	<div class="more_items" style="display: none;">
+    <% @more_sites.each do |site| %>
+      <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
+
+    <% end %>
+	</div>
     <% end %>
     <% end %>
+
   </ul>
   <hr>
 
@@ -34,7 +45,7 @@
       <%= hidden_field_tag :keywords, @search_term %>
       <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
       <% @variables.map do |variable| %>
-	<li><input type="checkbox" name="variable_name" class="triggerbox" value="<%= variable %>"> <%= variable %></li>
+	<li><input type="checkbox" name="subtopic" class="triggerbox" value="<%= variable %>"> <%= variable %></li>
     <% end %>
     <% end %>
   </ul>

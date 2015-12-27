@@ -17,8 +17,10 @@ class SearchController < ApplicationController
       @min_date = params[:min_date] || @search.map(&:begin_date).min
       @max_date = params[:max_date] || @search.map(&:end_date).max
       @search_term = params[:keywords]
-      @the_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
-      @variables = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
+      @raw_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
+      @the_sites = @raw_sites.first(10)
+      @more_sites = @raw_sites - @the_sites if @raw_sites.present?
+      @variables = ExtracatMetadata.search(search_params).map(&:subtopic).sort.uniq
     end
   end
   def show

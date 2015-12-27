@@ -80,7 +80,6 @@ $(function () {
     $("[name='shooby']").bootstrapSwitch({size: 'mini',
 					  onSwitchChange: function(event, state) {
 					      if ($("#shonby").is(":checked")) {
-						  console.log("i am i said");
 						  $("#both_off").val(false);
 					      }
 					      else {
@@ -93,7 +92,6 @@ $(function () {
     $("[name='shonby']").bootstrapSwitch({size: 'mini',
 					  onSwitchChange: function(event, state) {
 					      if ($("#shooby").is(":checked")) {
-						  console.log("i am i said");
 						  $("#both_off").val(false);
 					      }
 					      else {
@@ -104,5 +102,10 @@ $(function () {
 					 });
     $(".triggerbox").change(function(){
 	this.form.submit()
-    })
+    });
+    $(".moresites").click(function(e){
+	e.preventDefault();
+	$(this).parent().find(".more_items").show();
+	$(this).hide();
+    });
 });

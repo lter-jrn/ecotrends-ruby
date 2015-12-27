@@ -24,7 +24,7 @@ class LoginController < ApplicationController
     session["current_user"] = ""
 
     session["iduser"] = ""
-    redirect_to '/login'
+    redirect_to '/'
   end
 
 end

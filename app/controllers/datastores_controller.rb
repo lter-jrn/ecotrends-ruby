@@ -23,11 +23,19 @@ class DatastoresController < ApplicationController
   def create
     is_not = "not "
     if params[:docids].present? && current_user.present?
-      params[:docids].each do |doc|
-        s = SavedDataset.new
-        s.iduser = current_user_id
-        s.docid = doc #see if this works
-        is_not = "" if s.save
+      docids_array = if params[:docids].is_a?(String)
+                       [params[:docids]]
+                     else
+                       params[:docids]
+                     end
+      docids_array.each do |doc|
+        existing = SavedDataset.where(iduser: current_user_id, docid: doc)
+        if existing.blank?
+          s = SavedDataset.new
+          s.iduser = current_user_id
+          s.docid = doc #see if this works
+          is_not = "" if s.save
+        end
       end
 
     end

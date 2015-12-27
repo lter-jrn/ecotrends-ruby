@@ -41,7 +41,7 @@ class ExtracatMetadata < ActiveRecord::Base
                        self.where("keywords like ?", "%#{term_hash['keywords']}%")
                      end
     if term_hash["variable_name"].present?
-      keyword_search = keyword_search.where("variable_name" => term_hash["variable_name"])
+      keyword_search = keyword_search.where("subtopic" => term_hash["subtopic"])
     end
     if term_hash["site"].present?
       keyword_search = keyword_search.where("site_name" => term_hash["site"])

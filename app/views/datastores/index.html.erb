@@ -1,7 +1,7 @@
 <div class="row">
   <div class="span12 hover">
     <h1>Data Store</h1>
-    <h5>Your Saved Datasets | Go to <%= link_to "Search Page", search_index_path%></h5>
+    <h5>Your Saved Datasets</h5>
   </div> <!-- span -->
 </div> <!-- row -->
 <div class="row">
@@ -24,7 +24,7 @@
 	  </fieldset>
 	</div> <!-- span -->
 	<div class="span9">
-	  <a href="#"><h4 class="darkbrown"><%= result.extracat_metadata.variable_name %></h4></a>
+	  <h4 class="darkbrown"><%= link_to result.extracat_metadata.variable_name, search_path(result.extracat_metadata.entryid) %></h4>
 	  <p class="searchbody"></p>
 	  <p><%= image_tag "station.png", class: "icon" %><%= result.extracat_metadata.station_names %></b>/ <%= result.extracat_metadata.site_name%></a>
 	    --<%= result.extracat_metadata.topic %> / <%= result.extracat_metadata.subtopic %> -- <%= result.extracat_metadata.unit_name%> -- <%= result.extracat_metadata.timescale %></p>
