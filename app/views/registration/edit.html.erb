@@ -1,0 +1,12 @@
+<h1>Reset Your EcoTrends Account Password</h1>
+<%= form_tag "/reset/#{params[:token]}", method: :put do |form| %>
+  <p>
+    <%= label_tag 'Password' %> <%= password_field_tag :password %>
+  </p>
+  <p>
+    <%= label_tag 'Password Confirmation' %> <%= password_field_tag :password_confirmation %>
+  </p>
+  <p>
+    <%= submit_tag "Update Password" %>
+  </p>
+<% end %>

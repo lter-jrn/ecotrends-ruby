@@ -1,18 +1,21 @@
 EcoTrends::Application.routes.draw do
+
   get "comparison" => 'datastores#compare', as: :comparison
   get "testcharts" => 'search#test'
   resources :datastores
-
+  get 'account' => 'accounts#index'
+  put 'account/:id' => 'accounts#update'
   get 'login' => 'login#show'
+  get 'reset_password' => 'login#edit'
+  get 'reset/:token' => "registration#edit"
+  put 'reset/:token' => "registration#update"
   post 'login' => 'login#create'
+  put 'reset' => 'login#update'
   get 'logout' => 'login#destroy'
   match 'signup' => 'registration#new', via: :get
   post 'signup' => 'registration#create'
-  # get 'search/index'
 
-  # get 'search/create'
-
-	get "splash/index"
+  get "splash/index"
 
   get "home/index"
 
@@ -31,6 +34,8 @@ EcoTrends::Application.routes.draw do
   get "home/comparison"
 
   get "home/dataset"
+
+  get "home/graph"
 
   get "home/dataset2"
 

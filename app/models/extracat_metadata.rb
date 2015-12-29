@@ -38,7 +38,7 @@ class ExtracatMetadata < ActiveRecord::Base
   def self.search(term_hash)
     #take the term_hash and get values for that table either id or keywords
     keyword_search = if term_hash["keywords"].present?
-                       self.where("keywords like ?", "%#{term_hash['keywords']}%")
+                       self.where("keywords like ? or docid like ?", "%#{term_hash['keywords']}%", "%#{term_hash['keywords']}%")
                      end
     if term_hash["variable_name"].present?
       keyword_search = keyword_search.where("subtopic" => term_hash["subtopic"])

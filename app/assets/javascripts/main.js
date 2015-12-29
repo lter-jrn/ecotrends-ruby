@@ -108,4 +108,35 @@ $(function () {
 	$(this).parent().find(".more_items").show();
 	$(this).hide();
     });
+
+    $(".add-datastore").click(function(e){
+	var fa = $(this).find(".fa")
+	fa.addClass("text-warning");
+	var muck = $(this).find('.jsdocid').val();
+	$.ajax({
+	    method: "POST",
+	    url: "datastores.json",
+	    data: { docids: muck},
+	    success: function(data){
+		fa.removeClass("text-warning");
+		fa.addClass("text-error");
+	    }
+	});
+    });
+
+
+    // $(".remove-datastore").click(function(e){
+    // 	var fa = $(this).find(".fa")
+    // 	fa.addClass("text-warning");
+    // 	var muck = $(this).find('.jsdocid').val();
+    // 	$.ajax({
+    // 	    method: "POST",
+    // 	    url: "datastores.json",
+    // 	    data: { docids: muck},
+    // 	    success: function(data){
+    // 		fa.removeClass("text-warning");
+    // 		fa.addClass("text-error");
+    // 	    }
+    // 	});
+    // });
 });

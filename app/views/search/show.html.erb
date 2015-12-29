@@ -1,7 +1,8 @@
+<% unless @print %>
 <h1>Data Results</h1>
 <p><%= link_to "back", request.referer %> |<%= link_to "Print Version", search_path(params[:id], print: true) %> |  <%= link_to "CSV Download", search_path(params[:id], format: "csv") %>
   <%= form_tag(search_path(params[:id]), method: :get, id: "formmy") do %> <%= hidden_field_tag :both_off %>Customize Chart: <input type="checkbox" name="shooby" id="shooby" value="show_plots" <%= "checked" if @show_plots.present?%>> Plot Points <input type="checkbox" name="shonby" id="shonby" value="show_lines" <%= "checked" if @show_lines.present?%>> Grid Lines | <%= link_to "Reset Both", search_path(params[:id]) %><% end %> </p>
-
+<% end %>
 <% data = {
     labels: @data.map {|d| d[:year]},
     datasets: [
@@ -18,10 +19,12 @@
     ]
 } %>
 <% options = {width: 1000, generateLegend: true, scaleShowGridLines: @show_lines.present?, pointDot: @show_plots.present?, bezierCurve: false} %>
-    <%= line_chart data, options %>
+<%= line_chart data, options %>
+<% unless @print %>
     <p>
       <%= form_tag("/datastores") do %>
 	<%= hidden_field_tag :docids, @data_record.docid  %>
 	<%= submit_tag "Add To Datastore" %>
 	<% end %>
     </p>
+<% end %>

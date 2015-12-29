@@ -41,6 +41,7 @@ GEM
       debug_inspector (>= 0.0.1)
     bootstrap-datepicker-rails (1.5.0)
       railties (>= 3.0)
+    bootstrap_flash_messages (0.0.7)
     builder (3.2.2)
     byebug (5.0.0)
       columnize (= 0.9.0)
@@ -71,6 +72,8 @@ GEM
     debug_inspector (0.0.2)
     erubis (2.7.0)
     execjs (2.5.2)
+    font-awesome-rails (4.5.0.0)
+      railties (>= 3.2, < 5.0)
     globalid (0.3.5)
       activesupport (>= 4.1.0)
     i18n (0.7.0)
@@ -197,12 +200,14 @@ PLATFORMS
 
 DEPENDENCIES
   bootstrap-datepicker-rails
+  bootstrap_flash_messages (= 0.0.7)
   byebug
   capistrano
   capistrano-passenger
   capistrano-rails (~> 1.1.1)
   chartjs-ror
   coffee-rails (~> 4.1.0)
+  font-awesome-rails
   jbuilder (~> 2.0)
   jquery-rails
   kaminari

@@ -132,7 +132,11 @@
     <% if @search_term %>
       <div class="row">
 	<div class="span9">
-	  <a href="/search"><%= image_tag "delete.png", class: "baricon" %><%= @search_term %>&nbsp;</a>		 </a>
+	  <% @search_params.each do |k, v| %>
+	    <% unless v.blank? %>
+		<%= link_to "#{image_tag('delete.png', class: 'baricon')} #{v}".html_safe, search_index_path(@search_params.except(k)) %>&nbsp;
+          <% end %>
+          <% end %>
 	</div>
       </div>
       <hr>
@@ -142,10 +146,9 @@
     <!-- BEGIN SEARCH RESULTS -->
 
     <% if @results.present? %>
-
       <%= paginate @results %>
       <div class="span9">
-	<p><strong>Click to Add<br /> to Datastore</strong></p>
+	<p><strong>Click to Compare</strong></p>
       </div>
       <%= form_tag('/datastores') do %>
 	<% @results.each do |result| %>
@@ -159,14 +162,25 @@
 	      </div> <!-- span -->
 	      <div class="span6">
 		<h4 class="darkbrown"><%= link_to  result.variable_name, search_path(result.entryid) %></h4>
-		<p class="searchbody"><%= result.subtopic%></p>
+		<p class="searchbody"><%= result.docid %>: <%= result.subtopic%></p>
 		<p><%= image_tag "station.png", class: "icon" %>
 		  <b><%= result.station_names %></b> <%= result.site_name%>
 		  --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name%> -- <%= result.timescale %></p>
 	      </div> <!-- span -->
 	      <div class="span2 searchright">
 		<h4><%= result.begin_date.year%> - <%= result.end_date.year %></h4>
-		<%= link_to image_tag("datastore_on.png"), search_path(result.entryid) %>
+		<% if session["datastore_array"].include?(result.docid.to_s) %>
+		  <div class="remove-datastore">
+		    <%= hidden_field_tag :jsdocid, result.docid.to_s, class: "jsdocid" %>
+		    <i class="fa fa-area-chart fa-3x text-error"></i>
+		  </div>
+
+    <% else %>
+		  <div class="add-datastore">
+		    <%= hidden_field_tag :jsdocid, result.docid.to_s, class: "jsdocid" %>
+		    <i class="fa fa-line-chart fa-3x"></i>
+		  </div>
+    <% end %>
 	      </div> <!-- span -->
 	    </div> <!-- row -->
 	    <hr>

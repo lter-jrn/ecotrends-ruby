@@ -74,4 +74,9 @@ class UserProfile < ActiveRecord::Base
       "uid=#{the_uid},o=unaffiliated,dc=ecoinformatics,dc=org"
     end
   end
+
+  def update_and_send_password_reset(thyme)
+    self.update_attribute(:lastupdate, thyme)
+    ResetPassword.reset_password_mail(self).deliver_now
+  end
 end

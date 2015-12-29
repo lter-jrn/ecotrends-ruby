@@ -1,0 +1,17 @@
+<h1>Reset Password</h1>
+<p>Enter your email address that you used to sign up to your EcoTrends network. You'll recieve an email shortly and follow the link to reset the password.
+</p>
+<p><strong>Note: </strong><em> If you are connecting via LDAP, go through their protocol to reset the password. Again, this is only for those accounts that signed up using the Ecotrends Network at time of signup. </em></p>
+
+
+<%= form_tag '/reset', method: :put do |form| %>
+  <p>
+    <%= label_tag 'Email' %> <%= text_field_tag :email, nil, placeholder: "Enter Email"%>
+  </p>
+  <p>
+    <%= submit_tag "Send Reset Instructions" %>
+  </p>
+<% end %>
+  <p>
+    <i><%= link_to "Register", signup_path%> if you are not yet a member.</i>
+  </p>

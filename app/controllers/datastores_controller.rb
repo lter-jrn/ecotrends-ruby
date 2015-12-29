@@ -37,9 +37,13 @@ class DatastoresController < ApplicationController
           is_not = "" if s.save
         end
       end
-
+      set_datastore_array
     end
-    redirect_to datastores_path, notice: "Dataset was {is_not}saved"
+    respond_to do |format|
+      format.html {redirect_to datastores_path, notice: "Dataset was {is_not}saved"}
+      format.json { render json: {success: true}.to_json, status: 200}
+    end
+
   end
 
   def destroy
@@ -50,6 +54,7 @@ class DatastoresController < ApplicationController
       is_not = ""
     end
 
+    set_datastore_array
     redirect_to datastores_path, notice: "Dataset was #{is_not}deleted"
   end
   # 1. based on the docid from the site, we have to know the label range of the # of years from all comparable graphs.
@@ -106,6 +111,11 @@ class DatastoresController < ApplicationController
       "#{100 - index}, #{index}, #{index + 150}"
     end
 
+  end
+
+  def set_datastore_array
+    session["datastore_array"] = ""
+    session["datastore_array"] = SavedDataset.where(iduser: current_user_id).map(&:docid)
   end
 
   # def colour_value(index)

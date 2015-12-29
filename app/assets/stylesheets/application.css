@@ -11,6 +11,7 @@
  *= require_self
  *= require_tree .
  *= require bootstrap-datepicker3
+ *= require font-awesome
  */
 .bold {
     font-weight: bold;
@@ -22,4 +23,11 @@
     width: 1.0em;
     content: url();
     margin-right: 1.0em;
+}
+#flash {
+    color: green;
+    border: 1px solid;
+    padding: 1.0em;
+    width: 40em;
+    text-align: center;
 }

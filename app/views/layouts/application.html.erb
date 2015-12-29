@@ -60,6 +60,9 @@
 			        <ul class="nav">
 				  <% if current_user.present?%>
 				    <p><i>Welcome, <%= current_user %></i></p>
+
+			            <a href="/account"><li>Account</li></a>
+
 			            <a href="/logout"><li>Log Out</li></a>
 				  <% else %>
 				    <li>
@@ -75,7 +78,11 @@
 
     <div class="container">
         <div class="row">
-            <%= bootstrap_flash %>
+      <% flash.each do |k, v| %>
+    <p id="flash">
+	<%= flash[k] %>
+    </p>
+	<% end %>
             <%= yield %>
         </div><!--/row-->
         <hr>

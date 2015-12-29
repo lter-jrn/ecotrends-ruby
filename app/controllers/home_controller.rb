@@ -1,12 +1,15 @@
 class HomeController < ApplicationController
   skip_before_filter :allow_only_signed_in
-	layout "search", :only => :search
+  layout "search", :only => :search
+  layout "graph", :only => :graph
   def index
   end
 
   def about
   end
+  def graph
 
+  end
   def glossary
     @terms = [{"Abundance" => "The number of individuals or the representation of the number of individuals of a species in a particular ecosystem. Unit: number of individuals/sampling area or sampling effort."},
 {"Biogeochemistry" => "The biogeochemistry of ecosystems involves the movement or cycling of elements (e.g., sulfur, carbon, nitrogen) and compounds (e.g., water) through the biotic (e.g., plants, animals, microbes) and abiotic (e.g., soils, atmosphere) components of an ecosystem."},

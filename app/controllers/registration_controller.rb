@@ -4,7 +4,23 @@ class RegistrationController < ApplicationController
   def new
     @user = UserProfile.new
   end
-
+  def edit
+    ss = Time.at(params[:token].gsub("_", ".").to_f + 0.000001).to_datetime
+    @user = UserProfile.where(lastupdate: ss).first
+    if @user.blank?
+      redirect_to '/', notice: "You are unable to view that page."
+    end
+  end
+  def update
+    ss = Time.at(params[:token].gsub("_", ".").to_f + 0.000001).to_datetime
+    @user = UserProfile.where(lastupdate: ss).first
+    if @user.present? && (params[:password] == params[:password_confirmation])
+      @user.update_attributes(passphrase: UserProfile.encrypt_password(params["password"]), lastupdate: "")
+      redirect_to "/login", notice: "Password Reset. Thank You. Now please log in."
+    else
+      render :edit, notice: "Make both passwords match"
+    end
+  end
   def create
     the_route = "/signup"
     msg = "You were not logged into your Network."

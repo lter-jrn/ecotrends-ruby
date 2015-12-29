@@ -25,14 +25,14 @@
 	</div> <!-- span -->
 	<div class="span9">
 	  <h4 class="darkbrown"><%= link_to result.extracat_metadata.variable_name, search_path(result.extracat_metadata.entryid) %></h4>
-	  <p class="searchbody"></p>
+	  <p class="searchbody"><%= result.docid%></p>
 	  <p><%= image_tag "station.png", class: "icon" %><%= result.extracat_metadata.station_names %></b>/ <%= result.extracat_metadata.site_name%></a>
 	    --<%= result.extracat_metadata.topic %> / <%= result.extracat_metadata.subtopic %> -- <%= result.extracat_metadata.unit_name%> -- <%= result.extracat_metadata.timescale %></p>
 	</div> <!-- span -->
 	<div class="span2 searchright">
 	  <h4><%= result.extracat_metadata.begin_date.year%> - <%= result.extracat_metadata.end_date.year %></h4>
 	  <%= link_to image_tag("datastore_on.png"), search_path(result.extracat_metadata.entryid) %><hr/>
-	  <p><%= link_to 'Destroy?', datastore_path(result.idsave), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	  <p><i class="fa fa-delete"></i><%= link_to 'Remove?', datastore_path(result.idsave), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 	</div> <!-- span -->
       </div> <!-- row -->
     </div> <!-- span -->
