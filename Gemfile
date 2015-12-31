@@ -31,6 +31,7 @@ gem 'kaminari'
 gem "net-ldap"
 gem 'chartjs-ror'
 gem "font-awesome-rails"
+gem 'json'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

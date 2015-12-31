@@ -1,21 +1,25 @@
 <div class="row">
-	<div class="span12">
+	<div class="span14">
 		<h1>Infographics</h1>
 		<h5>Infographics Library</h5>
 
         <p>
-            <button id="start-slideshow" class="btn btn-small btn-success" data-slideshow="5000" data-target="#modal-gallery" data-selector="#gallery a[rel=gallery]">Start Slideshow</button>
-            <button id="toggle-fullscreen" class="btn btn-small btn-primary" data-toggle="button">Toggle Fullscreen</button>
         </p>
-    </header>
     <div id="gallery" data-toggle="modal-gallery" data-target="#modal-gallery">
-    <a href="RockNRoll.jpg" title="Banana" data-gallery="gallery">
-	    <%= image_tag "apples.jpg" %>
-    </a>
-    <a href="RockNRoll.jpg" title="Apple" data-gallery="gallery">
-	    <%= image_tag "oranges.jpg" %>
-    </a>
-</div>
+
+      <% @json_hash["images"].each_with_index do |key, index| %>
+
+          <%= link_to image_path("/images/infographics/#{key['image']['name']}"), title:"#{key['image']['title']}", :"data-gallery"=>"gallery" do %>
+              <%= image_tag("/images/infographics/thumb/#{key['image']['name']}", id:"info_thumb") %>
+          <% end %>
+
+          <% if index != 0 and ((index + 1) % 7) == 0  %>
+              <p></p>
+          <% end %>
+
+      <% end %>
+
+    </div>
     <br>
 
 

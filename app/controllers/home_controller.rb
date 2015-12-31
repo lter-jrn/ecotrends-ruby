@@ -2,6 +2,8 @@ class HomeController < ApplicationController
   skip_before_filter :allow_only_signed_in
   layout "search", :only => :search
   layout "graph", :only => :graph
+  require 'json'
+
   def index
   end
 
@@ -45,6 +47,17 @@ class HomeController < ApplicationController
   end
 
   def infographics
+    puts Rails.root
+    @file = File.read("#{Rails.root}/public/images/infographics/infographics.json")
+    @json_hash = JSON.parse(@file)
+    @imagePath = ""
+    # puts "here is the JSON :"
+    #
+    # @json_hash["images"].each do |key|
+    #
+    #   puts "key: #{key['image']['name']}"
+    #
+    # end
   end
 
   def datastore
