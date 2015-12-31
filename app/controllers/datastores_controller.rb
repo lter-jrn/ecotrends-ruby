@@ -113,10 +113,6 @@ class DatastoresController < ApplicationController
 
   end
 
-  def set_datastore_array
-    session["datastore_array"] = ""
-    session["datastore_array"] = SavedDataset.where(iduser: current_user_id).map(&:docid)
-  end
 
   # def colour_value(index)
   #   puts index

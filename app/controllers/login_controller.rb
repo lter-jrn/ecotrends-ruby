@@ -13,6 +13,7 @@ class LoginController < ApplicationController
         #session stuff here
         session["current_user"] = @user["uid"]
         session["iduser"] = @user["iduser"]
+        set_datastore_array
         the_route = '/search'
       end
     end

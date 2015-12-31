@@ -22,4 +22,15 @@ class ApplicationController < ActionController::Base
   def datastore_array
     session["datastore_ids"]
   end
+
+  def set_datastore_array
+    session["datastore_array"] = ""
+    session["datastore_array"] = SavedDataset.where(iduser: current_user_id).map(&:docid)
+  end
+
+  def set_session_variables
+    session["current_user"] = @user.uid
+    set_datastore_array
+    session["iduser"] = @user.iduser
+  end
 end

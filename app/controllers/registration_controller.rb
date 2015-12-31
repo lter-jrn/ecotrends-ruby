@@ -41,8 +41,7 @@ class RegistrationController < ApplicationController
           msg = "Successfully signed up"
 
           #session stuff here
-          session["current_user"] = @user.uid
-          session["iduser"] = @user.iduser
+          set_session_variables
         end
 
       end
