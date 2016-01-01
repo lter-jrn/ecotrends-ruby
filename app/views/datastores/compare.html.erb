@@ -1,5 +1,5 @@
 <h1>Comparing Datasets</h1>
-<p><%= link_to "back", search_index_path %> | <%= link_to "Print Version", comparison_path(params[:id], print: true) %>
+<p><%= link_to "Back", search_index_path %> | <%= link_to "Print Version", "#", :id=> "print-link" %>
   <%= form_tag(comparison_path(params), method: :get, id: "formmy") do %><%= hidden_field_tag :docids, params["docids"] %> <%= hidden_field_tag :both_off %>Customize Chart: <input type="checkbox" name="shooby" id="shooby" value="show_plots" <%= "checked" if @show_plots.present?%>> Plot Points <input type="checkbox" name="shonby" id="shonby" value="show_lines" <%= "checked" if @show_lines.present?%>> Grid Lines | <%= link_to "Reset Both", comparison_path(docids: params[:docids]) %><% end %></p>
 <% options = {width: 1000, generateLegend: true, scaleShowGridLines: @show_lines.present?, pointDot: @show_plots.present?} %>
 <%= line_chart @data, options %>

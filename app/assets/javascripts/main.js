@@ -139,4 +139,27 @@ $(function () {
     // 	    }
     // 	});
     // });
+
+    //print functions
+    $("#print-link").click(function(e){
+        var dataUrl = document.getElementById('chart-0').toDataURL(); //attempt to save base64 string to server using this var
+        var lineLegend = document.getElementsByClassName('line-legend')[0];
+        var lineLegHTML = lineLegend.innerHTML;
+        console.log(lineLegHTML);
+        var windowContent = '<!DOCTYPE html>';
+        windowContent += '<html>'
+        windowContent += '<head><title>Ecotrends - Comparing Datasets</title></head>';
+        windowContent += '<body>'
+        windowContent += '<img src="' + dataUrl + '">';
+        windowContent += '<ul style="color: #838383;font-weight: 300; font-size: 12px;">' + lineLegHTML + '<ul>';
+        windowContent += '</body>';
+        windowContent += '</html>';
+        var printWin = window.open('','','width=340,height=260');
+        printWin.document.open();
+        printWin.document.write(windowContent);
+        printWin.document.close();
+        printWin.focus();
+        printWin.print();
+        printWin.close();
+    });
 });
