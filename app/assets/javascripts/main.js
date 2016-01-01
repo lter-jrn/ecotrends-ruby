@@ -148,7 +148,7 @@ $(function () {
         console.log(lineLegHTML);
         var windowContent = '<!DOCTYPE html>';
         windowContent += '<html>'
-        windowContent += '<head><title>Ecotrends - Comparing Datasets</title></head>';
+        windowContent += '<head><title>Ecotrends - Data Results</title></head>';
         windowContent += '<body>'
         windowContent += '<img src="' + dataUrl + '">';
         windowContent += '<ul style="color: #838383;font-weight: 300; font-size: 12px;">' + lineLegHTML + '<ul>';
