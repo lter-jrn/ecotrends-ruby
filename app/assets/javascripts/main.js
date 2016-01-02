@@ -103,6 +103,7 @@ $(function () {
     $(".triggerbox").change(function(){
 	this.form.submit()
     });
+
     $(".moresites").click(function(e){
 	e.preventDefault();
 	$(this).parent().find(".more_items").show();
@@ -124,6 +125,10 @@ $(function () {
 	});
     });
 
+    $(".location").click(function(e){
+        $("#search-input").val($(this).attr("value"));
+        $("#search-form").trigger("submit.rails");
+    });
 
     // $(".remove-datastore").click(function(e){
     // 	var fa = $(this).find(".fa")
@@ -140,7 +145,7 @@ $(function () {
     // 	});
     // });
 
-    //print functions
+    //print function for charts
     $("#print-link").click(function(e){
         var dataUrl = document.getElementById('chart-0').toDataURL(); //attempt to save base64 string to server using this var
         var lineLegend = document.getElementsByClassName('line-legend')[0];

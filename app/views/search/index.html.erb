@@ -1,6 +1,6 @@
-<div class="span3">
+<div class="span3" id="filter-container">
   <h3>Filter Results <small><%= link_to "Clear", search_index_path %></small></h3>
-  <h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+  <h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a></h4>
   <hr>
   <ul class="search-side">
     <%= form_tag(search_index_path, method: :get) do  %>
@@ -24,7 +24,7 @@
   </ul>
   <hr>
 
-  <h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">Date Range</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+  <h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">Date Range</a></h4>
   <hr>
   <ul class="search-side">
     <%= form_tag(request.fullpath, method: :get) do  %>
@@ -38,7 +38,7 @@
   </ul>
   <hr>
 
-  <h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Variables Measured</a><span style="float:right;"><a href="#">+/-</a></span></h4>
+  <h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Variables Measured</a></h4>
   <hr>
   <ul class="search-side">
     <%= form_tag(request.fullpath, method: :get) do  %>
@@ -57,20 +57,15 @@
     <div class="span9">
       <div class="row">
 	<div style="padding-left:20px;" class="span3">
-	  <% if @results.present? %>
-	    <h1>Search Results</h1>
-	    <p class="searchbody"><%= @results.count %> results for: <b><%= @search_term %></b></p>
-    <% else %>
-	    <h1>Search</h1>
-    <% end %>
+    <h4>Search by keyword</h4>
 	</div> <!-- span -->
-	<div style="margin-right: -20px; padding-top: 27px;" class="span6">
+	<div style="margin-right: -20px; padding-top: 10px;" class="span6">
 	  <fieldset>
 
-	    <%= form_tag('/search', method: :get) do  %>
-	      <%= text_field_tag :keywords, @search_term %>
+	    <%= form_tag('/search', method: :get, id:"search-form") do  %>
+	      <%= text_field_tag :keywords, @search_term, id:"search-input" %>
 	      <%= hidden_field_tag :site_filter, params[:site_filter] %>
-	      <%= submit_tag "Search" %>
+	      <%= submit_tag "Search", class:"btn btn-primary", id:"search-button" %>
     <% end %>
 	  </fieldset>
 	</div> <!-- span <input class="searchinput"type="search" value="Plant Productivity"></input> -->
@@ -85,7 +80,7 @@
       <li>
 	<div class="dropdown">
 	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <h4><%= image_tag "globeicon.png", class: "baricon" %>Location</h4>
+            <h4><%= image_tag "globeicon.png", class: "baricon" %>Browes by location</h4>
 	  </a>
 	  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
       	    <div class="row">
@@ -95,15 +90,21 @@
 		    <h4>Sites </h4>
 		    <span class="<%= "bold" if params[:site_filter].blank? %>" id="all_locations"><small>All</small></span><br />
 		    <% @items[0].each do |item| %>
-		      <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
+            <a href='#' class='location' value='<%= item.site_name %>' >
+		          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>">
+                <%= item.site_name %><br />
+              </span>
+            </a>
 		    <% end %>
 		  </li>
 		  <li class="divider"></li>
 	      	</div> <!-- span -->
 	      	<div class="span2">
 		    <% @items[1].each do |item| %>
-		      <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
-		    <% end %>
+          <a href='#' class='location' value='<%= item.site_name %>' >
+		        <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
+		      </a>
+        <% end %>
 		  </li>
 		  <li class="divider"></li>
 	      	</div> <!-- span -->
@@ -111,8 +112,10 @@
 	      	<div class="span2">
 		  <li>
 		    <% @items[2].each do |item| %>
-		      <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
-		    <% end %>
+            <a href='#' class='location' value='<%= item.site_name %>' >
+            <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
+		        </a>
+        <% end %>
 		  </li>
 		  <li class="divider"></li>
 	      	</div> <!-- span -->
@@ -148,7 +151,8 @@
     <% if @results.present? %>
       <%= paginate @results %>
       <div class="span9">
-	<p><strong>Click to Compare</strong></p>
+        <%= @results.count %> total results for: <%= @search_term %></br>
+	<strong>Click to Compare</strong>
       </div>
       <%= form_tag('/datastores') do %>
 	<% @results.each do |result| %>
