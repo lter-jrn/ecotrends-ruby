@@ -41,6 +41,10 @@ EcoTrends::Application.routes.draw do
 
   get "policies" => "home#policies"
 
+  post 'contact' => 'contact_us#create'
+
+  get 'contact' =>  'contact_us#new'
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

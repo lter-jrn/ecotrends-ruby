@@ -8,6 +8,8 @@ class HomeController < ApplicationController
   end
 
   def about
+    @message = ContactUs.new
+
   end
   def graph
 
