@@ -5,8 +5,10 @@ class RegistrationController < ApplicationController
     @user = UserProfile.new
   end
   def edit
-    ss = Time.at(params[:token].gsub("_", ".").to_f + 0.000001).to_datetime
-    @user = UserProfile.where(lastupdate: ss).first
+    ss = Time.at(params[:token].gsub("_", ".").to_f + 0.000001).to_datetime.utc
+    kk = Time.at(params[:token].gsub("_", ".").to_f - 0.000001).to_datetime.utc
+    yy = Time.at(params[:token].gsub("_", ".").to_f).to_datetime.utc
+    @user = UserProfile.where(lastupdate: [ss, kk, yy]).first
     if @user.blank?
       redirect_to '/', notice: "You are unable to view that page."
     end
