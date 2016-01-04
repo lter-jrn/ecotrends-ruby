@@ -11,13 +11,17 @@ class SearchController < ApplicationController
     # ends here
     @variables = []
     @the_sites = []
+    @topics = ExtracatMetadata.group(:topic).select(:topic).order(:topic => "ASC").to_a
+    @subtopics = ExtracatMetadata.group(:subtopic).select(:subtopic).order(:subtopic => "ASC").to_a
     @sites_filtered = params[:site_filter].present? ? params[:site_filter].split() : []
+    @subtopics_filtered = params[:subtopic].present? ? params[:subtopic].split("-") : []
+    @topics_filtered = params[:topic].present? ? params[:topic].split("-") : []
+    @search_term = params[:keywords]
+    @search_params = search_params.except("page")
     unless @search.blank?
       @results = @search.page(params[:page])
       @min_date = params[:min_date] || @search.map(&:begin_date).min
       @max_date = params[:max_date] || @search.map(&:end_date).max
-      @search_term = params[:keywords]
-      @search_params = search_params
       @raw_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
       @the_sites = @raw_sites.first(10)
       @more_sites = @raw_sites - @the_sites if @raw_sites.present?
@@ -65,7 +69,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site, :min_date, :max_date, :site_filter)
+    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site, :min_date, :max_date, :site_filter, :topic, :subtopic)
   end
 
   def search_setup

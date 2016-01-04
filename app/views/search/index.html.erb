@@ -38,7 +38,7 @@
   </ul>
   <hr>
 
-  <h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Variables Measured</a></h4>
+  <h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Subtopics</a></h4>
   <hr>
   <ul class="search-side">
     <%= form_tag(request.fullpath, method: :get) do  %>
@@ -65,6 +65,8 @@
 	    <%= form_tag('/search', method: :get, id:"search-form") do  %>
 	      <%= text_field_tag :keywords, @search_term, id:"search-input" %>
 	      <%= hidden_field_tag :site_filter, params[:site_filter] %>
+	      <%= hidden_field_tag :topic, params[:topic] %>
+	      <%= hidden_field_tag :subtopic, params[:subtopic] %>
 	      <%= submit_tag "Search", class:"btn btn-primary", id:"search-button" %>
     <% end %>
 	  </fieldset>
@@ -75,12 +77,12 @@
 </div> <!-- span -->
 
 <div class="row">
-  <div class="span9">
+  <div class="span9" <%= "style=display:none;" if params[:keywords].blank? %>>
     <ul class='inline'>
       <li>
 	<div class="dropdown">
 	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <h4><%= image_tag "globeicon.png", class: "baricon" %>Browes by location</h4>
+            <h4><%= image_tag "globeicon.png", class: "baricon" %>Browse by location</h4>
 	  </a>
 	  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
       	    <div class="row">
@@ -130,6 +132,44 @@
 	  </ul>
 	</div>
       </li>
+      <li>
+	<div class="dropdown">
+	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+            <h4><%= image_tag "topicicon.png", class: "baricon" %>Browse by Topic</h4>
+	  </a>
+	  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+      	    <div class="row">
+      	      <div class="span4">
+	      	<div class="span2">
+		  <li>
+		    <h4>Topics </h4>
+		    <span class="<%= "bold" if params[:topic].blank? %>" id="all_topics"><small>All</small></span><br />
+		    <% @topics.each do |item| %>
+            <a href='#' class='location' value='<%= item.topic %>' >
+		          <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
+                <%= item.topic %><br />
+              </span>
+            </a>
+		    <% end %>
+		  </li>
+		  <li class="divider"></li>
+	      	</div> <!-- span -->
+	      	<div class="span2">
+		  <h4>SubTopics</h4>
+		    <span class="<%= "bold" if params[:topic].blank? %>" id="all_subtopics"><small>All</small></span><br />
+		    <% @subtopics.each do |item| %>
+          <a href='#' class='location' value='<%= item.subtopic %>' >
+		        <span class="location_link <%= "bold" if @subtopics_filtered.include?(item.subtopic) %>" id="<%= item.subtopic %>"><%= item.subtopic %><br /></span>
+		      </a>
+        <% end %>
+		  </li>
+		  <li class="divider"></li>
+	      	</div> <!-- span -->
+      	      </div> <!-- span -->
+      	    </div> <!-- row -->
+	  </ul>
+	</div>
+      </li>
     </ul>
     <hr>
     <% if @search_term %>
@@ -137,7 +177,9 @@
 	<div class="span9">
 	  <% @search_params.each do |k, v| %>
 	    <% unless v.blank? %>
-		<%= link_to "#{image_tag('delete.png', class: 'baricon')} #{v}".html_safe, search_index_path(@search_params.except(k)) %>&nbsp;
+	      <% v.split("-").each do |vv| %>
+		<%= link_to "#{image_tag('delete.png', class: 'baricon')} #{vv}".html_safe, search_index_path(@search_params.except(k)) %>&nbsp;
+		<% end %>
           <% end %>
           <% end %>
 	</div>

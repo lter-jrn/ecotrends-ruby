@@ -43,6 +43,17 @@ class ExtracatMetadata < ActiveRecord::Base
     if term_hash["variable_name"].present?
       keyword_search = keyword_search.where("subtopic" => term_hash["subtopic"])
     end
+
+    if term_hash["subtopic"].present?
+      sub_array = term_hash["subtopic"].split("-")
+      keyword_search = keyword_search.where("subtopic" => sub_array)
+    end
+
+    if term_hash["topic"].present?
+      topic_array = term_hash["topic"].split("-")
+      keyword_search = keyword_search.where("topic" => topic_array)
+    end
+
     if term_hash["site"].present?
       keyword_search = keyword_search.where("site_name" => term_hash["site"])
     end
