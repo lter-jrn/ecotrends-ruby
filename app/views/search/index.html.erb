@@ -185,7 +185,7 @@
         <%= @results.count %> total results for: <%= @search_term %></br>
 	<strong>Click to Compare</strong>
       </div>
-      <%= form_tag('/datastores') do %>
+      <%= form_tag('/comparison', method: :get) do %>
 	<% @results.each do |result| %>
 	  <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
 	  <div class="span9">
@@ -221,7 +221,7 @@
 	    <hr>
 	  </div> <!-- span -->
     <% end %>
-    <%= submit_tag "Save To Datastore" %>
+    <%= submit_tag "Compare Datasets" %>
     <% end %>
     <%= paginate @results %>
     <% end %>

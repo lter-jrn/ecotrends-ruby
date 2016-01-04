@@ -12,8 +12,11 @@ class RegistrationController < ApplicationController
     end
   end
   def update
-    ss = Time.at(params[:token].gsub("_", ".").to_f + 0.000001).to_datetime
-    @user = UserProfile.where(lastupdate: ss).first
+    # for some reason there is a minus whatever 1 microsecond on server, dev has +1.. putting all 3 in.
+    ss = Time.at(params[:token].gsub("_", ".").to_f + 0.000001).to_datetime.utc
+    kk = Time.at(params[:token].gsub("_", ".").to_f - 0.000001).to_datetime.utc
+    yy = Time.at(params[:token].gsub("_", ".").to_f).to_datetime.utc
+    @user = UserProfile.where(lastupdate: [ss, kk, yy]).first
     if @user.present? && (params[:password] == params[:password_confirmation])
       @user.update_attributes(passphrase: UserProfile.encrypt_password(params["password"]), lastupdate: "")
       redirect_to "/login", notice: "Password Reset. Thank You. Now please log in."
