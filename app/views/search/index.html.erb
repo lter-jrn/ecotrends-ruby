@@ -153,18 +153,7 @@
 		    <% end %>
 		  </li>
 		  <li class="divider"></li>
-	      	</div> <!-- span -->
-	      	<div class="span2">
-		  <h4>SubTopics</h4>
-		    <span class="<%= "bold" if params[:topic].blank? %>" id="all_subtopics"><small>All</small></span><br />
-		    <% @subtopics.each do |item| %>
-          <a href='#' class='location' value='<%= item.subtopic %>' >
-		        <span class="location_link <%= "bold" if @subtopics_filtered.include?(item.subtopic) %>" id="<%= item.subtopic %>"><%= item.subtopic %><br /></span>
-		      </a>
-        <% end %>
-		  </li>
-		  <li class="divider"></li>
-	      	</div> <!-- span -->
+	      	</div>
       	      </div> <!-- span -->
       	    </div> <!-- row -->
 	  </ul>
