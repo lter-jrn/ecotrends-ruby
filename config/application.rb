@@ -61,11 +61,11 @@ module EcoTrends
 
     #mailer
     config.action_mailer.smtp_settings = {
-        address: "smtp.gmail.com",
+        address: "smtp.nmsu.edu",
         port: 587,
-        domain: "gmail.com",
-        user_name: "*****",
-        password: "******",
+        domain: "nmsu.edu",
+        user_name: "ecotrend",
+        password: "Jer100$!",
         authentication: :plain,
         enable_starttls_auto: true
     }
