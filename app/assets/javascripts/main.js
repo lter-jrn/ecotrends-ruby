@@ -181,7 +181,9 @@ $(function () {
     });
 
     $(".location").click(function(e){
-        $("#search-form").trigger("submit.rails");
+        /// I need to do this so we can search without entering a search term in the search box!
+        /// filters on the left are just that and need to operate as they are.
+        window.location.href = "/search?utf8=✓&keywords=" + $(this).attr("value")
     });
 
     // $(".remove-datastore").click(function(e){

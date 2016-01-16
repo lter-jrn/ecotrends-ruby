@@ -2,7 +2,38 @@
           <div class="span7">
             <h1>Ecological Data on Demand</h1>
             <h5>The EcoTrends Project is designed to promote and enable the use and synthesis of long-term data to examine trends in the Earth's ecosystems.</h5>
-            <p>The Earth's environment is changing at local, regional, and global scales. Dramatic changes have occurred over the past century in climate, land cover, and habitat availability with important consequences for plant, animal, microbial, and human populations. Long-term data provide the only means to assess the rate and direction of change, to distinguish directional trends from short-term variability, and to forecast environmental conditions in the future.</p>
+            <p>
+              Welcome to EcoTrends. We are currently verifying the data on this website with the contributing researchers; please read the <b>disclaimer</b> below.
+              The Earth's environment is changing at local, regional, and global scales. Dramatic changes have occurred over the past century in climate, land cover, and habitat availability with important consequences for plant, animal, microbial, and human populations. Long-term data provide the only means to assess the rate and direction of change, to distinguish directional trends from short-term variability, and to forecast environmental conditions in the future.
+              The EcoTrends Project is designed to promote and enable the use and synthesis of long-term data to examine these trends in the Earth's ecosystems.
+              The EcoTrends project is a collaborative effort among state and federal agencies and institutions, at present primarily in the US, to make long-term ecological data easy to access, analyze, and compare within and across sites. This website is a portal to:
+              <ul>
+                <li>
+                  a large and diverse collection of standardized long-term ecological datasets and their metadata (> 1200 datasets)
+
+                </li>
+                <li>
+                  unique data exploration, download, graphing and synthesis tools
+                </li>
+                <li>
+                  information about participating research sites and their parent agencies
+                </li>
+              </ul>
+              These datasets, tools, and information are available to anyone who would like to: view trends in ecological variables for one or multiple sites or pursue additional statistical analyses of within-site and cross-site comparisons. Please read our <a href="/policies">data use and citation policies</a> before downloading data.
+              We are interested in expanding our database to include additional sites from both within the US and in other countries.<a href="/home/about">Please contact us</a> for details.
+              Any use of data or figures from the EcoTrends project must:
+            <ul>
+              <li>
+                Include the following statement (replace [Original Data Source] and [EcoTrends Dataset Identifier] with values from the website as appropriate):              </li>
+              <li>
+                "Data and figures were obtained from the <a href="/">EcoTrends Project</a> funded by the National Science Foundation and USDA Agricultural Research Service. These data are from [Original Data Source]; [EcoTrends Dataset Identifier]."
+              </li>
+              <li>
+                Submit a pdf of the final publication using EcoTrends data to: ecotrend@nmsu.edu
+              </li>
+            </ul>
+              <b>Disclaimer:</b> <i>While substantial efforts are made to ensure the accuracy of data and documentation contained in the datasets discovered on the EcoTrends website, complete accuracy of data and metadata cannot be guaranteed. All data and metadata are made available "as is". The Data User holds all parties involved in the production or distribution of the Dataset harmless for damages resulting from its use or interpretation.</i>
+            </p>
           </div> <!-- span -->
           <div class="span5">
           	<div class="row">
@@ -32,5 +63,14 @@
 								<p>Use our Glossary to stay informed on terminology.</p>
           		</div> <!-- span -->
           	</div> <!-- row -->
+            <div class="row"><!-- row -->
+              <div class="span1">
+                <%= image_tag "publications_icon.png" %>
+              </div> <!-- span -->
+              <div class="span4">
+                <h1><%= link_to "Publications", home_publications_path%></h1>
+                <p>Submit a pdf of any final publication using EcoTrends data.</p>
+              </div> <!-- span -->
+            </div> <!-- row -->
           </div> <!-- span -->
         </div><!--/row-->

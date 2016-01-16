@@ -1,0 +1,34 @@
+<div class="row">
+  <div class="span8">
+    <h1>Help Us Grow Our Datasets</h1>
+    <h2>We are interested in expanding our database to include additional sites from both within the US and in other countries.</h2>
+  </div> <!-- span -->
+  <div class="span4">
+    <h1>Contact Us</h1>
+    <%= form_for @message, url: contact_url do |message_form| %>
+        <fieldset>
+          <div class="field">
+            <%= message_form.text_field :subject, placeholder: "Subject", class:"span4" %>
+          </div>
+
+          <div class="field">
+            <%= message_form.email_field :email, placeholder: "Email", class:"span4" %>
+          </div>
+
+          <div class="field">
+            <%= message_form.text_area :content, placeholder: "Message", class:"span4" %>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <%= recaptcha_tags %>
+        </fieldset>
+
+        <fieldset>
+          <div class="field" style="padding-top:6px;">
+            <%= message_form.submit "Send Message", class: "btn btn-primary" %>
+          </div>
+        </fieldset>
+    <% end %>
+  </div> <!-- span -->
+</div>

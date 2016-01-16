@@ -21,6 +21,12 @@ EcoTrends::Application.routes.draw do
 
   get "home/about"
 
+  get "home/publications"
+
+  get "home/synthesis"
+
+  get "home/contact"
+
   get "home/glossary"
 
   get "home/infographics"
