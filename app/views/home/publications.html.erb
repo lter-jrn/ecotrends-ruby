@@ -31,15 +31,12 @@
       <td class="description">Perry, Ann. 2012. Climate Changes Help Grass Come Back to U.S. Rangelands. USDA News and Events article August 3, 2012. Accessed on 08/06/2012. http://www.ars.usda.gov/is/pr/2012/120803.htm. </td>
     </tr>
     <tr>
-      <td class="pdficon"><a href="/assets/ARS_magazine_Aug2012issue_Peters_research.pdf" target="_blank">
-        <img src="/assets/pdf.gif" alt="PDF Link" border="0"></a></td>
-      <td class="link"><a href="http://ars.usda.gov/is/AR/archive/aug12/grasslands0812.htm" target="_blank">
-        <img src="/assets/html.gif" alt="HTML Link" border="0" data-pin-nopin="true"></a></td>
+      <td class="pdficon"><%= link_to image_tag("pdf.gif"), asset_path("ARS_magazine_Aug2012issue_Peters_research.pdf"), target: "_blank" %></td>
+      <td class="link"><%= link_to image_tag("html.gif"), "http://ars.usda.gov/is/AR/archive/aug12/grasslands0812.htm", {target:"_blank", "data-pin-nopin" => "true" } %></td>
       <td class="description">Perry, Ann. 2012. Climate Change May Help Restore Arid Grasslands. Agricultural Resource magazine August 2012, Vol. 60, no. 7. Accessed August 2, 2012. http://ars.usda.gov/is/AR/archive/aug12/August2012.pdf. </td>
     </tr>
     <tr>
-      <td class="pdficon"><a href="/assets/eHigh_School_students_in_New_Mexico_put_a_fresh_twist_on_presenting_LTER_data.pdf" target="_blank">
-        <img src="/assets/pdf.gif" alt="PDF Link" border="0"></a></td>
+      <td class="pdficon"><%= link_to image_tag("pdf.gif"), "#", target: "_blank" %></td>
       <td class="link"></td>
       <td class="description">Haan-Amato, S., and S. Bestelmeyer. 2012. High School students in New Mexico put a fresh twist on presenting LTER data. LTER Network News Spring 2012, Vol. 25, no. 2. </td>
     </tr>
@@ -49,11 +46,7 @@
       <td class="description">Johnson DR, Ebert-May D, Webber PJ, and Tweedie CE. 2011. Forecasting alpine vegetation change using repeat sampling and a novel modeling approach. Ambioo 40: 693-704.</td>
     </tr>
     <tr>
-      <td class="pdficon">
-        <a href="/assets/es11-00115.1.pdf" target="_blank">
-          <img src="/assets/pdf.gif" alt="PDF Link" border="0"></a>
-
-      </td>
+      <td class="pdficon"><%= link_to image_tag("pdf.gif"), asset_path("es11-00115.1.pdf"), target:"_blank" %></td>
       <td class="link"></td>
       <td class="description">
         Peters, D. P. C., A. E. Lugo, F. S. Chapin, III, S. T. A. Pickett, M. Duniway, A. V. Rocha, F. J. Swanson, C. Laney, and J. Jones. 2011. <b>Cross-system comparisons elucidate disturbance complexities and generalities</b>. Ecosphere 2(7):art81. doi:10.1890/ES11-00115.1
@@ -81,29 +74,21 @@
       </td>
     </tr>
     <tr>
-      <td class="pdficon">
-        <a href="/assets/EcoTrendsWebPortal.pdf" target="_blank">
-          <img src="/assets/pdf.gif" alt="PDF Link" border="0"></a>
-      </td>
+      <td class="pdficon"><%= link_to image_tag("pdf.gif"), asset_path("EcoTrendsWebPortal.pdf"), target:"_blank" %></td>
       <td class="link"></td>
       <td class="description">
         Servilla, M., Costa, D., Laney, C., San Gil, I., Brunt, J. 2008. <b>The EcoTrends Web Portal: An Architecture for Data Discovery and Exploration</b>. Proceedings of the Environmental Information Management Conference 2008.
       </td>
     </tr>
     <tr>
-      <td class="pdficon">
-        <a href="/assets/DataBits_06spring.pdf" target="_blank">
-          <img src="/assets/pdf.gif" alt="PDF Link" border="0"></a>
-      </td>
+      <td class="pdficon"><%= link_to image_tag("pdf.gif"), asset_path("DataBits_06spring.pdf"), target: "_blank" %></td>
       <td class="link"></td>
       <td class="description">
         Laney, CM &amp; DPC Peters. 2006. <b>EcoTrends in Long-Term Ecological Data: a collaborative synthesis project, introduction and update</b>. Databits Spring 2006.
       </td>
     </tr>
     <tr>
-      <td class="pdficon">
-        <a href="/assets/jornv10i1.pdf" target="_blank">
-          <img src="/assets/pdf.gif" alt="PDF Link" border="0"></a></td>
+      <td class="pdficon"><%= link_to image_tag("pdf.gif"), asset_path("jornv10i1.pdf"), target: "_blank" %></td>
       <td class="link"></td>
       <td class="description">
         Peters, DPC &amp; CM Laney. 2006. <b>EcoTrends in long-term ecological research project</b>. Jornada Trails 10(1): 2.
@@ -129,22 +114,18 @@
       <th class="link">Link</th>
     </tr>
     <tr>
+      <td class="pub_table_cell"><%= image_tag "Trends_flyer_ESA2007.jpg", alt: "EcoTrends 2009 ESA Flyer", border:"0" %></td>
       <td class="pub_table_cell">
-        <img src="/assets/Trends_flyer_ESA2007.jpg" alt="EcoTrends 2009 ESA Flyer" border="0">
-      </td>
-      <td class="pub_table_cell">
-        <a href="/assets/EcoTrends_flyer_29July2009.pdf" target="_blank">
-          EcoTrends 2009 ESA Flyer (pdf)
+        <%= link_to "EcoTrends 2009 ESA Flyer (pdf)", asset_path("EcoTrends_flyer_29July2009.pdf"), target:"_blank" %>
         </a>
       </td>
     </tr>
     <tr>
       <td class="pub_table_cell">
-        <img src="/assets/EcoTrends_ESA2007_Poster.jpg" alt="EcoTrends 2009 ESA Poster" border="0">
+        <%= image_tag "EcoTrends_ESA2007_Poster.jpg",  alt: "EcoTrends 2009 ESA Poster", border: "0" %>
       </td>
       <td class="pub_table_cell">
-        <a href="/assets/EcoTrends_ESA2009_Poster.pptx">
-          EcoTrends 2009 ESA Poster (pptx)
+        <%= link_to "EcoTrends 2009 ESA Poster (pptx)", asset_path("EcoTrends_ESA2009_Poster.pptx"), target: "_blank" %>
         </a>
       </td>
     </tr>
