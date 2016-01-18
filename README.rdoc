@@ -13,7 +13,7 @@ Ruby App for Ecotrends.info
 
 4. git pull origin master
 
-5. RAILS_ENV=production bundle exec rails assets:precompile #just in case there is any assets added.
+5. RAILS_ENV=production bundle exec rake assets:precompile #just in case there is any assets added.
 
 6. touch tmp/restart.txt #this restarts passenger
 
