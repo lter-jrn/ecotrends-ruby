@@ -9,7 +9,7 @@ class ContactUsController < ApplicationController
 
     if @message.valid?
       ContactUsMailer.new_contact(@message).deliver
-      redirect_to "/home/about", notice: "Your messages has been sent."
+      redirect_to "/home/contact", notice: "Your messages has been sent."
     else
       flash[:alert] = "An error occurred while delivering this message."
       redirect_to("/home/about")

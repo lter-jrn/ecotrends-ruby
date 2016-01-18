@@ -83,4 +83,16 @@ class HomeController < ApplicationController
   def policies
 
   end
+
+  def contact
+    @message = ContactUs.new
+  end
+
+  def publications
+
+  end
+
+  def synthesis
+
+  end
 end

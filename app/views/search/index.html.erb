@@ -1,6 +1,10 @@
+
 <div class="span3" id="filter-container">
   <h3>Filter Results <small><%= link_to "Clear", search_index_path %></small></h3>
+  <% if @results.present? %>
+      <div style="height: 1px;"></div>
   <h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a></h4>
+      <div style="padding:1px"></div>
   <hr>
   <ul class="search-side">
     <%= form_tag(search_index_path, method: :get) do  %>
@@ -50,6 +54,10 @@
     <% end %>
   </ul>
 
+  <% else %>
+      <img src="/assets/no_filters.jpg">
+  <% end %>
+
 </div> <!-- span -->
 
 <div class="span searchbar">
@@ -74,10 +82,11 @@
       </div> <!-- row -->
     </div> <!-- span -->
   </div> <!-- row -->
-</div> <!-- span -->
+</div> <!-- span --></br>
 
 <div class="row">
-  <div class="span9" <%= "style=display:none;" if params[:keywords].blank? %>>
+  <div class="span9">
+    <div style="height: 3px;"></div>
     <ul class='inline'>
       <li>
 	<div class="dropdown">
@@ -224,7 +233,194 @@
     <%= submit_tag "Compare Datasets" %>
     <% end %>
     <%= paginate @results %>
-    <% end %>
+    <% else %>
+        <div id="content">
+          <!-- InstanceBeginEditable name="editContent" -->
 
+          <h1>Datasets: Browse, Search and Explore</h1>
+
+          <p>
+            Using the menu to the left, datasets can be browsed by <em>Topic</em>,
+            <em>Site</em>, or <em>Keyword</em>, or searched by specifying a variety
+            of criteria in a <em>Search Datasets</em> form. The browse and search
+            tools available in EcoTrends are described in the table below.
+          </p>
+
+          <p>
+            When viewing datasets while browsing or searching,
+            you can explore them further
+            by performing special operations on them. For example, you can
+            plot up to four datasets together on the same graph by selecting
+            (using the checkboxes) between one and four datasets and then
+            clicking the <span class="emphasis">Plot Selected (up to 4)</span> button.
+            You can customize how the plot is displayed by checking or unchecking
+            a variety of plot options such as <span class="emphasis">Data Points</span>,
+            <span class="emphasis">Data Lines</span>, and
+            <span class="emphasis">Moving Average</span>.
+          </p>
+          <br>
+          <table>
+            <tbody><tr>
+              <th>Browse / Search Tool</th>
+              <th>Description</th>
+              <th>Examples</th>
+            </tr>
+            <tr>
+              <td>Search Datasets</td>
+              <td>With Search Datasets you can specify a variety of search criteria such
+                as EcoTrends sites<!-- , subject -->, spatial (location), temporal
+                (start and end dates), timesteps (daily, monthly, yearly), and
+                variable names to narrow your search for datasets.
+                <ul>
+                  <li>
+                    <span class="emphasis">EcoTrends Sites</span> lets you choose one or more
+                    EcoTrends sites from a list.
+                  </li>
+                  <li>
+                    <span class="emphasis">Variable</span> lets you specify
+                    one or more variable names that the dataset must match.
+                  </li>
+                  <li>
+                    <span class="emphasis">Timestep</span> lets you specify
+                    one or more timestep values to match. All EcoTrends
+                    datasets will match one of these timesteps:
+                      <span class="emphasis">
+                        <ul>
+                          <li>monthy</li>
+                          <li>yearly</li>
+                        </ul>
+                      </span>
+                  </li>
+                  <li>
+                    <span class="emphasis">Temporal Criteria</span> lets you specify a
+                    start date and/or end date that the dataset must match.
+                    Dates may be entered as year (YYYY); year and month
+                    (YYYY MM); or year, month, and day (YYYY MM DD).
+                  </li>
+                  <li>
+                    <span class="emphasis">Spatial Criteria</span> lets you search a world
+                    map to match datasets based on location. Zoom in to the
+                    specific area on the map you'd like to search.
+                  </li>
+                  <!-- <li>
+                      <span class="emphasis">Subject</span> lets you type in one or more terms
+                      to search for in the dataset title, abstract, and keywords
+                      list.
+                  </li> -->
+                  <!-- <li>
+                      <span class="emphasis">Search Options</span> lets you specify options to
+                      the other search criteria on the form. For example, you can specify
+                      that your search terms are to be treated as case sensitive.
+                  </li> -->
+                </ul>
+              </td>
+              <td>
+                Click <span class="emphasis">Search Datasets</span>, then perform the following steps:
+                <ol>
+                  <li>In the <span class="emphasis">EcoTrends Sites</span> section, select
+                    Baltimore Ecosystem Study LTER in the list box.
+                  </li>
+                  <li>In the <span class="emphasis">Variable</span> section,
+                    select <span class="emphasis">air temperature (mean)</span>.
+                  </li>
+                  <li>In the <span class="emphasis">Timestep</span> section,
+                    select <span class="emphasis">monthly</span>.
+                  </li>
+                  <li>In the <span class="emphasis">Temporal Criteria</span> section,
+                    enter "1980 01 01" in the boxes under <span class="emphasis">Start Date</span>, and
+                    enter "2000 12 31" in the boxes under <span class="emphasis">End Date</span>.
+                  </li>
+                  <li>In the <span class="emphasis">Spatial Criteria</span> section,
+                    scroll the map and zoom in to a region of interest,
+                    such as the northeastern U.S.
+                  </li>
+                  <!--<li>In the <span class="emphasis">Subject</span> section, type
+                      <span class="emphasis">wet deposition</span> in the text box.
+                  </li>  -->
+                  <!-- <li>In the <span class="emphasis">Search Options</span> section,
+                      leave the <span class="emphasis">"And" all search items</span> option
+                      selected, and the <span class="emphasis">Case sensitive</span> checkbox
+                      unchecked.
+                  </li> -->
+                  <li>Click the <span class="emphasis">Search</span> button.
+                  </li>
+                </ol>
+                <p>
+                  After a few seconds, EcoTrends will display a list of
+                  datasets matching all of the criteria you specified.
+                </p>
+              </td>
+            </tr>
+            <tr><td colspan="3">&nbsp;</td></tr>
+            <tr>
+              <td>Browse By Topic</td>
+              <td>Browse datasets organized by topic and subtopic. Topics are
+                organized by biota (plants, animals, microbes);
+                biogeochemical cycles (nitrogen, sulfur, phosphorous);
+                human populations (density, economy);
+                disturbance characteristics and response to disturbance; and,
+                climate characteristics (precipitation, temperature).
+              </td>
+              <td>Click <span class="emphasis">By Topic</span>, then under the
+                <span class="emphasis">Climate and physical variability</span> topic heading,
+                click <span class="emphasis">Air temperature</span> to see all datasets related
+                to that subtopic.
+              </td>
+            </tr>
+            <tr><td colspan="3">&nbsp;</td></tr>
+            <tr>
+              <td>Browse By Site</td>
+              <td>Browse datasets organized by
+                <a href="participating-sites.jsp">EcoTrends site</a>.
+                The number in parentheses to the right of each site indicates
+                the number of datasets that match that site.
+              </td>
+              <td>Click <span class="emphasis">By Site</span>, then click
+                <span class="emphasis">Florida Coastal Everglades</span> to see all datasets
+                from that site.
+              </td>
+            </tr>
+            <tr><td colspan="3">&nbsp;</td></tr>
+            <tr>
+              <td>Browse By Keyword</td>
+              <td>Search for EcoTrends datasets matching a search term that you enter into a text box.
+              </td>
+              <td>Click <span class="emphasis">By Keyword</span>, type a search term such as
+                <span class="emphasis">drought</span> in the text box, then click the <span class="emphasis">Search</span> button.
+                EcoTrends will display a list of all datasets matching your search term.
+              </td>
+            </tr>
+            </tbody></table>
+
+          <h3><a name="workingSet">My Data Store</a></h3>
+          <p>
+            When you browse or search for datasets, you will see a
+            <i class="fa fa-line-chart fa-1x"></i> button
+            that lets you add a dataset to <span class="emphasis">My Data Store</span>
+            for future reference. You can view all datasets in
+            <span class="emphasis">My Data Store</span> by clicking the
+            <span class="emphasis">My Data Store</span> menu item to the left.
+          </p>
+          <p>
+            When viewing datasets in <span class="emphasis">My Data Store</span>,
+            you can explore them further
+            by performing special operations on them. For example, you can
+            plot up to four datasets together on the same graph by selecting
+            (using the checkboxes) between one and four datasets and then
+            clicking the <span class="emphasis">Plot Selected (up to 4)</span> button.
+            You can customize how the plot is displayed by checking/unchecking
+            a variety of plot options such as <span class="emphasis">Data Points</span>,
+            <span class="emphasis">Data Lines</span>, and
+            <span class="emphasis">Moving Average</span>.
+          </p>
+
+          <p>You can remove an individual dataset from
+            <span class="emphasis">My Data Store</span> going to <a href="/datastore">your datastore</a>
+             and clicking the <i>remove link</i> next to the dataset you would like to remove.
+          </p>
+
+          <!-- Closes the content div -->
+        </div>
+    <% end %>
 
   </div> <!-- row -->

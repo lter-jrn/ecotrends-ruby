@@ -46,7 +46,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/splash/index.html"><%= image_tag "EcoTrends-logo.png" %></a>
+          <a class="brand" href="/"><%= image_tag "EcoTrends-logo.png" %></a>
           <div class="container nav-collapse">
             <ul class="nav">
               <li><%= link_to "About EcoTrends", "/home/about"  %></li>
@@ -88,18 +88,6 @@
         <hr>
 	<footer>
 	  <%= render partial: 'splash/footer' %>
-
-		      <p style="padding-top: 1.0em;">The EcoTrends project is funded by the National Science Foundation (NSF)
-           and the USDA Agricultural Research Service (USDA-ARS) Jornada Experimental Range.
-           Collaborators include: the Long-Term Ecological Research (LTER) Network Office,
-           USDA-ARS, USDA Forest Service (USDA-FS), National Center for Ecological Analysis
-           and Synthesis (NCEAS), Department of Energy (DOE), US Geological Survey (USGS),
-           New Mexico State University (NMSU), Ecological Society of America (ESA),
-           and state institutions. This project would
-           not be possible without the continued assistance and involvement of scientists,
-           information managers, support staff, and students from each long-term site.
-           Please click on the logos below to visit our collaborators' websites.
-        </p>
         <div style="text-align: center;">
           <a href="http://www.fs.fed.us/" target="_blank">
 	    <%= image_tag 'FS.gif', width: "68", height: "72", border: "0"%>
@@ -134,7 +122,7 @@
            of the author(s) and do not necessarily reflect the views of the National
            Science Foundation or New Mexico State University.
         </p>
-		      <p>All Rights Reserved. EcoTrends &copy; 2015.</p>
+		      <p>All Rights Reserved. EcoTrends &copy; <%= DateTime.now.year%>.</p>
 	</footer>
     </div> <!-- /container -->
 
