@@ -26,10 +26,8 @@
       <th class="description">Summary</th>
     </tr>
     <tr>
-      <td class="pdficon"><a href="/assets/ARS_magazine_Aug2012issue_Peters_research.pdf" target="_blank">
-        <img src="/assets/pdf.gif" alt="PDF Link" border="0"></a></td>
-      <td class="link"><a href="http://www.ars.usda.gov/is/pr/2012/120803.htm" target="_blank">
-        <img src="/assets/html.gif" alt="HTML Link" border="0" data-pin-nopin="true"></a></td>
+      <td class="pdficon"><%= link_to image_tag("pdf.gif"), asset_path("ARS_magazine_Aug2012issue_Peters_research.pdf"), target: "_blank" %></td>
+      <td class="link"><%= link_to image_tag("html.gif"), "http://www.ars.usda.gov/is/pr/2012/120803.htm", {target: "_blank", "data-pin-nopin" =>"true"} %></td>
       <td class="description">Perry, Ann. 2012. Climate Changes Help Grass Come Back to U.S. Rangelands. USDA News and Events article August 3, 2012. Accessed on 08/06/2012. http://www.ars.usda.gov/is/pr/2012/120803.htm. </td>
     </tr>
     <tr>
