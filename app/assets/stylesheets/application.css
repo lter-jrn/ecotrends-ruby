@@ -31,3 +31,32 @@
     text-align: center;
 }
 
+.browse-by {
+    list-style: none;
+    margin-left: 0;
+}
+
+.moresites {
+    cursor: hand;
+    cursor:pointer;
+}
+
+.metadata-container a {
+    text-decoration: underline
+}
+
+.tablehead-metadata {
+    background:#d9d9d9;
+}
+
+.highlight-metadata {
+    background:#eeeeee;
+    padding: 5px;
+
+}
+
+.secondCol-metadata {
+    padding:5px;
+}
+
+

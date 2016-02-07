@@ -1,0 +1,52 @@
+    <h2>Dataset Information</h2>
+    <p>
+      <strong>Dataset ID: </strong> <%= @data_record.docid%>
+
+    </p>
+    <p>
+      <strong>
+        Site: </strong><%= @data_record.site_name %>
+    </p>
+    <p>
+      <strong>
+        Station(s): </strong>	<%= @data_record.station_names %>
+    </p>
+    <p>
+      <strong>
+        Variable: </strong> <%= @data_record.variable_name %>
+    </p>
+    <p>
+      <strong>
+        Unit: </strong>	<%= @data_record.unit_name %>
+    </p>
+    <p>
+      <strong>
+        Date Range: </strong>	<%= @data_record.begin_date.year %> to <%= @data_record.end_date.year %>
+    </p>
+    <p>
+      <strong>
+        Timescale: </strong>	<%= @data_record.timescale %>
+    </p>
+    <p>
+      <strong>
+        Data Version: </strong>	1 of 1
+    </p>
+<p></p>
+    <table border="1" cellspacing="5" cellpadding="5" style="width:100%;">
+        <% @csv_table.each_with_index do |val, index| %>
+            <% if index == 0 %>
+              <tr>
+              <% val.each do |header| %>
+                    <th><%= header %></th>
+              <% end %>
+              </tr>
+            <% else %>
+              <tr>
+                <% val.each do |element| %>
+                    <td><%= element %></td>
+                <% end %>
+              </tr>
+            <% end %>
+
+        <% end %>
+    </table>

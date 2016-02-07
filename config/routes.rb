@@ -47,6 +47,7 @@ EcoTrends::Application.routes.draw do
 
   get "policies" => "home#policies"
 
+
   post 'contact' => 'contact_us#create'
 
   get 'contact' =>  'contact_us#new'
@@ -64,6 +65,9 @@ EcoTrends::Application.routes.draw do
 
   # Sample resource route (maps HTTP verbs to controller actions automatically):
   resources :search
+
+  get "metadata" => "search#metadata"
+  get "derived-data/:id" => "search#data"
 
   # Sample resource route with options:
   #   resources :products do

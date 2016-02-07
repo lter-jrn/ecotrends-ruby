@@ -1,58 +1,144 @@
-
 <div class="span3" id="filter-container">
-  <h3>Filter Results <small><%= link_to "Clear", search_index_path %></small></h3>
+  <h3>Browse
+    <small><%= link_to "Clear", search_index_path %></small>
+  </h3>
+  <ul class='browse-by'>
+    <li>
+      <div class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <h4><%= image_tag "globeicon.png", class: "baricon" %>Browse by location</h4>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <div class="row">
+            <div class="span10">
+              <div class="span2">
+                <li>
+                  <h4>Sites </h4>
+                  <span class="<%= "bold" if params[:site_filter].blank? %>" id="all_locations"><small>All</small></span><br/>
+                  <% @items[0].each do |item| %>
+                      <a href='#' class='location' value='<%= item.site_name %>'>
+		          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">
+                <%= item.site_name %><br/>
+              </span>
+                      </a>
+                  <% end %>
+                </li>
+                <li class="divider"></li>
+              </div> <!-- span -->
+              <div class="span2">
+                <% @items[1].each do |item| %>
+                    <a href='#' class='location' value='<%= item.site_name %>'>
+                        <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>"><%= item.site_name %>
+                          <br/></span>
+                    </a>
+                <% end %>
+                </li>
+                <li class="divider"></li>
+              </div> <!-- span -->
+
+              <div class="span2">
+                <li>
+                  <% @items[2].each do |item| %>
+                      <a href='#' class='location' value='<%= item.site_name %>'>
+                          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>"><%= item.site_name %>
+                            <br/></span>
+                      </a>
+                  <% end %>
+                </li>
+                <li class="divider"></li>
+              </div> <!-- span -->
+
+              <div class="span2">
+                <li class="divider"></li>
+              </div> <!-- span -->
+
+
+            </div> <!-- span -->
+          </div> <!-- row -->
+        </ul>
+      </div>
+    </li>
+    <li>
+      <div class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+          <h4><%= image_tag "topicicon.png", class: "baricon" %>Browse by Topic</h4>
+        </a>
+        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+          <div class="row">
+            <div class="span4">
+              <div class="span2">
+                <li>
+                  <h4>Topics </h4>
+                  <span class="<%= "bold" if params[:topic].blank? %>" id="all_topics"><small>All</small></span><br/>
+                  <% @topics.each do |item| %>
+                      <a href='#' class='location' value='<%= item.topic %>'>
+		          <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
+                <%= item.topic %><br/>
+              </span>
+                      </a>
+                  <% end %>
+                </li>
+                <li class="divider"></li>
+              </div>
+            </div> <!-- span -->
+          </div> <!-- row -->
+        </ul>
+      </div>
+    </li>
+  </ul>
+  <h3>Filter Results
+    <small><%= link_to "Clear", search_index_path %></small>
+  </h3>
   <% if @results.present? %>
       <div style="height: 1px;"></div>
-  <h4><%= image_tag "sitesicon.png",  class: "baricon" %><a href="#">Sites</a></h4>
+      <h4><%= image_tag "sitesicon.png", class: "baricon" %><a href="#">Sites</a></h4>
       <div style="padding:1px"></div>
-  <hr>
-  <ul class="search-side">
-    <%= form_tag(search_index_path, method: :get) do  %>
-      <%= hidden_field_tag :keywords, @search_term %>
-      <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
-      <% @the_sites.each do |site| %>
-	<li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
-      <% end %>
-      <% if @more_sites.present? %>
+      <ul class="search-side">
+        <%= form_tag(search_index_path, method: :get) do %>
+            <%= hidden_field_tag :keywords, @search_term %>
+            <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
+            <% @the_sites.each do |site| %>
+                <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
+            <% end %>
+            <% if @more_sites.present? %>
+                <li class="moresites"><b>Show More &#x25BC;</b></li>
+                <div class="more_items" style="display: none;">
+                  <% @more_sites.each do |site| %>
+                      <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
 
-	<li class="moresites"><b>Show More &#x25BC;</b></li>
-	<div class="more_items" style="display: none;">
-    <% @more_sites.each do |site| %>
-      <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
+                  <% end %>
+                </div>
+            <% end %>
+        <% end %>
 
-    <% end %>
-	</div>
-    <% end %>
-    <% end %>
+      </ul>
+      <hr>
 
-  </ul>
-  <hr>
+      <h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">Date Range</a></h4>
 
-  <h4><%= image_tag "ecosystemicon.png", class: "baricon" %><a href="#">Date Range</a></h4>
-  <hr>
-  <ul class="search-side">
-    <%= form_tag(request.fullpath, method: :get) do  %>
-      <%= hidden_field_tag :keywords, @search_term %>
-      <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
-      <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
-      <li>Min Date: <%= text_field_tag :min_date, @min_date, class: "datepicker" %></li>
-      <li>Max Date: <%= text_field_tag :max_date, @max_date, class: "datepicker" %></li>
-      <%= submit_tag %>
-    <% end %>
-  </ul>
-  <hr>
+      <ul class="search-side">
+        <%= form_tag(request.fullpath, method: :get) do %>
+            <%= hidden_field_tag :keywords, @search_term %>
+            <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
+            <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
+            <li>Min Date: <%= text_field_tag :min_date, @min_date, class: "datepicker" %></li>
+            <li>Max Date: <%= text_field_tag :max_date, @max_date, class: "datepicker" %></li>
+            <%= submit_tag %>
+        <% end %>
+      </ul>
+      <hr>
 
-  <h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Subtopics</a></h4>
-  <hr>
-  <ul class="search-side">
-    <%= form_tag(request.fullpath, method: :get) do  %>
-      <%= hidden_field_tag :keywords, @search_term %>
-      <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
-      <% @variables.map do |variable| %>
-	<li><input type="checkbox" name="subtopic" class="triggerbox" value="<%= variable %>"> <%= variable %></li>
-    <% end %>
-    <% end %>
-  </ul>
+      <h4><%= image_tag "variableicon.png", class: "baricon" %><a href="#">Subtopics</a></h4>
+      <ul class="search-side">
+        <%= form_tag(request.fullpath, method: :get) do %>
+            <%= hidden_field_tag :keywords, @search_term %>
+            <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
+            <% @variables.map do |variable| %>
+                <li><input type="checkbox" name="subtopic" class="triggerbox" value="<%= variable %>"> <%= variable %>
+                </li>
+            <% end %>
+        <% end %>
+      </ul>
 
   <% else %>
       <%= image_tag "no_filters.jpg" %>
@@ -64,21 +150,21 @@
   <div class="row">
     <div class="span9">
       <div class="row">
-	<div style="padding-left:20px;" class="span3">
-    <h4>Search by keyword</h4>
-	</div> <!-- span -->
-	<div style="margin-right: -20px; padding-top: 10px;" class="span6">
-	  <fieldset>
+        <div style="padding-left:20px;" class="span3">
+          <h4>Search by keyword</h4>
+        </div> <!-- span -->
+        <div style="margin-right: -20px; padding-top: 10px;" class="span6">
+          <fieldset>
 
-	    <%= form_tag('/search', method: :get, id:"search-form") do  %>
-	      <%= text_field_tag :keywords, @search_term, id:"search-input" %>
-	      <%= hidden_field_tag :site_filter, params[:site_filter] %>
-	      <%= hidden_field_tag :topic, params[:topic] %>
-	      <%= hidden_field_tag :subtopic, params[:subtopic] %>
-	      <%= submit_tag "Search", class:"btn btn-primary", id:"search-button" %>
-    <% end %>
-	  </fieldset>
-	</div> <!-- span <input class="searchinput"type="search" value="Plant Productivity"></input> -->
+            <%= form_tag('/search', method: :get, id: "search-form") do %>
+                <%= text_field_tag :keywords, @search_term, id: "search-input" %>
+                <%= hidden_field_tag :site_filter, params[:site_filter] %>
+                <%= hidden_field_tag :topic, params[:topic] %>
+                <%= hidden_field_tag :subtopic, params[:subtopic] %>
+                <%= submit_tag "Search", class: "btn btn-primary", id: "search-button" %>
+            <% end %>
+          </fieldset>
+        </div> <!-- span <input class="searchinput"type="search" value="Plant Productivity"></input> -->
       </div> <!-- row -->
     </div> <!-- span -->
   </div> <!-- row -->
@@ -86,341 +172,74 @@
 
 <div class="row">
   <div class="span9">
-    <div style="height: 3px;"></div>
-    <ul class='inline'>
-      <li>
-	<div class="dropdown">
-	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <h4><%= image_tag "globeicon.png", class: "baricon" %>Browse by location</h4>
-	  </a>
-	  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-      	    <div class="row">
-      	      <div class="span10">
-	      	<div class="span2">
-		  <li>
-		    <h4>Sites </h4>
-		    <span class="<%= "bold" if params[:site_filter].blank? %>" id="all_locations"><small>All</small></span><br />
-		    <% @items[0].each do |item| %>
-            <a href='#' class='location' value='<%= item.site_name %>' >
-		          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>">
-                <%= item.site_name %><br />
-              </span>
-            </a>
-		    <% end %>
-		  </li>
-		  <li class="divider"></li>
-	      	</div> <!-- span -->
-	      	<div class="span2">
-		    <% @items[1].each do |item| %>
-          <a href='#' class='location' value='<%= item.site_name %>' >
-		        <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
-		      </a>
-        <% end %>
-		  </li>
-		  <li class="divider"></li>
-	      	</div> <!-- span -->
-
-	      	<div class="span2">
-		  <li>
-		    <% @items[2].each do |item| %>
-            <a href='#' class='location' value='<%= item.site_name %>' >
-            <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site%>"><%= item.site_name %><br /></span>
-		        </a>
-        <% end %>
-		  </li>
-		  <li class="divider"></li>
-	      	</div> <!-- span -->
-
-	      	<div class="span2">
-		  <li class="divider"></li>
-	      	</div> <!-- span -->
+    <div style="height: 20px;"></div>
 
 
-      	      </div> <!-- span -->
-      	    </div> <!-- row -->
-	  </ul>
-	</div>
-      </li>
-      <li>
-	<div class="dropdown">
-	  <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-            <h4><%= image_tag "topicicon.png", class: "baricon" %>Browse by Topic</h4>
-	  </a>
-	  <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-      	    <div class="row">
-      	      <div class="span4">
-	      	<div class="span2">
-		  <li>
-		    <h4>Topics </h4>
-		    <span class="<%= "bold" if params[:topic].blank? %>" id="all_topics"><small>All</small></span><br />
-		    <% @topics.each do |item| %>
-            <a href='#' class='location' value='<%= item.topic %>' >
-		          <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
-                <%= item.topic %><br />
-              </span>
-            </a>
-		    <% end %>
-		  </li>
-		  <li class="divider"></li>
-	      	</div>
-      	      </div> <!-- span -->
-      	    </div> <!-- row -->
-	  </ul>
-	</div>
-      </li>
-    </ul>
-    <hr>
     <% if @search_term %>
-      <div class="row">
-	<div class="span9">
-	  <% @search_params.each do |k, v| %>
-	    <% unless v.blank? %>
-	      <% v.split("-").each do |vv| %>
-		<%= link_to "#{image_tag('delete.png', class: 'baricon')} #{vv}".html_safe, search_index_path(@search_params.except(k)) %>&nbsp;
-		<% end %>
-          <% end %>
-          <% end %>
-	</div>
-      </div>
-      <hr>
+        <div class="row">
+          <div class="span9">
+            <% @search_params.each do |k, v| %>
+                <% unless v.blank? %>
+                    <% v.split("-").each do |vv| %>
+                        <%= link_to "#{image_tag('delete.png', class: 'baricon')} #{vv}".html_safe, search_index_path(@search_params.except(k)) %>&nbsp;
+                    <% end %>
+                <% end %>
+            <% end %>
+          </div>
+        </div>
+        <hr>
     <% end %>
 
 
     <!-- BEGIN SEARCH RESULTS -->
 
     <% if @results.present? %>
-      <%= paginate @results %>
-      <div class="span9">
-        <%= @results.count %> total results for: <%= @search_term %></br>
-	<strong>Click to Compare</strong>
-      </div>
-      <%= form_tag('/comparison', method: :get) do %>
-	<% @results.each do |result| %>
-	  <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
-	  <div class="span9">
-	    <div class="row">
-	      <div class="span1">
-		<fieldset>
-		  <%= check_box_tag :docid, result.docid.to_s, false, {multiple: true, name: 'docids[]'} %>&nbsp;&nbsp;
-		</fieldset>
-	      </div> <!-- span -->
-	      <div class="span6">
-		<h4 class="darkbrown"><%= link_to  result.variable_name, search_path(result.entryid) %></h4>
-		<p class="searchbody"><%= result.docid %>: <%= result.subtopic%></p>
-		<p><%= image_tag "station.png", class: "icon" %>
-		  <b><%= result.station_names %></b> <%= result.site_name%>
-		  --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name%> -- <%= result.timescale %></p>
-	      </div> <!-- span -->
-	      <div class="span2 searchright">
-		<h4><%= result.begin_date.year%> - <%= result.end_date.year %></h4>
-		<% if session["datastore_array"].include?(result.docid.to_s) %>
-		  <div class="remove-datastore">
-		    <%= hidden_field_tag :jsdocid, result.docid.to_s, class: "jsdocid" %>
-		    <i class="fa fa-area-chart fa-3x text-error"></i>
-		  </div>
-
-    <% else %>
-		  <div class="add-datastore">
-		    <%= hidden_field_tag :jsdocid, result.docid.to_s, class: "jsdocid" %>
-		    <i class="fa fa-line-chart fa-3x"></i>
-		  </div>
-    <% end %>
-	      </div> <!-- span -->
-	    </div> <!-- row -->
-	    <hr>
-	  </div> <!-- span -->
-    <% end %>
-    <%= submit_tag "Compare Datasets" %>
-    <% end %>
-    <%= paginate @results %>
-    <% else %>
-        <div id="content">
-          <!-- InstanceBeginEditable name="editContent" -->
-
-          <h1>Datasets: Browse, Search and Explore</h1>
-
-          <p>
-            Using the menu to the left, datasets can be browsed by <em>Topic</em>,
-            <em>Site</em>, or <em>Keyword</em>, or searched by specifying a variety
-            of criteria in a <em>Search Datasets</em> form. The browse and search
-            tools available in EcoTrends are described in the table below.
-          </p>
-
-          <p>
-            When viewing datasets while browsing or searching,
-            you can explore them further
-            by performing special operations on them. For example, you can
-            plot up to four datasets together on the same graph by selecting
-            (using the checkboxes) between one and four datasets and then
-            clicking the <span class="emphasis">Plot Selected (up to 4)</span> button.
-            You can customize how the plot is displayed by checking or unchecking
-            a variety of plot options such as <span class="emphasis">Data Points</span>,
-            <span class="emphasis">Data Lines</span>, and
-            <span class="emphasis">Moving Average</span>.
-          </p>
-          <br>
-          <table>
-            <tbody><tr>
-              <th>Browse / Search Tool</th>
-              <th>Description</th>
-              <th>Examples</th>
-            </tr>
-            <tr>
-              <td>Search Datasets</td>
-              <td>With Search Datasets you can specify a variety of search criteria such
-                as EcoTrends sites<!-- , subject -->, spatial (location), temporal
-                (start and end dates), timesteps (daily, monthly, yearly), and
-                variable names to narrow your search for datasets.
-                <ul>
-                  <li>
-                    <span class="emphasis">EcoTrends Sites</span> lets you choose one or more
-                    EcoTrends sites from a list.
-                  </li>
-                  <li>
-                    <span class="emphasis">Variable</span> lets you specify
-                    one or more variable names that the dataset must match.
-                  </li>
-                  <li>
-                    <span class="emphasis">Timestep</span> lets you specify
-                    one or more timestep values to match. All EcoTrends
-                    datasets will match one of these timesteps:
-                      <span class="emphasis">
-                        <ul>
-                          <li>monthy</li>
-                          <li>yearly</li>
-                        </ul>
-                      </span>
-                  </li>
-                  <li>
-                    <span class="emphasis">Temporal Criteria</span> lets you specify a
-                    start date and/or end date that the dataset must match.
-                    Dates may be entered as year (YYYY); year and month
-                    (YYYY MM); or year, month, and day (YYYY MM DD).
-                  </li>
-                  <li>
-                    <span class="emphasis">Spatial Criteria</span> lets you search a world
-                    map to match datasets based on location. Zoom in to the
-                    specific area on the map you'd like to search.
-                  </li>
-                  <!-- <li>
-                      <span class="emphasis">Subject</span> lets you type in one or more terms
-                      to search for in the dataset title, abstract, and keywords
-                      list.
-                  </li> -->
-                  <!-- <li>
-                      <span class="emphasis">Search Options</span> lets you specify options to
-                      the other search criteria on the form. For example, you can specify
-                      that your search terms are to be treated as case sensitive.
-                  </li> -->
-                </ul>
-              </td>
-              <td>
-                Click <span class="emphasis">Search Datasets</span>, then perform the following steps:
-                <ol>
-                  <li>In the <span class="emphasis">EcoTrends Sites</span> section, select
-                    Baltimore Ecosystem Study LTER in the list box.
-                  </li>
-                  <li>In the <span class="emphasis">Variable</span> section,
-                    select <span class="emphasis">air temperature (mean)</span>.
-                  </li>
-                  <li>In the <span class="emphasis">Timestep</span> section,
-                    select <span class="emphasis">monthly</span>.
-                  </li>
-                  <li>In the <span class="emphasis">Temporal Criteria</span> section,
-                    enter "1980 01 01" in the boxes under <span class="emphasis">Start Date</span>, and
-                    enter "2000 12 31" in the boxes under <span class="emphasis">End Date</span>.
-                  </li>
-                  <li>In the <span class="emphasis">Spatial Criteria</span> section,
-                    scroll the map and zoom in to a region of interest,
-                    such as the northeastern U.S.
-                  </li>
-                  <!--<li>In the <span class="emphasis">Subject</span> section, type
-                      <span class="emphasis">wet deposition</span> in the text box.
-                  </li>  -->
-                  <!-- <li>In the <span class="emphasis">Search Options</span> section,
-                      leave the <span class="emphasis">"And" all search items</span> option
-                      selected, and the <span class="emphasis">Case sensitive</span> checkbox
-                      unchecked.
-                  </li> -->
-                  <li>Click the <span class="emphasis">Search</span> button.
-                  </li>
-                </ol>
-                <p>
-                  After a few seconds, EcoTrends will display a list of
-                  datasets matching all of the criteria you specified.
-                </p>
-              </td>
-            </tr>
-            <tr><td colspan="3">&nbsp;</td></tr>
-            <tr>
-              <td>Browse By Topic</td>
-              <td>Browse datasets organized by topic and subtopic. Topics are
-                organized by biota (plants, animals, microbes);
-                biogeochemical cycles (nitrogen, sulfur, phosphorous);
-                human populations (density, economy);
-                disturbance characteristics and response to disturbance; and,
-                climate characteristics (precipitation, temperature).
-              </td>
-              <td>Click <span class="emphasis">By Topic</span>, then under the
-                <span class="emphasis">Climate and physical variability</span> topic heading,
-                click <span class="emphasis">Air temperature</span> to see all datasets related
-                to that subtopic.
-              </td>
-            </tr>
-            <tr><td colspan="3">&nbsp;</td></tr>
-            <tr>
-              <td>Browse By Site</td>
-              <td>Browse datasets organized by
-                <a href="participating-sites.jsp">EcoTrends site</a>.
-                The number in parentheses to the right of each site indicates
-                the number of datasets that match that site.
-              </td>
-              <td>Click <span class="emphasis">By Site</span>, then click
-                <span class="emphasis">Florida Coastal Everglades</span> to see all datasets
-                from that site.
-              </td>
-            </tr>
-            <tr><td colspan="3">&nbsp;</td></tr>
-            <tr>
-              <td>Browse By Keyword</td>
-              <td>Search for EcoTrends datasets matching a search term that you enter into a text box.
-              </td>
-              <td>Click <span class="emphasis">By Keyword</span>, type a search term such as
-                <span class="emphasis">drought</span> in the text box, then click the <span class="emphasis">Search</span> button.
-                EcoTrends will display a list of all datasets matching your search term.
-              </td>
-            </tr>
-            </tbody></table>
-
-          <h3><a name="workingSet">My Data Store</a></h3>
-          <p>
-            When you browse or search for datasets, you will see a
-            <i class="fa fa-line-chart fa-1x"></i> button
-            that lets you add a dataset to <span class="emphasis">My Data Store</span>
-            for future reference. You can view all datasets in
-            <span class="emphasis">My Data Store</span> by clicking the
-            <span class="emphasis">My Data Store</span> menu item to the left.
-          </p>
-          <p>
-            When viewing datasets in <span class="emphasis">My Data Store</span>,
-            you can explore them further
-            by performing special operations on them. For example, you can
-            plot up to four datasets together on the same graph by selecting
-            (using the checkboxes) between one and four datasets and then
-            clicking the <span class="emphasis">Plot Selected (up to 4)</span> button.
-            You can customize how the plot is displayed by checking/unchecking
-            a variety of plot options such as <span class="emphasis">Data Points</span>,
-            <span class="emphasis">Data Lines</span>, and
-            <span class="emphasis">Moving Average</span>.
-          </p>
-
-          <p>You can remove an individual dataset from
-            <span class="emphasis">My Data Store</span> going to <a href="/datastore">your datastore</a>
-             and clicking the <i>remove link</i> next to the dataset you would like to remove.
-          </p>
-
-          <!-- Closes the content div -->
+        <%= paginate @results %>
+        <div class="span9">
+          <%= @results.count %> total results for: <%= @search_term %></br>
+          <strong>Click to Compare</strong>
         </div>
+        <%= form_tag('/comparison', method: :get) do %>
+            <% @results.each do |result| %>
+                <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
+                <div class="span9">
+                  <div class="row">
+                    <div class="span1">
+                      <fieldset>
+                        <%= check_box_tag :docid, result.docid.to_s, false, {multiple: true, name: 'docids[]'} %>&nbsp;&nbsp;
+                      </fieldset>
+                    </div> <!-- span -->
+                    <div class="span6">
+                      <h4 class="darkbrown"><%= link_to result.variable_name, search_path(result.entryid) %></h4>
+                      <p class="searchbody"><%= result.docid %>: <%= result.subtopic %></p>
+                      <p><%= image_tag "station.png", class: "icon" %>
+                        <b><%= result.station_names %></b> <%= result.site_name %>
+                        --<%= result.topic %> / <%= result.subtopic %> -- <%= result.unit_name %>
+                        -- <%= result.timescale %></p>
+                    </div> <!-- span -->
+                    <div class="span2 searchright">
+                      <h4><%= result.begin_date.year %> - <%= result.end_date.year %></h4>
+                      <% if session["datastore_array"].include?(result.docid.to_s) %>
+                          <div class="remove-datastore">
+                            <%= hidden_field_tag :jsdocid, result.docid.to_s, class: "jsdocid" %>
+                            <i class="fa fa-area-chart fa-3x text-error"></i>
+                          </div>
+
+                      <% else %>
+                          <div class="add-datastore">
+                            <%= hidden_field_tag :jsdocid, result.docid.to_s, class: "jsdocid" %>
+                            <i class="fa fa-line-chart fa-3x"></i>
+                          </div>
+                      <% end %>
+                    </div> <!-- span -->
+                  </div> <!-- row -->
+                  <hr>
+                </div> <!-- span -->
+            <% end %>
+            <%= submit_tag "Compare Datasets" %>
+        <% end %>
+        <%= paginate @results %>
     <% end %>
+
 
   </div> <!-- row -->

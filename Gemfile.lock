@@ -216,6 +216,7 @@ DEPENDENCIES
   kaminari
   less-rails (~> 2.7.0)
   net-ldap
+  nokogiri
   pg
   pry
   rails (= 4.2.3)

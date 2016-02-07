@@ -66,11 +66,17 @@
     </p>
     <p>
       <strong>
-	Derived Data: </strong>	View data as HTML	Download as CSV
+	Derived Data: </strong>
+      <a href="/derived-data/<%= @id %>">
+        View data as HTML
+      </a>	|
+      <a href="<%= @data_url %>">
+        Download as CSV
+      </a>
     </p>
     <p>
       <strong>
 
-	Derived Metadata: </strong>	View as HTML	Download as EML(XML)
+	Derived Metadata: </strong>	<a href="/metadata/?dataset=<%= @metadata_url %>" >View as HTML</a> | <a href="<%= @metadata_url %>">Download as EML(XML)</a>
     </p>
 <% end %>
