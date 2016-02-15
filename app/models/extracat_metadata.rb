@@ -46,9 +46,9 @@ class ExtracatMetadata < ActiveRecord::Base
       keyword_search = keyword_search.where("subtopic" => term_hash["subtopic"])
     end
 
-    if term_hash["subtopic"].present?
-      sub_array = term_hash["subtopic"].split("-")
-      keyword_search = keyword_search.where("subtopic" => sub_array)
+    if term_hash["subtopics"].present?
+      #sub_array = term_hash["subtopics"].split(",")
+      keyword_search = keyword_search.where("subtopic" => term_hash["subtopics"].split(","))
     end
 
     if term_hash["topic"].present?
@@ -59,9 +59,10 @@ class ExtracatMetadata < ActiveRecord::Base
     if term_hash["site"].present?
       keyword_search = keyword_search.where("site_name" => term_hash["site"])
     end
-    if term_hash["site_filter"].present?
-      term_array = term_hash["site_filter"].split
-      keyword_search = keyword_search.where("site" => term_array)
+    if term_hash["site_filters"].present?
+      #term_array = term_hash["site_filters"].split(",")
+      puts "here are the site filters : #{term_hash["site_filters"].split(",")}"
+      keyword_search = keyword_search.where("site" => term_hash["site_filters"].split(","))
     end
     if term_hash["min_date"].present? && term_hash["max_date"].blank?
       keyword_search = keyword_search.where("begin_date > ?", term_hash["min_date"])

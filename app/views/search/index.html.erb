@@ -19,6 +19,7 @@
                       <a href='#' class='location' value='<%= item.site_name %>'>
 		          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">
                 <%= item.site_name %><br/>
+
               </span>
                       </a>
                   <% end %>
@@ -98,13 +99,30 @@
             <%= hidden_field_tag :keywords, @search_term %>
             <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
             <% @the_sites.each do |site| %>
-                <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
+                <% @checked = "" %>
+                <% if @site_filters.nil? == false %>
+                    <% @site_filters.each do |site_filter| %>
+                        <% if site_filter == site %>
+                            <% @checked = "checked" %>
+                        <% end %>
+                    <% end %>
+                <% end %>
+                <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>" <%= @checked %>> <%= site %> </li>
             <% end %>
             <% if @more_sites.present? %>
                 <li class="moresites"><b>Show More &#x25BC;</b></li>
                 <div class="more_items" style="display: none;">
                   <% @more_sites.each do |site| %>
-                      <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>"> <%= site %> </li>
+
+                      <% @checked = "" %>
+                      <% if @site_filters.nil? == false %>
+                          <% @site_filters.each do |site_filter| %>
+                              <% if site_filter == site %>
+                                  <% @checked = "checked" %>
+                              <% end %>
+                          <% end %>
+                      <% end %>
+                      <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>" <%= @checked %>> <%= site %> </li>
 
                   <% end %>
                 </div>
@@ -158,9 +176,9 @@
 
             <%= form_tag('/search', method: :get, id: "search-form") do %>
                 <%= text_field_tag :keywords, @search_term, id: "search-input" %>
-                <%= hidden_field_tag :site_filter, params[:site_filter] %>
+                <%= hidden_field_tag :site_filters, params[:site_filters]%>
                 <%= hidden_field_tag :topic, params[:topic] %>
-                <%= hidden_field_tag :subtopic, params[:subtopic] %>
+                <%= hidden_field_tag :subtopics, params[:subtopics] %>
                 <%= submit_tag "Search", class: "btn btn-primary", id: "search-button" %>
             <% end %>
           </fieldset>

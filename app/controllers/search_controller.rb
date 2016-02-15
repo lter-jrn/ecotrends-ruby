@@ -5,6 +5,13 @@ class SearchController < ApplicationController
   before_filter :search_setup, :only => [:index]
   layout :get_layout, only: :show
   def index
+
+    if params[:site_filters].nil? == false
+      @site_filters = params[:site_filters].split(',');
+    end
+
+    puts "here is the site filters #{@site_filters}"
+
     @search = ExtracatMetadata.search(search_params)
     @items = ExtracatMetadata.group(:site, :site_name).select(:site, :site_name).order(:site_name => "ASC").to_a
     #starts here: Used to split the locations into groups of 20
@@ -112,7 +119,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site, :min_date, :max_date, :site_filter, :topic, :subtopic)
+    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site, :min_date, :max_date, :site_filters, :topic, :subtopics)
   end
 
   def search_setup

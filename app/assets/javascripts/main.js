@@ -155,9 +155,62 @@ $(function () {
 						  $("#formmy").submit();
 					      }
 					 });
+    var callSubmit = true;
+
     $(".triggerbox").change(function(){
-	this.form.submit()
+
+        var checkedSites = [];
+        var checkedTopics = [];
+        $(".triggerbox").each(function(index){
+
+            if(this.checked == true) {
+                if(this.name == "site")
+                    checkedSites.push(this.value);
+                else
+                    checkedTopics.push(this.value);
+            }
+        });
+
+        var fieldSites =  $("#site_filters");
+        $(fieldSites).val("");
+        for(var i = 0; i < checkedSites.length; i++) {
+
+            var value = checkedSites[i] + ",";
+            if(i == checkedSites.length - 1 ) {
+                value = checkedSites[i];
+            }
+
+            $(fieldSites).val($(fieldSites).val() + value);
+        }
+
+        console.log($(fieldSites).val());
+
+        var fieldtopics =  $("#subtopics");
+        $(fieldtopics).val("");
+        for(var i = 0; i < checkedTopics.length; i++) {
+
+
+            var value = checkedTopics[i] + ",";
+
+            if(i == checkedTopics.length - 1)
+                value = checkedTopics[i];
+
+            $(fieldtopics).val($(fieldtopics).val() + value);
+        }
+
+        console.log($(fieldtopics).val());
+
+        //if(callSubmit == true)
+	     //   this.form.submit();
+
+        callSubmit = true;
     });
+
+    //set all the check boxes
+
+    function setCheckboxFilters() {
+        callSubmit = false;
+    }
 
     $(".moresites").click(function(e){
 	e.preventDefault();
@@ -223,4 +276,6 @@ $(function () {
         printWin.print();
         printWin.close();
     });
+
+    //setCheckboxFilters();
 });
