@@ -7,10 +7,12 @@ class SearchController < ApplicationController
   def index
 
     if params[:site_filters].nil? == false
-      @site_filters = params[:site_filters].split(',');
+      @site_filters = params[:site_filters].split(',')
     end
 
-    puts "here is the site filters #{@site_filters}"
+    if params[:subtopics].nil? == false
+      @subtopic_filters = params[:subtopics].split('-')
+    end
 
     @search = ExtracatMetadata.search(search_params)
     @items = ExtracatMetadata.group(:site, :site_name).select(:site, :site_name).order(:site_name => "ASC").to_a
@@ -34,7 +36,7 @@ class SearchController < ApplicationController
       @raw_sites = ExtracatMetadata.group(:site_name).count.keys #ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
       @the_sites = @raw_sites.first(10)
       @more_sites = @raw_sites - @the_sites if @raw_sites.present?
-      @variables = ExtracatMetadata.search(search_params).map(&:subtopic).sort.uniq
+      @variables = @subtopics.map(&:subtopic).sort.uniq
     #end
   end
   def show
@@ -88,6 +90,7 @@ class SearchController < ApplicationController
           config.options = Nokogiri::XML::ParseOptions::NOERROR
         end
         @xml_hash = Hash.from_xml("<root>#{doc.to_s}</root>");
+        puts "here is the hash #{@xml_hash}"
       rescue => ex
         puts "error message : #{ex.message}"
       end

@@ -80,7 +80,7 @@ $(function () {
 
     $(".topic_link").click(function(e){
 	e.preventDefault();
-	console.log("fuck");
+
 	if ($(this).hasClass("bold")) {
 	    // single choice in string
 	    var nuts = $("#topic").val().replace(String(this.id), "");
@@ -190,7 +190,7 @@ $(function () {
         for(var i = 0; i < checkedTopics.length; i++) {
 
 
-            var value = checkedTopics[i] + ",";
+            var value = checkedTopics[i] + "-";
 
             if(i == checkedTopics.length - 1)
                 value = checkedTopics[i];
@@ -203,6 +203,11 @@ $(function () {
         //if(callSubmit == true)
 	     //   this.form.submit();
 
+        callSubmit = true;
+    });
+
+    $(".green_arrow").click(function(){
+        $("#search-form").submit();
         callSubmit = true;
     });
 

@@ -52,7 +52,7 @@
 .highlight-metadata {
     background:#eeeeee;
     padding: 5px;
-
+    vertical-align: text-top;
 }
 
 .secondCol-metadata {

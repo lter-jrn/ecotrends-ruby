@@ -40,7 +40,7 @@ class ExtracatMetadata < ActiveRecord::Base
     keyword_search = if term_hash["keywords"].present?
                        self.where("keywords like ? or docid like ?", "%#{term_hash['keywords']}%", "%#{term_hash['keywords']}%")
                      else
-                       self.all()
+                       self
                      end
     if term_hash["variable_name"].present?
       keyword_search = keyword_search.where("subtopic" => term_hash["subtopic"])
@@ -48,7 +48,9 @@ class ExtracatMetadata < ActiveRecord::Base
 
     if term_hash["subtopics"].present?
       #sub_array = term_hash["subtopics"].split(",")
-      keyword_search = keyword_search.where("subtopic" => term_hash["subtopics"].split(","))
+      #binding.pry()
+      keyword_search = keyword_search.where("subtopic" => term_hash["subtopics"].split("-"))
+      #binding.pry()
     end
 
     if term_hash["topic"].present?
@@ -56,13 +58,21 @@ class ExtracatMetadata < ActiveRecord::Base
       keyword_search = keyword_search.where("topic" => topic_array)
     end
 
-    if term_hash["site"].present?
-      keyword_search = keyword_search.where("site_name" => term_hash["site"])
-    end
+    # if term_hash["site"].present?
+    #   keyword_search = keyword_search.where("site_name" => term_hash["site"])
+    # end
+
     if term_hash["site_filters"].present?
       #term_array = term_hash["site_filters"].split(",")
-      puts "here are the site filters : #{term_hash["site_filters"].split(",")}"
-      keyword_search = keyword_search.where("site" => term_hash["site_filters"].split(","))
+
+      # term_hash["site_filters"].split(",").each do |site|
+      #   puts "here is the site : #{site}"
+      # end
+
+      keyword_search = keyword_search.where("site_name" => term_hash["site_filters"].split(","))
+      puts "here is the search : #{keyword_search}"
+
+      #keyword_search = keyword_search.where("site" => term_hash["site_filters"].split(","))
     end
     if term_hash["min_date"].present? && term_hash["max_date"].blank?
       keyword_search = keyword_search.where("begin_date > ?", term_hash["min_date"])
@@ -74,8 +84,12 @@ class ExtracatMetadata < ActiveRecord::Base
     if term_hash["max_date"].present? && term_hash["min_date"].present?
       keyword_search = keyword_search.where("begin_date > ? and end_date < ?", term_hash["min_date"], term_hash["max_date"])
     end
-
-    keyword_search
+    #binding.pry()
+    if keyword_search == self
+      keyword_search = self.all()
+    end
+    #binding.pry()
+    keyword_search.order("entryid asc")
   end
   #returns the dataset
   def self.get_values(entry_id)
