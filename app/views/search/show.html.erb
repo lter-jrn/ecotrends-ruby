@@ -18,8 +18,17 @@
         }
     ]
 } %>
-<% options = {width: 1000, generateLegend: true, scaleShowGridLines: @show_lines.present?, pointDot: @show_plots.present?, bezierCurve: false} %>
-<%= line_chart data, options %>
+
+<% chart_width = (data[:datasets].first()[:data].count / 20) * 450 %>
+<% if chart_width < 900 %>
+    <% chart_width = 900 %>
+<% end %>
+<% options = {width: chart_width, generateLegend: true, scaleShowGridLines: @show_lines.present?, pointDot: @show_plots.present?, bezierCurve: false} %>
+
+<div style="overflow:auto; width:1000px">
+  <%= line_chart data, options %>
+</div>
+
 <% unless @print %>
   <h2>Dataset Information</h2>
     <p>
