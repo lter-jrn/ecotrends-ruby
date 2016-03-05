@@ -176,7 +176,7 @@
             </td>
           </tr>
 
-          <!-- Keywords -->
+          <!-- License and Usage Rights -->
           <tr>
             <td colspan="2">
               <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
@@ -203,12 +203,14 @@
                              <% else %>
                                  <% if section["para"].to_s.include?("orderedlist") %>
                                      <% @meta_hash = {} %>
-                                     <%= section["para"].each do |pair| %>
+                                     <% section["para"].each do |pair| %>
                                          <% key,value = pair.split(/:/) %>
                                          <% @meta_hash[key] = value %>
                                      <% end %>
-                                     <% puts "meta data" %>
-                                     <%= @meta_hash["orderedlist"] %>
+                                     <% @meta_info = @meta_hash.first.first.second["listitem"] %>
+                                     <% @meta_info.each do |item| %>
+                                         <p><%= p item["para"] %></p>
+                                     <% end %>
                                  <% else %>
 
                                      <%= section["para"] %>
@@ -226,162 +228,142 @@
               </table>
             </td>
           </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <table width="100%" class="defaulttable">
-    <tbody>
-    <tr>
-      <td colspan="2" class="tablehead-metadata">Additional Metadata</td>
-    </tr>
-    <tr>
-      <td>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
-          <tbody>
-          <tr>
-            <td class="highlight-metadata" width="15%">Additional Metadata:</td>
-            <td class="secondCol-metadata" width="85%">Item
-              1&nbsp;<a href="http://ecotrends.nmsu.edu:/exploratory/metacat?action=read&amp;qformat=exploratory&amp;sessionid=&amp;docid=ecotrends.9001.1&amp;displaymodule=additionalmetadata&amp;additionalmetadataindex=1"><b>(View)</b></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <table width="100%" class="defaulttable">
-    <tbody>
-    <tr>
-      <td>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
-          <tbody>
-          <tr>
-            <td class="highlight-metadata" width="15%">Additional Metadata:</td>
-            <td class="secondCol-metadata" width="85%">Item
-              2&nbsp;<a href="http://ecotrends.nmsu.edu:/exploratory/metacat?action=read&amp;qformat=exploratory&amp;sessionid=&amp;docid=ecotrends.9001.1&amp;displaymodule=additionalmetadata&amp;additionalmetadataindex=2"><b>(View)</b></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <table width="100%" class="defaulttable">
-    <tbody>
-    <tr>
-      <td>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
-          <tbody>
-          <tr>
-            <td class="highlight-metadata" width="15%">Additional Metadata:</td>
-            <td class="secondCol-metadata" width="85%">Item
-              3&nbsp;<a href="http://ecotrends.nmsu.edu:/exploratory/metacat?action=read&amp;qformat=exploratory&amp;sessionid=&amp;docid=ecotrends.9001.1&amp;displaymodule=additionalmetadata&amp;additionalmetadataindex=3"><b>(View)</b></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <table width="100%" class="defaulttable">
-    <tbody>
-    <tr>
-      <td>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
-          <tbody>
-          <tr>
-            <td class="highlight-metadata" width="15%">Additional Metadata:</td>
-            <td class="secondCol-metadata" width="85%">Item
-              4&nbsp;<a href="http://ecotrends.nmsu.edu:/exploratory/metacat?action=read&amp;qformat=exploratory&amp;sessionid=&amp;docid=ecotrends.9001.1&amp;displaymodule=additionalmetadata&amp;additionalmetadataindex=4"><b>(View)</b></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <table width="100%" class="defaulttable">
-    <tbody>
-    <tr>
-      <td>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
-          <tbody>
-          <tr>
-            <td class="highlight-metadata" width="15%">Additional Metadata:</td>
-            <td class="secondCol-metadata" width="85%">Item
-              5&nbsp;<a href="http://ecotrends.nmsu.edu:/exploratory/metacat?action=read&amp;qformat=exploratory&amp;sessionid=&amp;docid=ecotrends.9001.1&amp;displaymodule=additionalmetadata&amp;additionalmetadataindex=5"><b>(View)</b></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <table width="100%" class="defaulttable">
-    <tbody>
-    <tr>
-      <td>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
-          <tbody>
-          <tr>
-            <td class="highlight-metadata" width="15%">Additional Metadata:</td>
-            <td class="secondCol-metadata" width="85%">Item
-              6&nbsp;<a href="http://ecotrends.nmsu.edu:/exploratory/metacat?action=read&amp;qformat=exploratory&amp;sessionid=&amp;docid=ecotrends.9001.1&amp;displaymodule=additionalmetadata&amp;additionalmetadataindex=6"><b>(View)</b></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <table width="100%" class="defaulttable">
-    <tbody>
-    <tr>
-      <td>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
-          <tbody>
-          <tr>
-            <td class="highlight-metadata" width="15%">Additional Metadata:</td>
-            <td class="secondCol-metadata" width="85%">Item
-              7&nbsp;<a href="http://ecotrends.nmsu.edu:/exploratory/metacat?action=read&amp;qformat=exploratory&amp;sessionid=&amp;docid=ecotrends.9001.1&amp;displaymodule=additionalmetadata&amp;additionalmetadataindex=7"><b>(View)</b></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-  <table width="100%" class="defaulttable">
-    <tbody>
-    <tr>
-      <td>
-        <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
-          <tbody>
-          <tr>
-            <td class="highlight-metadata" width="15%">Additional Metadata:</td>
-            <td class="secondCol-metadata" width="85%">Item
-              8&nbsp;<a href="http://ecotrends.nmsu.edu:/exploratory/metacat?action=read&amp;qformat=exploratory&amp;sessionid=&amp;docid=ecotrends.9001.1&amp;displaymodule=additionalmetadata&amp;additionalmetadataindex=8"><b>(View)</b></a>
-            </td>
-          </tr>
-          </tbody>
-        </table>
-      </td>
-    </tr>
-    </tbody>
-  </table>
 
+          <!-- Geographic Coverage -->
+          <tr>
+            <td colspan="2">
+              <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
+                <tbody>
+                <tr>
 
-  <script type="text/JavaScript" language="JavaScript">
-    <
-    !--insertTemplateClosing('http://ecotrends.nmsu.edu:/exploratory');//--></script>
+                  <td colspan="2" class="tablehead-metadata">Geographic Coverage: <b><%= @xml_hash["root"]["eml"]["dataset"]["coverage"]["geographicCoverage"]["geographicDescription"] %></b>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+              <table width="100%">
+                <tbody>
+                <tr>
+                  <td class="highlight-metadata" width="15%"></td>
+                  <td class="secondCol-metadata" width="85%">
+                    <p>
+                      <b>Bounding Coordinates:</b></br>
+                      <% @xml_hash["root"]["eml"]["dataset"]["coverage"]["geographicCoverage"]["boundingCoordinates"].each do |key, coordinate| %>
+                        <ul>
+                          <li><%= "#{key.underscore.humanize}: #{coordinate}" %></li>
+                        </ul>
+                      <% end %>
+                    </p>
+                    <p>
+                      <b>Temporal Coverage Coordinates:</b></br>
+                      <% @xml_hash["root"]["eml"]["dataset"]["coverage"]["temporalCoverage"]["rangeOfDates"].each do |key, date| %>
+                        <ul>
+                          <li><%= "#{key.underscore.humanize}: #{date['calendarDate']}" %></li>
+                        </ul>
+                      <% end %>
+                    </p>
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Contacts -->
+          <tr>
+            <td colspan="2">
+              <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
+                <tbody>
+                <tr>
+
+                  <td colspan="2" class="tablehead-metadata">Contact(s):</td>
+                </tr>
+                </tbody>
+              </table>
+              <table width="100%">
+                <tbody>
+                <tr>
+                  <td class="highlight-metadata" width="15%"></td>
+                  <td class="secondCol-metadata" width="85%">
+                      <% @xml_hash["root"]["eml"]["dataset"]["contact"].each do |contact| %>
+                        <p>
+                          <b>Name:</b> <%= contact['organizationName'] || contact['individualName'] %></br>
+                          <b>Position:</b> <%= contact['positionName'] %></br>
+                          <b>Address:</b></br>
+                          <ul>
+                          <% contact["address"].each do |key, a| %>
+                            <% if key == "deliveryPoint" %>
+                              <% a.each do |dp| %>
+                                    <li><b>Delivery Point: </b> <%= "#{dp}" %></li>
+                              <% end %>
+                            <% else %>
+                                  <li><b><%= "#{key.underscore.humanize}: " %></b> <%= "#{a}" %></li>
+                            <% end %>
+                          <% end %>
+                          </ul>
+                          <% if contact["phone"].nil? == false %>
+                              <% contact["phone"].each do |phone| %>
+                                  <b>Phone: </b><%= phone %></br>
+                              <% end %>
+                          <% end %>
+
+                          <b>Online Url: </b><%= link_to contact["onlineUrl"], contact["onlineUrl"] %>
+                        </p>
+                    <% end %>
+
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Method Info: -->
+          <tr>
+            <td colspan="2">
+              <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
+                <tbody>
+                <tr>
+
+                  <td colspan="2" class="tablehead-metadata">Method Info:</td>
+                </tr>
+                </tbody>
+              </table>
+              <table width="100%">
+                <tbody>
+                <tr>
+                  <td class="highlight-metadata" width="15%"></td>
+                  <td class="secondCol-metadata" width="85%">
+                    <% @xml_hash["root"]["eml"]["dataset"]["methods"]["methodStep"].each do |methodStep| %>
+                        <p>
+                          <b>Description</b></br>
+                          <% methodStep["description"].each do |para| %>
+                              <% para.each do |pr| %>
+                                <% if pr.class == Array %>
+                                    <% pr.each do |stuff| %>
+                                      <p><%= p stuff %> </p>
+                                    <% end %>
+                                <% elsif pr != "para" %>
+                                   <p><%= p pr %> </p>
+                                <% end %>
+
+                              <% end %>
+
+                          <% end %>
+
+                        </p>
+                    <% end %>
+
+                  </td>
+                </tr>
+
+                </tbody>
+              </table>
+            </td>
+          </tr>
+
+          </tbody>
+        </table>
 </div>
