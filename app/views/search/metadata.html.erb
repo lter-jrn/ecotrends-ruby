@@ -56,20 +56,30 @@
                 <% @xml_hash["root"]["eml"]["dataset"]["creator"].each do |creator| %>
 
                     <tr>
-                      <td class="highlight-metadata" width="15%"><%= creator["organizationName"] %></td>
-                      <td class="secondCol-metadata" width="85%">
-                        <% creator["address"].each do |key, address| %>
-                          <% if key == "deliveryPoint" %>
-                                <% if address.kind_of?(Array) %>
-                                  <%= "#{key.underscore.humanize}: #{address.join(', ')}" %>
-                                <% else %>
-                                    <%= "#{key.underscore.humanize}: #{address}" %>
-                                <% end %>
-                          <% else %>
-                                <%= "#{key.underscore.humanize}: #{address}" %> </br>
-                          <% end %>
-
+                      <td class="highlight-metadata" width="15%">
+                        <% if creator["organizationName"].nil? != true %>
+                            <%= creator["organizationName"] %>
+                        <% else %>
+                            <%= "#{creator['individualName']['salutation']} #{creator['individualName']['givinName']} #{creator['individualName']['surName']}" %>
                         <% end %>
+                      </td>
+                      <td class="secondCol-metadata" width="85%">
+                      <% if creator["address"] %>
+                            <% creator["address"].each do |key, address| %>
+                                <% if key == "deliveryPoint" %>
+                                    <% if address.class == Array %>
+                                        <% address.each do |dp| %>
+                                            <li><b>Delivery Point: </b> <%= "#{dp}" %></li>
+                                        <% end %>
+                                    <% else %>
+                                        <li><b>Delivery Point: </b> <%= "#{address}" %></li>
+                                    <% end %>
+                                <% else %>
+                                    <%= "#{key.underscore.humanize}: #{address}" %> </br>
+                                <% end %>
+
+                            <% end %>
+                      <% end %>
 
                         Email: <%= link_to creator["electronicMailAddress"], "mailto:#{creator['electronicMailAddress']}" %></br>
                         Contry: <%= link_to creator["onlineUrl"], creator["onlineUrl"] %></br>
@@ -101,13 +111,15 @@
                       <td class="secondCol-metadata" width="85%">
                         <% provider["address"].each do |key, address| %>
                             <% if key == "deliveryPoint" %>
-                                <% if address.kind_of?(Array) %>
-                                    <%= "#{key.underscore.humanize}: #{address.join(', ')}" %>
+                                <% if address.class == Array %>
+                                    <% address.each do |dp| %>
+                                        <li><b>Delivery Point: </b> <%= "#{dp}" %></li>
+                                    <% end %>
                                 <% else %>
-                                    <%= "#{key.underscore.humanize}: #{address}" %>
+                                    <li><b>Delivery Point: </b> <%= "#{address}" %></li>
                                 <% end %>
                             <% else %>
-                                <%= "#{key.underscore.humanize}: #{address}" %> </br>
+                                <li><b><%= "#{key.underscore.humanize}: " %></b> <%= "#{address}" %></li>
                             <% end %>
                         <% end %>
 
