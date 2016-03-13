@@ -89,7 +89,7 @@ class ExtracatMetadata < ActiveRecord::Base
       keyword_search = self.all()
     end
     #binding.pry()
-    keyword_search.order("entryid asc")
+    keyword_search.order("variable_name asc")
   end
   #returns the dataset
   def self.get_values(entry_id)

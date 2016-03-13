@@ -1,6 +1,6 @@
 <div class="span3" id="filter-container">
   <h3>Browse
-    <small><%= link_to "Clear", search_index_path %></small>
+    <small><%= link_to '<button type="button">Clear</button>'.html_safe, search_index_path %></small>
   </h3>
   <ul class='browse-by'>
     <li>
@@ -88,7 +88,7 @@
     </li>
   </ul>
   <h3>Filter Results
-    <small><%= link_to "Clear", search_index_path %></small>
+    <small><%= link_to '<button type="button">Clear</button>'.html_safe, search_index_path %></small>
   </h3>
   <% if @results.present? %>
       <div style="height: 1px;"></div>

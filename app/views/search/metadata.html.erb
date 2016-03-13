@@ -9,7 +9,7 @@
         <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
           <tbody>
           <tr>
-            <td class="tablehead-metadata" colspan="2">Dataset Title</td>
+            <td class="tablehead-metadata" colspan="2">Dataset title</td>
           </tr>
           <tr>
             <td class="citation" colspan="2">
@@ -17,15 +17,23 @@
             </td>
           </tr>
           <tr>
-            <td class="tablehead-metadata" colspan="2">Dataset description:</td>
+            <td class="tablehead-metadata" colspan="2">Dataset ciation</td>
           </tr>
           <tr>
             <td class="citation" colspan="2">
-              <%= @xml_hash["root"]["eml"]["dataset"]["dataTable"]["entityDescription"] %>
+              <%= @xml_hash["root"]["eml"]["dataset"]["title"] %>
             </td>
           </tr>
           <tr>
-            <td class="tablehead-metadata" colspan="2">Short name:</td>
+            <td class="tablehead-metadata" colspan="2">Dataset ID</td>
+          </tr>
+          <tr>
+            <td class="citation" colspan="2">
+              <%= @xml_hash["root"]["eml"]["dataset"]["dataTable"]["entityName"] %>
+            </td>
+          </tr>
+          <tr>
+            <td class="tablehead-metadata" colspan="2">Short name</td>
           </tr>
           <tr>
             <td class="citation" colspan="2">
@@ -33,7 +41,7 @@
             </td>
           </tr>
           <tr>
-            <td class="tablehead-metadata" colspan="2">Download File:</td>
+            <td class="tablehead-metadata" colspan="2">Download file</td>
           </tr>
           <tr>
             <td class="citation" colspan="2">
@@ -47,7 +55,7 @@
               <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
                 <tbody>
                 <tr>
-                  <td colspan="2" class="tablehead-metadata">Dataset owners:</td>
+                  <td colspan="2" class="tablehead-metadata">Dataset owners</td>
                 </tr>
                 </tbody>
               </table>
@@ -65,24 +73,11 @@
                       </td>
                       <td class="secondCol-metadata" width="85%">
                       <% if creator["address"] %>
-                            <% creator["address"].each do |key, address| %>
-                                <% if key == "deliveryPoint" %>
-                                    <% if address.class == Array %>
-                                        <% address.each do |dp| %>
-                                            <li><b>Delivery Point: </b> <%= "#{dp}" %></li>
-                                        <% end %>
-                                    <% else %>
-                                        <li><b>Delivery Point: </b> <%= "#{address}" %></li>
-                                    <% end %>
-                                <% else %>
-                                    <%= "#{key.underscore.humanize}: #{address}" %> </br>
-                                <% end %>
-
-                            <% end %>
+                            <%= formatted_address(creator["address"]).html_safe %>
                       <% end %>
 
                         Email: <%= link_to creator["electronicMailAddress"], "mailto:#{creator['electronicMailAddress']}" %></br>
-                        Contry: <%= link_to creator["onlineUrl"], creator["onlineUrl"] %></br>
+                        Website: <%= link_to creator["onlineUrl"], creator["onlineUrl"] %></br>
                       </td>
                     </tr>
 
@@ -98,7 +93,7 @@
               <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
                 <tbody>
                 <tr>
-                  <td colspan="2" class="tablehead-metadata">Metadata owners:</td>
+                  <td colspan="2" class="tablehead-metadata">Metadata providers</td>
                 </tr>
                 </tbody>
               </table>
@@ -109,23 +104,10 @@
                     <tr>
                       <td class="highlight-metadata" width="15%"><%= provider["organizationName"] %></td>
                       <td class="secondCol-metadata" width="85%">
-                        <% provider["address"].each do |key, address| %>
-                            <% if key == "deliveryPoint" %>
-                                <% if address.class == Array %>
-                                    <% address.each do |dp| %>
-                                        <li><b>Delivery Point: </b> <%= "#{dp}" %></li>
-                                    <% end %>
-                                <% else %>
-                                    <li><b>Delivery Point: </b> <%= "#{address}" %></li>
-                                <% end %>
-                            <% else %>
-                                <li><b><%= "#{key.underscore.humanize}: " %></b> <%= "#{address}" %></li>
-                            <% end %>
-                        <% end %>
-
+                        <%= formatted_address(provider["address"]).html_safe %>
                         Phone: <%= provider["phone"] %></br>
                         Email: <%= link_to provider["electronicMailAddress"], "mailto:#{provider['electronicMailAddress']}" %></br>
-                        Contry: <%= link_to provider["onlineUrl"], provider["onlineUrl"] %></br>
+                        Website: <%= link_to provider["onlineUrl"], provider["onlineUrl"] %></br>
                       </td>
                     </tr>
 
@@ -142,7 +124,7 @@
               <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
                 <tbody>
                 <tr>
-                  <td colspan="2" class="tablehead-metadata">Abstract:</td>
+                  <td colspan="2" class="tablehead-metadata">Abstract</td>
                 </tr>
                 </tbody>
               </table>
@@ -168,7 +150,7 @@
               <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
                 <tbody>
                 <tr>
-                  <td colspan="2" class="tablehead-metadata">Keywords:</td>
+                  <td colspan="2" class="tablehead-metadata">Keywords</td>
                 </tr>
                 </tbody>
               </table>
@@ -194,7 +176,7 @@
               <table cellpadding="0" cellspacing="0" width="100%" class="tabledefault">
                 <tbody>
                 <tr>
-                  <td colspan="2" class="tablehead-metadata">License and Usage Rights: <b><%= @xml_hash["root"]["eml"]["dataset"]["intellectualRights"]["section"]["title"] %></b> <%= @xml_hash["root"]["eml"]["dataset"]["intellectualRights"]["section"]["para"]["emphasis"] %>
+                  <td colspan="2" class="tablehead-metadata">License and usage rights
                   </td>
                 </tr>
                 </tbody>
@@ -204,8 +186,9 @@
                 <tr>
                   <td class="highlight-metadata" width="15%"></td>
                   <td class="secondCol-metadata" width="85%">
+                    <p><%= @xml_hash["root"]["eml"]["dataset"]["intellectualRights"]["section"]["title"] %></br>
+                      <%= @xml_hash["root"]["eml"]["dataset"]["intellectualRights"]["section"]["para"]["emphasis"] %></p>
                     <% @xml_hash["root"]["eml"]["dataset"]["intellectualRights"]["section"]["section"].each do |section| %>
-
                            <p>
                              <b><%= "#{section['title']}:" %></b></br>
                              <% if section["para"].kind_of?(Array) %>
@@ -248,7 +231,7 @@
                 <tbody>
                 <tr>
 
-                  <td colspan="2" class="tablehead-metadata">Geographic Coverage: <b><%= @xml_hash["root"]["eml"]["dataset"]["coverage"]["geographicCoverage"]["geographicDescription"] %></b>
+                  <td colspan="2" class="tablehead-metadata">Geographic coverage <b><%= @xml_hash["root"]["eml"]["dataset"]["coverage"]["geographicCoverage"]["geographicDescription"] %></b>
                   </td>
                 </tr>
                 </tbody>
@@ -289,7 +272,7 @@
                 <tbody>
                 <tr>
 
-                  <td colspan="2" class="tablehead-metadata">Contact(s):</td>
+                  <td colspan="2" class="tablehead-metadata">Contact(s)</td>
                 </tr>
                 </tbody>
               </table>
@@ -303,24 +286,15 @@
                           <b>Name:</b> <%= contact['organizationName'] || contact['individualName'] %></br>
                           <b>Position:</b> <%= contact['positionName'] %></br>
                           <b>Address:</b></br>
-                          <ul>
-                          <% contact["address"].each do |key, a| %>
-                            <% if key == "deliveryPoint" %>
-                              <% a.each do |dp| %>
-                                    <li><b>Delivery Point: </b> <%= "#{dp}" %></li>
-                              <% end %>
-                            <% else %>
-                                  <li><b><%= "#{key.underscore.humanize}: " %></b> <%= "#{a}" %></li>
-                            <% end %>
-                          <% end %>
-                          </ul>
+                          <%= formatted_address(contact["address"]).html_safe %>
+
                           <% if contact["phone"].nil? == false %>
                               <% contact["phone"].each do |phone| %>
                                   <b>Phone: </b><%= phone %></br>
                               <% end %>
                           <% end %>
 
-                          <b>Online Url: </b><%= link_to contact["onlineUrl"], contact["onlineUrl"] %>
+                          <b>Website: </b><%= link_to contact["onlineUrl"], contact["onlineUrl"] %>
                         </p>
                     <% end %>
 
@@ -339,7 +313,7 @@
                 <tbody>
                 <tr>
 
-                  <td colspan="2" class="tablehead-metadata">Method Info:</td>
+                  <td colspan="2" class="tablehead-metadata">Method info</td>
                 </tr>
                 </tbody>
               </table>

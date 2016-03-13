@@ -33,7 +33,7 @@ class SearchController < ApplicationController
       @results = @search.page(params[:page])
       @min_date = params[:min_date] || @search.map(&:begin_date).min
       @max_date = params[:max_date] || @search.map(&:end_date).max
-      @raw_sites = ExtracatMetadata.group(:site_name).count.keys #ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
+      @raw_sites = ExtracatMetadata.group(:site_name).count.keys.sort #ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
       @the_sites = @raw_sites.first(10)
       @more_sites = @raw_sites - @the_sites if @raw_sites.present?
       @variables = @subtopics.map(&:subtopic).sort.uniq
