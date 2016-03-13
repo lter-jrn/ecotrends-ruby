@@ -189,31 +189,34 @@
                     <p><%= @xml_hash["root"]["eml"]["dataset"]["intellectualRights"]["section"]["title"] %></br>
                       <%= @xml_hash["root"]["eml"]["dataset"]["intellectualRights"]["section"]["para"]["emphasis"] %></p>
                     <% @xml_hash["root"]["eml"]["dataset"]["intellectualRights"]["section"]["section"].each do |section| %>
-                           <p>
-                             <b><%= "#{section['title']}:" %></b></br>
-                             <% if section["para"].kind_of?(Array) %>
-                                <% section["para"].each do |para| %>
-                                  <%= simple_format(para) %>
+                        <% if( (section["para"].kind_of?(Array) && Array(section["para"]).length > 0) ||( section["para"].kind_of?(String) && String(section["para"]).length > 0) ) %>
+                            <p>
+                              <b><%= "#{section['title']}:" if section['title'].nil? == false %></b></br>
+                              <% if section["para"].kind_of?(Array) %>
+                                  <% section["para"].each do |para| %>
+                                      <%= simple_format(para) %>
+                                  <% end %>
+                              <% else %>
+                                  <% if section["para"].to_s.include?("orderedlist") %>
+                                      <% @meta_hash = {} %>
+                                      <% section["para"].each do |pair| %>
+                                          <% key,value = pair.split(/:/) %>
+                                          <% @meta_hash[key] = value %>
+                                      <% end %>
+                                      <% @meta_info = @meta_hash.first.first.second["listitem"] %>
+                                      <% @meta_info.each do |item| %>
+                                        <p><%= p item["para"] %></p>
+
+                                    <% end %>
+                                  <% else %>
+                                    <p><%= p section["para"] %>
                                 <% end %>
-                             <% else %>
-                                 <% if section["para"].to_s.include?("orderedlist") %>
-                                     <% @meta_hash = {} %>
-                                     <% section["para"].each do |pair| %>
-                                         <% key,value = pair.split(/:/) %>
-                                         <% @meta_hash[key] = value %>
-                                     <% end %>
-                                     <% @meta_info = @meta_hash.first.first.second["listitem"] %>
-                                     <% @meta_info.each do |item| %>
-                                         <p><%= p item["para"] %></p>
-                                     <% end %>
-                                 <% else %>
 
-                                     <%= section["para"] %>
-                                 <% end %>
+                            <% end %>
 
-                             <% end %>
+                            </p>
+                        <% end %>
 
-                           </p>
 
                     <% end %>
                   </td>
@@ -313,7 +316,7 @@
                 <tbody>
                 <tr>
 
-                  <td colspan="2" class="tablehead-metadata">Method info</td>
+                  <td colspan="2" class="tablehead-metadata">Methods</td>
                 </tr>
                 </tbody>
               </table>
@@ -324,7 +327,7 @@
                   <td class="secondCol-metadata" width="85%">
                     <% @xml_hash["root"]["eml"]["dataset"]["methods"]["methodStep"].each do |methodStep| %>
                         <p>
-                          <b>Description</b></br>
+                          <b>Method discription</b></br>
                           <% methodStep["description"].each do |para| %>
                               <% para.each do |pr| %>
                                 <% if pr.class == Array %>
