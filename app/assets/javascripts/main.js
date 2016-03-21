@@ -273,7 +273,7 @@ $(function () {
             if($(e.target).is('.line-legend')) {
                 var arr = e.target;
                 $(e.target).children().each(function(i, element){
-                    $(element).children('span').text('----');
+                    var span = $(element).children('span').html('&nbsp;&nbsp;&nbsp;&nbsp;');
                 });
             }
     });
