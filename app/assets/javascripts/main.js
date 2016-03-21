@@ -244,22 +244,7 @@ $(function () {
         window.location.href = "/search?utf8=✓&keywords=" + $(this).attr("value")
     });
 
-    // $(".remove-datastore").click(function(e){
-    // 	var fa = $(this).find(".fa")
-    // 	fa.addClass("text-warning");
-    // 	var muck = $(this).find('.jsdocid').val();
-    // 	$.ajax({
-    // 	    method: "POST",
-    // 	    url: "datastores.json",
-    // 	    data: { docids: muck},
-    // 	    success: function(data){
-    // 		fa.removeClass("text-warning");
-    // 		fa.addClass("text-error");
-    // 	    }
-    // 	});
-    // });
 
-    //print function for charts
     $("#print-link").click(function(e){
         var dataUrl = document.getElementById('chart-0').toDataURL(); //attempt to save base64 string to server using this var
         var lineLegend = document.getElementsByClassName('line-legend')[0];
@@ -282,5 +267,15 @@ $(function () {
         printWin.close();
     });
 
-    //setCheckboxFilters();
+
+
+    $(document).on('DOMNodeInserted', function(e) {
+            if($(e.target).is('.line-legend')) {
+                var arr = e.target;
+                $(e.target).children().each(function(i, element){
+                    $(element).children('span').text('----');
+                });
+            }
+    });
+
 });

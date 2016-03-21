@@ -6,6 +6,12 @@ class DatastoresController < ApplicationController
 
   def compare
     @data = setup_dataset(params)
+    @data_length = 0
+    @data[:datasets].each do |data_set|
+      if data_set[:data].count > @data_length
+        @data_length = data_set[:data].count
+      end
+    end
     @show_lines = params[:shooby].blank? ? true : false
     @show_plots = params[:shonby].blank? ? true : false
     if params[:both_off].present?
@@ -84,8 +90,10 @@ class DatastoresController < ApplicationController
       pointStrokeColor: "#fff",
       pointHighlightFill: "#fff",
       pointHighlightStroke: "rgba(#{colour},1)",
-      data: clean_up_data(data_set, labels)
-        }
+      data: clean_up_data(data_set, labels),
+      legendTemplate:"<ul class=\"<%%=name.toLowerCase()%>-legend\"><%% for (var i=0; i<segments.length; i++){%><li><div class=\"legend-item-color\" style=\"background-color:<%%=segments[i].fillColor%>\"></div><%%if(segments[i].label){%><%%=segments[i].label%><%%}%></li><%%}%></ul>",
+
+    }
   end
 
   def clean_up_data(data_set, labels)
