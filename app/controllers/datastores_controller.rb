@@ -5,6 +5,13 @@ class DatastoresController < ApplicationController
 
 
   def compare
+
+    if params[:docids].nil? || params[:docids].count < 1
+      flash[:error] = "Please select one or more datasets to compare."
+      redirect_to "/datastores"
+      return
+    end
+
     @data = setup_dataset(params)
     @data_length = 0
     @data[:datasets].each do |data_set|

@@ -244,6 +244,7 @@ $(function () {
         window.location.href = "/search?utf8=✓&keywords=" + $(this).attr("value")
     });
 
+    $("#print-info").tooltip();
 
     $("#print-link").click(function(e){
         var dataUrl = document.getElementById('chart-0').toDataURL(); //attempt to save base64 string to server using this var

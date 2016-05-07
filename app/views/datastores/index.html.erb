@@ -9,12 +9,16 @@
 
   <%= form_tag('/comparison', method: :get) do %>
     <div class="span12 headerbar">
-      <button class="btn">Compare Selected</button>
+      <% if @datastores.count > 0 %>
+        <button class="btn">Compare Selected</button>
+      <% else %>
+          <button class="btn" disabled>Compare Selected</button>
+      <% end %>
     </div> <!-- span -->
 </div> <!-- row -->
 
 <!-- BEGIN SEARCH RESULTS -->
-<% @datastores.each do |result| %>
+  <% @datastores.each_with_index do |result, index| %>
   <div class="row">
     <div class="span12">
       <div class="row">
@@ -31,12 +35,20 @@
 	</div> <!-- span -->
 	<div class="span2 searchright">
 	  <h4><%= result.extracat_metadata.begin_date.year%> - <%= result.extracat_metadata.end_date.year %></h4>
-	  <%= link_to image_tag("datastore_on.png"), search_path(result.extracat_metadata.entryid) %><hr/>
-	  <p><i class="fa fa-delete"></i><%= link_to 'Remove?', datastore_path(result.idsave), method: :delete, data: { confirm: 'Are you sure?' } %></p>
+	  <%= link_to image_tag("chart.png"), search_path(result.extracat_metadata.entryid) %><hr/>
+	  <p><i class="fa fa-delete"></i><%= link_to image_tag("remove.png"), datastore_path(result.idsave), method: :delete, data: { confirm: 'Are you sure?' } %></p>
 	</div> <!-- span -->
       </div> <!-- row -->
     </div> <!-- span -->
-  </div> <!-- row -->
-  <hr>
+  </div>
+    <% if index <= @datastores.count - 2 %>
+      <hr/>
+    <% end %>
   <% end %>
   <% end %> <!-- form end one hopes -->
+
+<% if @datastores.nil? || @datastores.count < 1 %>
+      <h2>It doesn't look like you have any datasets to compare. Please go to the <%= link_to "search", "/search"%>
+        section of the website in order to find datasets you can add to your datastore to compare.
+      </h2>
+<% end %>
