@@ -5,6 +5,6 @@
 <% if chart_width < 900 %>
     <% chart_width = 900 %>
 <% end %>
-<% options = {width: chart_width, generateLegend: true, scaleShowGridLines: @show_lines.present?, pointDot: @show_plots.present?} %>
+<% options = {width: chart_width, generateLegend: true, scaleShowGridLines: @show_lines.present?, pointDot: @show_plots.present?, bezierCurve:false} %>
 <%= line_chart @data, options %>
 
