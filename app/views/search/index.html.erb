@@ -72,7 +72,7 @@
                   <h4>Topics </h4>
                   <span class="<%= "bold" if params[:topic].blank? %>" id="all_topics"><small>All</small></span><br/>
                   <% @topics.each do |item| %>
-                      <a href='#' class='location' value='<%= item.topic %>'>
+                      <a href='#' class='brows_topic' value='<%= item.topic %>'>
 		          <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
                 <%= item.topic %><br/>
               </span>
@@ -181,7 +181,8 @@
           <fieldset>
 
             <%= form_tag('/search', method: :get, id: "search-form") do %>
-                <%= text_field_tag :keywords, @search_term, id: "search-input" %>
+                <%= text_field_tag :search_term, "", id: "search-input" %>
+                <%= hidden_field_tag :keywords, @search_params[:keywords], id:"keywords_field" %>
                 <%= hidden_field_tag :site_filters, params[:site_filters]%>
                 <%= hidden_field_tag :topic, params[:topic] %>
                 <%= hidden_field_tag :subtopics, params[:subtopics] %>
@@ -199,14 +200,14 @@
     <div style="height: 20px;"></div>
 
 
-    <% if @search_term %>
+    <% if @all_search_terms %>
         <div class="row">
           <div class="span9">
             <% @search_params.each do |k, v| %>
-              <% if k != "site_filters" && k != "subtopics" %>
+              <% if k == "keywords" %>
                     <% unless v.blank? %>
-                        <% v.split("-").each do |vv| %>
-                            <%= link_to "#{image_tag('delete.png', class: 'baricon')} #{vv}".html_safe, search_index_path(@search_params.except(k)) %>&nbsp;
+                        <% v.split(",").each do |vv| %>
+                            <%= link_to "#{image_tag('delete.png', class: 'baricon')} #{vv}".html_safe, "#", class:'delete_keyword', value:"#{vv}" %>&nbsp;
                         <% end %>
                     <% end %>
               <% end %>

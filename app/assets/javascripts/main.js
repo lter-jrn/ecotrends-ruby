@@ -53,84 +53,84 @@ $(function () {
     });
 
     $(".location_link").click(function(e){
-	e.preventDefault();
-	if ($(this).hasClass("bold")) {
-	    // single choice in string
-	    var nuts = $("#site_filter").val().replace(String(this.id), "");
-	    $("#site_filter").val(nuts);
-	    console.log($("#site_filter").val().replace(String(this.id), ""));
-	    if($("#site_filter").val() == ' ' || $("#site_filter").val() == ' ') {
-		$("#all_locations").addClass("bold");
-	    }
-	    $(this).removeClass("bold");
-
-	}
-	else {
-	    $(this).addClass("bold");
-	    if ($("#site_filter").val() == '') {
-		$("#all_locations").removeClass("bold");
-		$("#site_filter").val(this.id);
-	    }
-	    else {
-		var stuff = $("#site_filter").val() + " " + this.id;
-		$("#site_filter").val(stuff);
-	    }
-	}
+    	e.preventDefault();
+    	if ($(this).hasClass("bold")) {
+    	    // single choice in string
+    	    var nuts = $("#site_filter").val().replace(String(this.id), "");
+    	    $("#site_filter").val(nuts);
+    	    console.log($("#site_filter").val().replace(String(this.id), ""));
+    	    if($("#site_filter").val() == ' ' || $("#site_filter").val() == ' ') {
+    		      $("#all_locations").addClass("bold");
+    	    }
+    	    $(this).removeClass("bold");
+    	}
+    	else {
+    	    $(this).addClass("bold");
+    	    if ($("#site_filter").val() == '') {
+    		      $("#all_locations").removeClass("bold");
+    		      $("#site_filter").val(this.id);
+    	    }
+    	    else {
+    		      var stuff = $("#site_filter").val() + " " + this.id;
+    		      $("#site_filter").val(stuff);
+    	    }
+    	}
     });
 
     $(".topic_link").click(function(e){
-	e.preventDefault();
+    	e.preventDefault();
 
-	if ($(this).hasClass("bold")) {
-	    // single choice in string
-	    var nuts = $("#topic").val().replace(String(this.id), "");
-	    $("#topic").val(nuts);
-	    console.log($("#topic").val().replace(String(this.id), ""));
-	    if($("#topic").val() == ' ' || $("#topic").val() == ' ') {
-		$("#all_topics").addClass("bold");
-	    }
-	    $(this).removeClass("bold");
+    	if ($(this).hasClass("bold")) {
+    	    // single choice in string
+    	    var nuts = $("#topic").val().replace(String(this.id), "");
+    	    $("#topic").val(nuts);
+    	    console.log($("#topic").val().replace(String(this.id), ""));
+    	    if($("#topic").val() == ' ' || $("#topic").val() == ' ') {
+    		$("#all_topics").addClass("bold");
+    	    }
+    	    $(this).removeClass("bold");
 
-	}
-	else {
-	    $(this).addClass("bold");
-	    if ($("#topic").val() == '') {
-		$("#all_topics").removeClass("bold");
-		$("#topic").val(this.id);
-	    }
-	    else {
-		console.log("i am here right " + this.id );
-		var stuff = $("#topic").val() + "-" + this.id;
-		$("#topic").val(stuff);
-		console.log($("#topic"));
-	    }
-	}
+    	}
+    	else {
+    	    $(this).addClass("bold");
+    	    if ($("#topic").val() == '') {
+    		$("#all_topics").removeClass("bold");
+    		$("#topic").val(this.id);
+    	    }
+    	    else {
+    		console.log("i am here right " + this.id );
+    		var stuff = $("#topic").val() + "-" + this.id;
+    		$("#topic").val(stuff);
+    		console.log($("#topic"));
+    	    }
+    	}
+      $('#search-form').submit();
     });
 
     $(".subtopic_link").click(function(e){
-	e.preventDefault();
-	if ($(this).hasClass("bold")) {
-	    // single choice in string
-	    var nuts = $("#subtopic").val().replace(String(this.id), "");
-	    $("#subtopic").val(nuts);
-	    console.log($("#subtopic").val().replace(String(this.id), ""));
-	    if($("#subtopic").val() == ' ' || $("#subtopic").val() == ' ') {
-		$("#all_subtopics").addClass("bold");
-	    }
-	    $(this).removeClass("bold");
+    	e.preventDefault();
+    	if ($(this).hasClass("bold")) {
+    	    // single choice in string
+    	    var nuts = $("#subtopic").val().replace(String(this.id), "");
+    	    $("#subtopic").val(nuts);
+    	    console.log($("#subtopic").val().replace(String(this.id), ""));
+    	    if($("#subtopic").val() == ' ' || $("#subtopic").val() == ' ') {
+    		$("#all_subtopics").addClass("bold");
+    	    }
+    	    $(this).removeClass("bold");
 
-	}
-	else {
-	    $(this).addClass("bold");
-	    if ($("#subtopic").val() == '') {
-		$("#all_subtopics").removeClass("bold");
-		$("#subtopic").val(this.id);
-	    }
-	    else {
-		var stuff = $("#subtopic").val() + "," + this.id;
-		$("#subtopic").val(stuff);
-	    }
-	}
+    	}
+    	else {
+    	    $(this).addClass("bold");
+    	    if ($("#subtopic").val() == '') {
+    		$("#all_subtopics").removeClass("bold");
+    		$("#subtopic").val(this.id);
+    	    }
+    	    else {
+    		var stuff = $("#subtopic").val() + "," + this.id;
+    		$("#subtopic").val(stuff);
+    	    }
+    	}
     });
     $("[name='shooby']").bootstrapSwitch({size: 'mini',
 					  onSwitchChange: function(event, state) {
@@ -206,6 +206,21 @@ $(function () {
         callSubmit = true;
     });
 
+    $(".delete_keyword").click(function(e) {
+
+      e.preventDefault();
+      var word = $(this).attr("value").trim();
+      var keywords = $('#keywords_field').val()
+      console.log(keywords);
+      keywords = keywords.replace(word+',', '');
+      keywords = keywords.replace(','+word, '');
+      keywords = keywords.replace(word, '');
+
+      $('#keywords_field').val(keywords);
+      $('#search-form').submit();
+
+    });
+
     $(".green_arrow").click(function(){
         $("#search-form").submit();
         callSubmit = true;
@@ -241,7 +256,22 @@ $(function () {
     $(".location").click(function(e){
         /// I need to do this so we can search without entering a search term in the search box!
         /// filters on the left are just that and need to operate as they are.
-        window.location.href = "/search?utf8=✓&keywords=" + $(this).attr("value")
+        //window.location.href = "/search?utf8=✓&keywords=" + $(this).attr("value")
+
+        var word = $(this).attr("value").trim();
+        var keywords = $('#keywords_field').val()
+
+        if(keywords.includes(word) == false) {
+          if(keywords.length == 0) {
+            keywords = word;
+          } else {
+              keywords += (','+word);
+          }
+
+        }
+
+        $('#keywords_field').val(keywords);
+        $('#search-form').submit();
     });
 
     $("#print-info").tooltip();

@@ -5,6 +5,20 @@ class SearchController < ApplicationController
   before_filter :search_setup, :only => [:index]
   layout :get_layout, only: :show
   def index
+    if params[:search_term] != ""
+      if params[:keywords].present?
+        keywords = params[:keywords].split(",")
+        if params[:search_term].present? and keywords.include?(params[:search_term]) == false
+          if keywords.count >= 1
+            params[:keywords] += ",#{params[:search_term]}"
+          else
+            params[:keywords] = params[:search_term];
+          end
+        end
+      else
+        params[:keywords] = params[:search_term];
+      end
+    end
 
     if params[:site_filters].nil? == false
       @site_filters = params[:site_filters].split(',')
@@ -27,8 +41,10 @@ class SearchController < ApplicationController
     @sites_filtered = params[:site_filter].present? ? params[:site_filter].split() : []
     @subtopics_filtered = params[:subtopic].present? ? params[:subtopic].split("-") : []
     @topics_filtered = params[:topic].present? ? params[:topic].split("-") : []
-    @search_term = params[:keywords]
+    @search_term = ""
+    @all_search_terms = params[:keywords]
     @search_params = search_params.except("page")
+    #binding.pry()
     #unless @search.blank?
       @results = @search.page(params[:page])
       @min_date = params[:min_date] || @search.map(&:begin_date).min
@@ -122,7 +138,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :keywords, :page, :variable_name, :site, :min_date, :max_date, :site_filters, :topic, :subtopics)
+    params.permit(:site_name, :id, :search_term, :keywords, :page, :variable_name, :site, :min_date, :max_date, :site_filters, :topic, :subtopics)
   end
 
   def search_setup

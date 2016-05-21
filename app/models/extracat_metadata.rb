@@ -37,11 +37,16 @@ class ExtracatMetadata < ActiveRecord::Base
   #search for metadata to display in results page
   def self.search(term_hash)
     #take the term_hash and get values for that table either id or keywords
-    keyword_search = if term_hash["keywords"].present?
-                       self.where("keywords like ? or docid like ?", "%#{term_hash['keywords']}%", "%#{term_hash['keywords']}%")
-                     else
-                       self
-                     end
+    keyword_search = nil
+
+
+    if term_hash["keywords"].present?
+      words_array = term_hash["keywords"].split(",")
+      keyword_search = self.where("keywords ILIKE ANY (array[?]) or docid ILIKE ANY (array[?])", words_array.map {|val| "%#{val}%"}, words_array.map {|val| "%#{val}%"})
+    else
+      keyword_search = self
+    end
+    #binding.pry()
     if term_hash["variable_name"].present?
       keyword_search = keyword_search.where("subtopic" => term_hash["subtopic"])
     end
