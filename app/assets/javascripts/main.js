@@ -202,7 +202,7 @@ $(function () {
 
         //if(callSubmit == true)
 	     //   this.form.submit();
-
+       $("#search-form").submit();
         callSubmit = true;
     });
 

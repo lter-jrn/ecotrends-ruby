@@ -92,7 +92,7 @@
   </h3>
   <% if @results.present? %>
       <div style="height: 1px;"></div>
-      <h4><%= image_tag "sitesicon.png", class: "baricon" %>Sites <a href="#" style="padding-left:60px;"><%= image_tag "green_arrow_right_small.png", class:"green_arrow" %></a></h4>
+      <h4><%= image_tag "sitesicon.png", class: "baricon" %>Sites </h4>
       <div style="padding:1px"></div>
       <ul class="search-side">
         <%= form_tag(search_index_path, method: :get) do %>
@@ -145,7 +145,7 @@
         <% end %>
       </ul>
       <hr>
-      <h4><%= image_tag "variableicon.png", class: "baricon" %>Subtopics  <a href="#" style="padding-left:60px;"><%= image_tag "green_arrow_right_small.png", class:"green_arrow" %></a></h4>
+      <h4><%= image_tag "variableicon.png", class: "baricon" %>Subtopics </h4>
 
       <ul class="search-side">
         <%= form_tag(request.fullpath, method: :get) do %>
