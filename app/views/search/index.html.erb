@@ -98,20 +98,19 @@
         <%= form_tag(search_index_path, method: :get) do %>
             <%= hidden_field_tag :keywords, @search_term %>
             <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
-            <% @the_sites.each do |site| %>
-                <% @checked = "" %>
-                <% if @site_filters.nil? == false %>
-                    <% @site_filters.each do |site_filter| %>
-                        <% if site_filter == site %>
-                            <% @checked = "checked" %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-                <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>" <%= @checked %>> <%= site %> </li>
-            <% end %>
-            <% if @more_sites.present? %>
-                <li class="moresites"><b>Show More &#x25BC;</b></li>
-                <div class="more_items" style="display: none;">
+            <div class="filter_wrapper">
+              <% @the_sites.each do |site| %>
+                  <% @checked = "" %>
+                  <% if @site_filters.nil? == false %>
+                      <% @site_filters.each do |site_filter| %>
+                          <% if site_filter == site %>
+                              <% @checked = "checked" %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+                  <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>" <%= @checked %>> <%= site %> </li>
+              <% end %>
+                <div class="more_items">
                   <% @more_sites.each do |site| %>
 
                       <% @checked = "" %>
@@ -126,7 +125,7 @@
 
                   <% end %>
                 </div>
-            <% end %>
+            </div>
         <% end %>
 
       </ul>
@@ -151,18 +150,20 @@
         <%= form_tag(request.fullpath, method: :get) do %>
             <%= hidden_field_tag :keywords, @search_term %>
             <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
-            <% @variables.map do |variable| %>
-                <% @checked = "" %>
-                <% if @subtopic_filters.nil? == false %>
-                    <% @subtopic_filters.each do |subtopic| %>
-                        <% if subtopic == variable %>
-                            <% @checked = "checked" %>
-                        <% end %>
-                    <% end %>
-                <% end %>
-                <li><input type="checkbox" name="subtopic" class="triggerbox" value="<%= variable %>" <%= @checked %>> <%= variable %>
-                </li>
-            <% end %>
+            <div class="filter_wrapper">
+              <% @variables.map do |variable| %>
+                  <% @checked = "" %>
+                  <% if @subtopic_filters.nil? == false %>
+                      <% @subtopic_filters.each do |subtopic| %>
+                          <% if subtopic == variable %>
+                              <% @checked = "checked" %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+                  <li><input type="checkbox" name="subtopic" class="triggerbox" value="<%= variable %>" <%= @checked %>> <%= variable %>
+                  </li>
+              <% end %>
+            </div>
         <% end %>
       </ul>
 

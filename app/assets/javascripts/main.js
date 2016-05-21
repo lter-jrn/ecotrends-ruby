@@ -233,9 +233,9 @@ $(function () {
     }
 
     $(".moresites").click(function(e){
-	e.preventDefault();
-	$(this).parent().find(".more_items").show();
-	$(this).hide();
+	      e.preventDefault();
+	      $(this).parent().find(".more_items").show();
+	      $(this).hide();
     });
 
     $(".add-datastore").click(function(e){
