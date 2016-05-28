@@ -100,13 +100,11 @@ class SearchController < ApplicationController
   def metadata
     puts "Here are the Params: #{params}"
     if params[:dataset]
-
       begin
         doc = Nokogiri::XML(open(params[:dataset].to_s)) do |config|
           config.options = Nokogiri::XML::ParseOptions::NOERROR
         end
         @xml_hash = Hash.from_xml("<root>#{doc.to_s}</root>");
-        puts "here is the hash #{@xml_hash}"
       rescue => ex
         puts "error message : #{ex.message}"
       end

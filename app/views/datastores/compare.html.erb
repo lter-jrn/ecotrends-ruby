@@ -1,11 +1,10 @@
 <h1>Comparing Datasets</h1>
 <p><%= link_to "Back", search_index_path %> | <%= link_to "Print / Save PDF", "#", { id: "print-link"}   %>
   <i id="print-info" class="fa fa-info-circle fa-1" aria-hidden="true" title="If you would like to download a PDF please select 'Save as PDF' from your print preview window"></i>
-  <%= form_tag(comparison_path(params), method: :get, id: "formmy") do %><%= hidden_field_tag :docids, params["docids"] %> <%= hidden_field_tag :both_off %>Customize Chart: <input type="checkbox" name="shooby" id="shooby" value="show_plots" <%= "checked" if @show_plots.present?%>> Plot Points <input type="checkbox" name="shonby" id="shonby" value="show_lines" <%= "checked" if @show_lines.present?%>> Grid Lines | <%= link_to "Reset Both", comparison_path(docids: params[:docids]) %><% end %></p>
+  <%= form_tag(comparison_path(params), method: :get, id: "formmy") do %><%= hidden_field_tag :docids, params["docids"] %> <%= hidden_field_tag :both_off %>Customize Chart: <input type="checkbox" name="shooby" id="shooby" value="show_plots" class="chart-checkbox" <%= "checked" if @show_plots.present?%>> Plot Points <input type="checkbox" name="shonby" id="shonby" class="chart-checkbox" value="show_lines" <%= "checked" if @show_lines.present?%>> Grid Lines | <%= link_to "Reset Both", comparison_path(docids: params[:docids]) %><% end %></p>
 <% chart_width = (@data_length / 20) * 450 %>
 <% if chart_width < 900 %>
     <% chart_width = 900 %>
 <% end %>
 <% options = {width: chart_width, generateLegend: true, scaleShowGridLines: @show_lines.present?, pointDot: @show_plots.present?, bezierCurve:false} %>
 <%= line_chart @data, options %>
-

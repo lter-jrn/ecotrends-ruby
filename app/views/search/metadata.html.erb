@@ -49,6 +49,28 @@
             </td>
           </tr>
 
+          <!-- source url -->
+          <% if @xml_hash["root"]["eml"]["additionalMetadata"].nil? == false %>
+            <% @xml_hash["root"]["eml"]["additionalMetadata"].each do |meta_data| %>
+              <% if meta_data["metadata"]["sourceMetadataURLs"].nil? == false %>
+                <tr>
+                  <td class="tablehead-metadata" colspan="2">Source metadata</td>
+                </tr>
+                <% if meta_data["metadata"]["sourceMetadataURLs"]["sourceMetadataURL"].kind_of?(Array) == false %>
+                  <td class="citation" colspan="2">
+                    <%= link_to meta_data["metadata"]["sourceMetadataURLs"]["sourceMetadataURL"], meta_data["metadata"]["sourceMetadataURLs"]["sourceMetadataURL"] %>
+                  </td>
+                <% elsif meta_data["metadata"]["sourceMetadataURLs"]["sourceMetadataURL"].kind_of?(Array) == true %>
+                  <td class="citation" colspan="2">
+                  <% meta_data["metadata"]["sourceMetadataURLs"]["sourceMetadataURL"].each do |link| %>
+                    <%= link_to link, link%></br>
+                  <% end %>
+                  </td>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+
           <!-- data set owners -->
           <tr>
             <td colspan="2">

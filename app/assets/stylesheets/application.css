@@ -64,4 +64,14 @@
     padding:5px;
 }
 
+.add-to-datastore {
+  width: 600px;
+}
 
+.compairing-datasets {
+  width: 600px;
+}
+
+.chart-checkbox {
+  margin-top:0 !important;
+}

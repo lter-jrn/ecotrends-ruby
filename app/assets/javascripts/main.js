@@ -132,8 +132,7 @@ $(function () {
     	    }
     	}
     });
-    $("[name='shooby']").bootstrapSwitch({size: 'mini',
-					  onSwitchChange: function(event, state) {
+    $("#shooby").click(function(event) {
 					      if ($("#shonby").is(":checked")) {
 						  $("#both_off").val(false);
 					      }
@@ -141,11 +140,9 @@ $(function () {
 						  $("#both_off").val(true);
 					      }
 						  $("#formmy").submit();
-					      }
 					 });
 
-    $("[name='shonby']").bootstrapSwitch({size: 'mini',
-					  onSwitchChange: function(event, state) {
+    $("#shonby").click(function(event) {
 					      if ($("#shooby").is(":checked")) {
 						  $("#both_off").val(false);
 					      }
@@ -153,7 +150,6 @@ $(function () {
 						  $("#both_off").val(true);
 					      }
 						  $("#formmy").submit();
-					      }
 					 });
     var callSubmit = true;
 
