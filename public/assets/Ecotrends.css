@@ -1,0 +1,745 @@
+/**
+ * '$RCSfile$'
+ *  Copyright: 2007 University of New Mexico
+ * '$Author: mservilla $'
+ * '$Date: 2009-06-22 14:12:18 -0600 (Mon, 22 Jun 2009) $'
+ * '$Revision: 2532 $'
+ *
+ * This program is free software; you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation; either version 2 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Public License for more details.
+ *
+ * You should have received a copy of the GNU General Public License
+ * along with this program; if not, write to the Free Software
+ * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
+ */
+
+/* Set everything to zero for a good cross-browser starting point */
+html, body, ul, ol, li {
+	margin: 0;
+	padding: 0; /* Opera carries a default padding and requires this zeroing */
+	border: 0
+}
+
+body {
+	background-color: #fff;
+	background-image: url(../images/body_bg.jpg);
+	background-repeat: repeat-x;
+	color: #383412;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 100.01%;  /* see Note 1 */
+	min-width: 990px
+}
+
+#wrapper {
+	width: 990px;
+	/* centers the wrapper for compliant browsers. First value -
+	* 5px is applied to the top and bottom margins, auto sets
+	* the excess space on the view port evenly to the left and
+	* right */
+	margin: 5px auto;
+	position: relative;
+	background-image: url(../images/wrapper_bg.jpg);
+	background-repeat: repeat-y;
+	background-color: #fff;
+	border: 1px solid #000;
+	text-align: left
+}
+
+#printlogo {
+	display: none
+}
+
+#clientaccess a,
+#login a {
+	font-size: 60%;
+	color: #036;
+	float: right;
+	margin: 3px 10px 0px 0px
+}
+
+
+#policy {
+	background-color: #fff;
+	color: #036;
+	font-size: 80%;
+}
+
+
+#clientaccess a:hover,
+#clientaccess a:focus,
+#login a:hover,
+#login a:focus {
+	text-decoration: none;
+	color: #CDCDCD
+}
+
+
+/* Begin laying out the banner */
+#masthead {
+	background-image: url(../images/masthead.jpg);
+	background-repeat: no-repeat;
+	margin-top: 0px;
+	height: 161px;
+	position: relative /* See Note 2 */
+}
+
+
+/* Main content area */
+#content {
+	float: left;
+	margin: 0 0 20px 40px;
+	margin-right: -3px; /* prevents IE float drop */
+	width: 650px
+}
+
+#content h1 {
+	font-size: 125%;
+	color: #003366;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	padding: 2px 0 2px 10px;
+	margin: 10px 0px 0px 0px;
+	background-color: #F4F4F4;
+	border-left: 8px solid #E9C273
+}
+
+#content h2 {
+	font-size: 115%;
+	color: #003366;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	padding: 0px 0px 0px 3px;
+	margin: 20px 0px 0px 0px;
+	background-color: #F1EFE3
+}
+
+#content h3 {
+	font-size: 107%;
+	color: #003366;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	padding: 0px 0px 0px 3px;
+	margin: 20px 0 0 0;
+	background-color: #F1EFE3
+}
+
+#content h4 {
+	font-size: 100%;
+	color: #003366;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	padding: 0px 0px 0px 3px;
+	margin: 20px 0px 0px 0px;
+	background-color: #F1EFE3
+}
+
+#content p {
+	font-size: 80%;
+	margin: 12px 0px 0px 0px
+}
+
+#content ul, #content ol {
+	font-size: 80%;
+	margin: 12px 0px 0px 2px
+}
+
+#content li {
+	margin-left: 14px
+}
+
+#content a:link,
+#content a:visited {
+	color: #003366
+}
+#content a:hover,
+#content a:active,
+#content a:focus {
+	color: #ffffff;
+	background-color: #003366;
+	text-decoration: none
+}
+
+/* Generic float rules for our images in the content area */
+#content .left{
+	float: left;
+	border: 1px solid #000;
+	margin: 5px 12px 1px 0px;
+}
+
+#content .right {
+	float: right;
+	border: 1px solid #000;
+	margin: 5px 0px 1px 10px
+}
+
+#advsrch a:link,
+#advsrch a:active,
+#advsrch a:visited,
+#advsrch a:focus,
+#advsrch a:hover {
+	font-size: 75%;
+	color: #003366;
+	background-color: #F1EFE3;
+	text-decoration: none
+}
+
+
+/* Begin styling the navigation */
+#navbox {
+	width: 216px;
+	margin-bottom: 20px;
+	border: 1px solid #000
+}
+
+#navbox ul li {
+	line-height: 120%;
+	font-size: 80%
+}
+
+#navbox ul li ul li {
+	line-height: 120%;
+	font-size: 100%
+}
+
+#navbox ul li a {
+	text-decoration: none
+}
+
+/* Create the second column to hold the navigation */
+#leftcol {
+	display: inline; /* Fix for IE doubled margin */
+ 	float: left;
+ 	width: 227px;
+	margin-left: 14px;
+	margin-bottom: 20px
+}
+
+#leftcol img {
+	margin: 0 auto;
+	border: 1px solid #000
+}
+
+#sidebar h2 {
+	font-size: 100%;
+	color: #fff;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	font-weight: normal;
+	letter-spacing: .1px;
+	padding: 4px 10px;
+	margin: 10px 10px 0px 0px;
+	background-color: #415485
+}
+
+#sidebar p {
+	font-size: 80%;
+	margin: 12px 0px 0px 10px
+}
+
+#sidebar a:link, #sidebar a:visited {
+	color: #415485
+}
+
+#sidebar a:hover, #sidebar a:active, #sidebar a:focus {
+	color: #fff;
+	background-color: #415485;
+	text-decoration: none
+}
+  
+/* Begin laying out and styling the footer div */
+#footer {
+	background-color: #fff;
+	width: 990px;
+	border-top: 1px solid #000;
+	font-size: 60%;
+	margin-top: 20px;
+	clear: left /* See Note 3 */
+}
+
+.textRight {
+	text-align: right;
+}
+
+.textCenter {
+	text-align: center
+}
+
+#footer p {
+	background-color: #E4E4E4;
+	padding: 4px 4px 4px 10px;
+	margin: 0px 0px 0px 0px
+}
+
+#footer ul{
+	background-color: #A18E80;
+	margin: 0px 0px 0px 0px;
+	padding: 4px
+}
+
+#footer li{
+	display: inline
+}
+
+#footer a {
+	color: #fff;
+	text-decoration: underline
+}
+
+#footer a:hover,
+#footer a:focus {
+	text-decoration: none
+}
+
+#footer p a {
+	color: #383412;
+	text-decoration: underline
+}
+
+#footer p a:hover, #footer p a:focus {
+	color: #fff
+}
+
+/*
+ * Begin laying out the subcontent -
+ * This is the area below the main content that contains the two columns, the
+ * subcontent div is a container for the left and right divs.
+ */
+#subcontent {
+	margin: 25px 0px 0px 0px
+}
+
+#subcontent #left {
+	float: left;
+	width: 320px;
+	margin-bottom: 20px;
+	background-color: #F4F4F4;
+	padding: 10px 0px
+}
+
+#subcontent #right {
+	float: right;
+	width: 320px;
+	margin-bottom: 20px;
+	background-color: #F4F4F4;
+	padding: 10px 0px
+}
+#subcontent #basesubcontent {
+	clear: both;
+	display: block;
+	background-color: #F4F4F4;
+	padding: 10px
+}
+
+#subcontent h2 {
+	font-size: 110%;
+	color: #003366;
+	font-family: Arial, Verdana, Helvetica, sans-serif;
+	margin: 0px 0px 0px 0px;
+	background-color: transparent;
+	text-align: center
+}
+
+#subcontent p {
+	margin: 10px 10px 10px 10px
+}
+
+/* Begin laying out the login div */
+#login {
+	width: 150px;
+	padding: 0px;
+	margin: 0px 10px 0px 0px;
+	float: right;
+	display: inline;
+}
+
+#login fieldset {
+	border: none
+}
+
+#login form {
+	margin: 5px 0px 15px 0px;
+	font-size: 90%;
+	color: black
+}
+
+#login form input {
+	margin-bottom: 0px;
+	border: 1px solid #999;
+	width: 125px;
+	height: 20px;
+	margin: 0px 0px 5px 0px;
+	padding: 0px 0px 0px 0px;
+	align: center
+}
+
+#mastheadimage {
+	padding: 0px 0px 0px 255px;
+	display: inline;
+	margin: 0px 0px 0px 0px
+}
+
+#mastheadimage img {
+	padding-top: 12px
+}
+
+#wrapper .textCenter img {
+	margin-right: 18px;
+	margin-left: 18px
+}
+
+#footer .textCenter img {
+	margin-right: 10px;
+	margin-left: 10px
+}
+
+table {
+	font-size: 85%;
+	background-color: #fff;
+	border-collapse: collapse;
+	width: 100%;
+	line-height: 1.2em
+}
+
+caption {
+	font-size: 30px;
+	font-weight: bold;
+	color: #002084;
+	text-align: left;
+	padding: 10px 0px;
+	margin-bottom: 2px;
+	text-transform: capitalize
+}
+
+thead th {
+	border-right: 2px solid #fff;
+	color: #fff;
+	text-align: center;
+	padding: 2px;
+	height: 25px;
+	background-color: #415485
+}
+
+tfoot {
+	color: #002084;
+	padding: 2px;
+	text-transform: uppercase;
+	font-size: 1.2em; 
+	font-weigth: bold;
+	margin-top: 6px;
+	border-top: 6px solid #004080;
+	border-bottom: 6px solid #004080
+}
+
+tbody tr {
+	background-color: #fff;
+	border-bottom: 2px solid #c0c0c0
+}
+
+tbody td {
+	color: #333333;
+	padding: 5px;
+	text-align: left
+}
+
+tbody th {
+	text-align: left;
+	padding: 2px
+}
+
+tbody td a,
+tbody th a {
+	color: #002084;
+	text-decoration: underline;
+	font-weight: normal;
+}
+
+tbody td a:hover,
+tbody th a:hover {
+	text-decoration: none
+}
+
+/* Fading Tooltips By Dustin Diaz */
+body div#toolTip {
+	position: absolute;
+	z-index: 1000;
+	width: 220px;
+	background: #000;
+	border: 2px double #fff;
+	text-align: left;
+	padding: 5px;
+	min-height: 1em;
+	-moz-border-radius: 5px
+}
+
+body div#toolTip p {
+	margin: 0;
+	padding: 0;
+	color: #fff;
+	font: 11px/12px verdana,arial,sans-serif
+}
+
+body div#toolTip p em {
+	display: block;
+	margin-top: 3px;
+	color: #f60;
+	font-style: normal;
+	font-weight: bold
+}
+
+body div#toolTip p em span {
+	font-weight: bold;
+	color: #fff
+}
+
+/* Navigation */
+#primarynav,
+#primarynav ul {
+	margin: 0px 0px 0px 0px;
+	padding: 0px 0px 0px 0px;
+}
+
+#primarynav li {
+	text-decoration: none;
+	color: #CCCCCC;
+	line-height: 1;
+	border-top: 1px solid #0C2B47;
+	list-style: none;
+	margin:  0px 0px 0px 0px
+}
+#primarynav ul {
+	margin: 0px 0px 0px 0px;
+}
+#primarynav ul li {
+	font-size: 90%;
+	margin: 0px 0px 0px 0px;
+	list-style: none
+}
+
+#primarynav a {
+	display: block;
+	background-color: #1E71B5;
+	color: #FFFFFF;
+	padding: 4px 10px;
+	font-weight: bold
+}
+
+#primarynav ul a {
+	display: block;
+	background: #AEDBFF url(../images/nav_dots1.gif) 20px 50% no-repeat;
+	color: #000000;
+	padding: 4px 10px 4px 30px
+}
+
+#primarynav a:hover,
+#primarynav a:active,
+#primarynav a:focus {
+	color: #FFFFFF;
+	letter-spacing: .01px;
+	background-color: #0C2B47
+}
+
+body#homepg li#home a, 
+body#aboutpg li#about a, 
+/*body#datasetspg li#datasets a,*/ 
+body#searchpg li#byword a, 
+body#browsebysitepg li#bysite a, 
+body#browsebytopicpg li#bytopic a, 
+body#advancedsearchpg li#advsearch a, 
+body#datapolicypg li#datapolicy a, 
+body#particiatepg li#particiate a, 
+body#publicationspg li#publications a, 
+body#submitnewpg li#submitnew a,
+body#myaccountpg li#myaccount a,
+body#changepasswordpg li#changepassword a,
+body#profilepg li#profile a,
+body#acceptdeclinepg li#acceptdecline a,
+body#registrationpg li#registration a,
+body#logonpg li#logon a,
+body#workingsetpg li#workingset a,
+body#contactpg li#contact a {
+	background-color: #E9C273;
+	color: #000
+}
+
+body#homepg li#home a:hover, 
+body#aboutpg li#about a:hover, 
+body#datasetspg li#datasets a:hover, 
+body#searchpg li#byword a:hover, 
+body#browsebysitepg li#bysite a:hover, 
+body#browsebytopicpg li#bytopic a:hover, 
+body#advancedsearchpg li#advsearch a:hover, 
+body#datapolicypg li#datapolicy a:hover, 
+body#particiatepg li#particiate a:hover, 
+body#publicationspg li#publications a:hover, 
+body#submitnewpg li#submitnew a:hover,
+body#myaccountpg li#myaccount a:hover,
+body#changepasswordpg li#changepassword a:hover,
+body#profilepg li#profile a:hover,
+body#acceptdeclinepg li#acceptdecline a:hover,
+body#registrationpg li#registration a:hover,
+body#logonpg li#logon a:hover,
+body#workingsetpg li#workingset a:hover,
+body#contactpg li#contact a:hover {
+	background-color: #E9C273;
+	color: #000
+}
+
+.recentpublicationblock {
+	width: 300px;
+	background-color: #A4C8F3;
+	padding: 10px;
+	float: right
+}
+
+.clear {
+	clear: both;
+	height: 1px
+}
+
+.publicationstable img {
+	border:none
+}
+
+
+#content table {
+	color: #000000;
+    text-align: left
+}
+
+#content th {
+	font-size: 12px;
+	font-weight: bold;
+	text-align: left;
+	color: #000000;
+	background-color: #CCCC66
+}
+
+#content caption {
+	font-size: 30px;
+	font-weight: bold;
+	color: #002084;
+	text-align: left;
+	padding: 10px 0px;
+	margin-bottom: 2px;
+	text-transform: capitalize
+}
+
+#content thead th {
+	border-right: 2px solid #fff;
+	color: #fff;
+	text-align: center;
+	padding:2 px;
+	height: 25px;
+	background-color: #415485
+}
+
+#content tfoot {
+	color: #002084;
+	padding: 2px;
+	text-transform: uppercase;
+	font-size: 1.2em; 
+	font-weigth: bold;
+	margin-top: 6px;
+	border-top: 6px solid #004080;
+	border-bottom: 6px solid #004080
+}
+
+#content tbody tr {
+	background-color: #fff;
+	border-bottom: none
+}
+
+#content tbody td {
+	color: #333333;
+	padding: 5px;
+	text-align: left
+}
+
+#content tbody th {
+	text-align: left;
+	padding: 2px
+}
+
+#content tbody td a,
+tbody th a {
+	color: #002084;
+	text-decoration: underline;
+	font-weight: normal
+}
+
+#content tbody td a:hover,
+tbody th a:hover {
+	text-decoration: none
+}
+
+.searchcat {
+    padding-left: 5px;
+    color: #0247A8;
+    font-weight: bold;
+    font-size: 14px 
+}
+                    
+td.searchsubcat {
+    padding-left: 15px
+}
+
+.emphasis {
+    font-weight: bold;
+}
+
+p.attention {
+	font-weight: bold;
+	color: red;
+}
+
+#byKeyword .label, 
+#changepassword .label, 
+#dataset .label, 
+#feedback .label, 
+#logon .label, 
+#profile .label, 
+#registration .label,
+#resetpassword .label {
+    font-weight: bold;
+    text-align: right;
+}
+
+#dataset .centered
+{
+	text-align: center;
+}
+
+/*
+ * Note 1: Sets default font size. This odd value compensates for several
+ * browser bugs. First, setting a default font size in percent (instead of em)
+ * eliminates an IE/Win problem with growing or shrinking fonts out of
+ * proportion if they are later set in ems in other elements. Additionally, some
+ * versions of Opera will draw a default font-size of 100% too small compared to
+ * other browsers. Safari, on the other hand, has a problem with a font-size of
+ * 101%. Current "best" suggestion is to use the 100.01% value for this
+ * property.
+ */
+
+/*
+ * Note 2: (PLEASE READ) This position property and its relative value is not
+ * needed for your page to be rendered correctly in the browser - However,
+ * without it Dreamweaver allows the position of the leftcol div to ride up
+ * over the banner in design view. If that does not bother you you can safely
+ * delete this property and value pair. Alternatively you could implement a
+ * design time style sheet to position the div correctly for working in design
+ * view
+ */
+ 
+ /*
+  * Note 3: The leftcol div is outside the flow of the document and does not
+  * respect the footer; #leftcol would, if its content were great enough, extend
+  * through the bottom of the layout. The "clear left" ensures the footer is
+  * always kept further down than leftcol div, and our design remains intact.
+  * The content div is within the flow of the document and thus will always push
+  * the footer div down as its content dictates.
+  */
+ 
+

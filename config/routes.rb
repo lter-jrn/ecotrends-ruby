@@ -47,6 +47,8 @@ EcoTrends::Application.routes.draw do
 
   get "policies" => "home#policies"
 
+  get "participating-sites" => "home#participating"
+
 
   post 'contact' => 'contact_us#create'
 

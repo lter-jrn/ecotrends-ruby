@@ -84,6 +84,10 @@ class HomeController < ApplicationController
 
   end
 
+  def participating
+
+  end
+
   def contact
     @message = ContactUs.new
   end
