@@ -20,10 +20,37 @@
             <td class="tablehead-metadata" colspan="2">Dataset ciation</td>
           </tr>
           <tr>
-            <td class="citation" colspan="2">
-              <%= @xml_hash["root"]["eml"]["dataset"]["title"] %>
+            <td class="highlight-metadata" width="15%">
+              Publisher(s)
+            </td>
+            <td width="85%">
+              <ul>
+                <% @xml_hash["root"]["eml"]["dataset"]["creator"].each do |creator| %>
+
+
+                    <li>
+                      <% if creator["organizationName"].nil? != true %>
+                          <%= creator["organizationName"] %>
+                      <% else %>
+                          <%= "#{creator['individualName']['salutation']} #{creator['individualName']['givinName']} #{creator['individualName']['surName']}" %>
+                      <% end %>
+                    </li>
+
+                <% end %>
+              </ul>
             </td>
           </tr>
+          <tr>
+            <td class="highlight-metadata" width="15%">
+              Published Date
+            </td>
+            <td width="85%">
+              <ul>
+                <li><%= @xml_hash["root"]["eml"]["dataset"]["pubDate"] %></li>
+              </ul>
+            </td>
+          </tr>
+
           <tr>
             <td class="tablehead-metadata" colspan="2">Dataset ID</td>
           </tr>

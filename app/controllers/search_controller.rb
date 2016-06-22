@@ -63,6 +63,7 @@ class SearchController < ApplicationController
     ident_array = @data_record.docid.split('.')
     response = open("https://pasta.lternet.edu/package/data/eml/#{ident_array[0]}/#{ident_array[1]}/newest").read
 
+    doiResp = open("https://pasta.lternet.edu/package/doi/eml/#{ident_array[0]}/#{ident_array[1]}/#{ident_array[2]}").read
 
     @data_url = "https://pasta.lternet.edu/package/data/eml/#{ident_array[0]}/#{ident_array[1]}/newest/#{response}"
     @metadata_url = "https://pasta.lternet.edu/package/metadata/eml/#{ident_array[0]}/#{ident_array[1]}/newest"
