@@ -77,6 +77,7 @@
                   <% end %>
                   <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>" <%= @checked %>> <%= site %> </li>
               <% end %>
+                <% if @more_sites.present? %>
                 <div class="more_items">
                   <% @more_sites.each do |site| %>
 
@@ -92,6 +93,7 @@
 
                   <% end %>
                 </div>
+                <% end %>
             </div>
         <% end %>
 
@@ -254,6 +256,11 @@
         <% end %>
         <%= paginate @results %>
     <% else %>
+      <% if @search_params[:keywords].present? %>
+        <div class="alert alert-danger">
+          <strong>Sorry!</strong> The search that you preformed doesn't seem to yield any results. Try removing some of the keywords above or click the reset link. 
+        </div>
+      <% end %>
       <h3>Choose a location</h3>
       <ul class="ul-no-style">
         <div class="row">
