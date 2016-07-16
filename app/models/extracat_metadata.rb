@@ -47,8 +47,8 @@ class ExtracatMetadata < ActiveRecord::Base
       keyword_search = self
     end
 
-    if term_hash["variable_name"].present?
-      keyword_search = keyword_search.where("subtopic" => term_hash["subtopic"])
+    if term_hash["variable_filters"].present?
+      keyword_search = keyword_search.where("variable_name" => term_hash["variable_filters"])
     end
 
     if term_hash["subtopics"].present?

@@ -98,64 +98,93 @@
         <% end %>
 
       </ul>
-      <hr>
+      <% if @topics.present? %>
+        <hr>
+        <h4><%= image_tag "variableicon.png", class: "baricon" %>Topics </h4>
+        <ul class="search-side">
+          <%= form_tag(request.fullpath, method: :get) do %>
+              <%= hidden_field_tag :keywords, @search_term %>
+              <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
+              <div class="filter_wrapper">
+                <% @topics.each do |item| %>
+                    <a href='#' class='brows_topic' value='<%= item.topic %>'>
+            <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
+              <%= item.topic %><br/>
+            </span>
+                    </a>
+                <% end %>
+              </div>
+          <% end %>
+        </ul>
+      <% end %>
 
-      <h4><%= image_tag "calendar.png", class: "baricon" %><a href="#">Date Range</a></h4>
-
-      <ul class="search-side">
-        <%= form_tag(request.fullpath, method: :get) do %>
-            <%= hidden_field_tag :keywords, @search_term %>
-            <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
-            <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
-            <li>Min Date: <%= text_field_tag :min_date, @min_date, class: "datepicker" %></li>
-            <li>Max Date: <%= text_field_tag :max_date, @max_date, class: "datepicker" %></li>
-            <%= submit_tag %>
-        <% end %>
-      </ul>
-
-      <hr>
-      <h4><%= image_tag "variableicon.png", class: "baricon" %>Topics </h4>
-
-      <ul class="search-side">
-        <%= form_tag(request.fullpath, method: :get) do %>
-            <%= hidden_field_tag :keywords, @search_term %>
-            <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
-            <div class="filter_wrapper">
-              <% @topics.each do |item| %>
-                  <a href='#' class='brows_topic' value='<%= item.topic %>'>
-          <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
-            <%= item.topic %><br/>
-          </span>
-                  </a>
-              <% end %>
-            </div>
-        <% end %>
-      </ul>
-
+      <% if @sub_topics.present? %>
       <hr>
       <h4><%= image_tag "variableicon.png", class: "baricon" %>Subtopics </h4>
+        <ul class="search-side">
+          <%= form_tag(request.fullpath, method: :get) do %>
+              <%= hidden_field_tag :keywords, @search_term %>
+              <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
+              <div class="filter_wrapper">
+                <% @sub_topics.map do |stopic| %>
+                    <% @checked = "" %>
+                    <% if @subtopic_filters.nil? == false %>
+                        <% @subtopic_filters.each do |subtopic| %>
+                            <% if subtopic == stopic %>
+                                <% @checked = "checked" %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <li><input type="checkbox" name="subtopic" class="triggerbox" value="<%= stopic %>" <%= @checked %>> <%= stopic %>
+                    </li>
+                <% end %>
+              </div>
+          <% end %>
+        </ul>
+      <% end %>
 
-      <ul class="search-side">
-        <%= form_tag(request.fullpath, method: :get) do %>
-            <%= hidden_field_tag :keywords, @search_term %>
-            <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
-            <div class="filter_wrapper">
-              <% @variables.map do |variable| %>
-                  <% @checked = "" %>
-                  <% if @subtopic_filters.nil? == false %>
-                      <% @subtopic_filters.each do |subtopic| %>
-                          <% if subtopic == variable %>
-                              <% @checked = "checked" %>
-                          <% end %>
-                      <% end %>
-                  <% end %>
-                  <li><input type="checkbox" name="subtopic" class="triggerbox" value="<%= variable %>" <%= @checked %>> <%= variable %>
-                  </li>
-              <% end %>
-            </div>
-        <% end %>
-      </ul>
+      <% if @variable_names.present? %>
+        <hr>
+        <h4><%= image_tag "variableicon.png", class: "baricon" %>Variables </h4>
 
+        <ul class="search-side">
+          <%= form_tag(request.fullpath, method: :get) do %>
+              <%= hidden_field_tag :keywords, @search_term %>
+              <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
+              <div class="filter_wrapper">
+                <% @variable_names.map do |variable| %>
+                    <% @checked = "" %>
+                    <% if @variable_filtered.nil? == false %>
+                        <% @variable_filtered.each do |v| %>
+                            <% if v == variable %>
+                                <% @checked = "checked" %>
+                            <% end %>
+                        <% end %>
+                    <% end %>
+                    <li><input type="checkbox" name="variable" class="triggerbox" value="<%= variable %>" <%= @checked %>> <%= variable %>
+                    </li>
+                <% end %>
+              </div>
+          <% end %>
+        </ul>
+      <% end %>
+
+      <% if @min_date.present? and @max_date.present? %>
+        <hr>
+
+        <h4><%= image_tag "calendar.png", class: "baricon" %><a href="#">Date Range</a></h4>
+
+        <ul class="search-side">
+          <%= form_tag(request.fullpath, method: :get) do %>
+              <%= hidden_field_tag :keywords, @search_term %>
+              <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
+              <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
+              <li>Min Date: <%= text_field_tag :min_date, @min_date, class: "datepicker" %></li>
+              <li>Max Date: <%= text_field_tag :max_date, @max_date, class: "datepicker" %></li>
+              <%= submit_tag %>
+          <% end %>
+        </ul>
+      <% end %>
 
 </div> <!-- span -->
 
@@ -175,6 +204,7 @@
                 <%= hidden_field_tag :site_filters, params[:site_filters]%>
                 <%= hidden_field_tag :topic, params[:topic] %>
                 <%= hidden_field_tag :subtopics, params[:subtopics] %>
+                <%= hidden_field_tag :variable_filters, params[:variable_filters] %>
                 <%= submit_tag "Search", class: "btn btn-primary", id: "search-button" %>
             <% end %>
           </fieldset>
@@ -258,7 +288,7 @@
     <% else %>
       <% if @search_params[:keywords].present? %>
         <div class="alert alert-danger">
-          <strong>Sorry!</strong> The search that you preformed doesn't seem to yield any results. Try removing some of the keywords above or click the reset link. 
+          <strong>Sorry!</strong> The search that you preformed doesn't seem to yield any results. Try removing some of the keywords above or click the reset link.
         </div>
       <% end %>
       <h3>Choose a location</h3>

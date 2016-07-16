@@ -132,6 +132,7 @@ $(function () {
     	    }
     	}
     });
+
     $("#shooby").click(function(event) {
 					      if ($("#shonby").is(":checked")) {
 						  $("#both_off").val(false);
@@ -157,16 +158,19 @@ $(function () {
 
         var checkedSites = [];
         var checkedTopics = [];
+        var variables = [];
         $(".triggerbox").each(function(index){
 
             if(this.checked == true) {
                 if(this.name == "site")
-                    checkedSites.push(this.value);
-                else
-                    checkedTopics.push(this.value);
+                  checkedSites.push(this.value);
+                else if(this.name == "subtopic")
+                  checkedTopics.push(this.value);
+                else if(this.name == "variable")
+                  variables.push(this.value);
             }
         });
-
+        console.log("variables : ", variables);
         var fieldSites =  $("#site_filters");
         $(fieldSites).val("");
         for(var i = 0; i < checkedSites.length; i++) {
@@ -178,8 +182,6 @@ $(function () {
 
             $(fieldSites).val($(fieldSites).val() + value);
         }
-
-        console.log($(fieldSites).val());
 
         var fieldtopics =  $("#subtopics");
         $(fieldtopics).val("");
@@ -194,10 +196,20 @@ $(function () {
             $(fieldtopics).val($(fieldtopics).val() + value);
         }
 
-        console.log($(fieldtopics).val());
+        var vars =  $("#variable_filters");
+        $(vars).val("");
+        for(var i = 0; i < variables.length; i++) {
 
-        //if(callSubmit == true)
-	     //   this.form.submit();
+
+            var value = variables[i] + "-";
+
+            if(i == variables.length - 1)
+                value = variables[i];
+
+            $(vars).val($(vars).val() + value);
+        }
+
+
        $("#search-form").submit();
         callSubmit = true;
     });

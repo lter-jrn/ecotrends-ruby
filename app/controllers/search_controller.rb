@@ -32,23 +32,21 @@ class SearchController < ApplicationController
 
     @search = ExtracatMetadata.search(search_params)
 
-
-
-
     @items = ExtracatMetadata.group(:site, :site_name).select(:site, :site_name).order(:site_name => "ASC").to_a
     @topics = ExtracatMetadata.group(:topic).select(:topic).order(:topic => "ASC").to_a
     #starts here: Used to split the locations into groups of 20
     items, @items = @items.dup, []
     @items.push(items.shift(20)) until items.empty?
     # ends here
-    @variables = []
+    @variable_name = []
     @the_sites = []
     @sites_filtered = params[:site_filter].present? ? params[:site_filter].split() : []
     @subtopics_filtered = params[:subtopic].present? ? params[:subtopic].split("-") : []
     @topics_filtered = params[:topic].present? ? params[:topic].split("-") : []
-    @all_search_terms = params[:keywords]
+    @variable_filtered = params[:variable_filters].present? ? params[:variable_filters].split("-") : []
+    @all_search_terms = params[:keywords].present? ? params[:keywords] : []
     @search_params = search_params.except("page")
-    @total_search_count = 0
+    @total_search_count = @search.nil? ? 0 : @search.count
 
 
     unless @search.blank?
@@ -59,16 +57,18 @@ class SearchController < ApplicationController
       @raw_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
       @the_sites = @raw_sites.first(10)
       @more_sites = @raw_sites - @the_sites if @raw_sites.present?
-      @variables = ExtracatMetadata.search(search_params).map(&:subtopic).sort.uniq
+      @variable_names = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
+      @sub_topics = ExtracatMetadata.search(search_params).map(&:subtopic).sort.uniq
 
-      if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topics].present?
+      if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topics].present? and !params[:variable_filters].present?
         @results = nil
+        @total_search_count = 0
       end
 
-      @total_search_count = @results.nil? ? 0 : @results.count
+
 
     end
-    
+
   end
   def show
     @print = params[:print].present?
@@ -152,7 +152,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :search_term, :keywords, :page, :variable_name, :site, :min_date, :max_date, :site_filters, :topic, :subtopics)
+    params.permit(:site_name, :id, :search_term, :keywords, :page, :variable_filters, :site, :min_date, :max_date, :site_filters, :topic, :subtopics)
   end
 
   def search_setup
