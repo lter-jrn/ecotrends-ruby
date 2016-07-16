@@ -211,7 +211,6 @@ $(function () {
       keywords = keywords.replace(word+',', '');
       keywords = keywords.replace(','+word, '');
       keywords = keywords.replace(word, '');
-
       $('#keywords_field').val(keywords);
       $('#search-form').submit();
 

@@ -1,24 +1,20 @@
 <div class="span3" id="filter-container">
-  <h3>Browse
-    <small><%= link_to '<button type="button">Clear</button>'.html_safe, search_index_path %></small>
-  </h3>
+  <% if @results.present? %>
   <ul class='browse-by'>
     <li>
       <div class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <h4><%= image_tag "globeicon.png", class: "baricon" %>Browse by location</h4>
+          <h4><%= image_tag "globeicon.png", class: "baricon" %>Add a location</h4>
         </a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
           <div class="row">
             <div class="span10">
-              <div class="span2">
+              <div class="span3">
                 <li>
-                  <h4>Sites </h4>
-                  <span class="<%= "bold" if params[:site_filter].blank? %>" id="all_locations"><small>All</small></span><br/>
                   <% @items[0].each do |item| %>
                       <a href='#' class='location' value='<%= item.site_name %>'>
-		          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">
-                <%= item.site_name %><br/>
+              <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">
+                - <%= item.site_name %><br/>
 
               </span>
                       </a>
@@ -26,10 +22,10 @@
                 </li>
                 <li class="divider"></li>
               </div> <!-- span -->
-              <div class="span2">
+              <div class="span3">
                 <% @items[1].each do |item| %>
                     <a href='#' class='location' value='<%= item.site_name %>'>
-                        <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>"><%= item.site_name %>
+                        <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">- <%= item.site_name %>
                           <br/></span>
                     </a>
                 <% end %>
@@ -37,11 +33,11 @@
                 <li class="divider"></li>
               </div> <!-- span -->
 
-              <div class="span2">
+              <div class="span3">
                 <li>
                   <% @items[2].each do |item| %>
                       <a href='#' class='location' value='<%= item.site_name %>'>
-                          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>"><%= item.site_name %>
+                          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">- <%= item.site_name %>
                             <br/></span>
                       </a>
                   <% end %>
@@ -53,44 +49,15 @@
                 <li class="divider"></li>
               </div> <!-- span -->
 
-
-            </div> <!-- span -->
-          </div> <!-- row -->
-        </ul>
-      </div>
-    </li>
-    <li>
-      <div class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <h4><%= image_tag "topicicon.png", class: "baricon" %>Browse by Topic</h4>
-        </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <div class="row">
-            <div class="span4">
-              <div class="span2">
-                <li>
-                  <h4>Topics </h4>
-                  <span class="<%= "bold" if params[:topic].blank? %>" id="all_topics"><small>All</small></span><br/>
-                  <% @topics.each do |item| %>
-                      <a href='#' class='brows_topic' value='<%= item.topic %>'>
-		          <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
-                <%= item.topic %><br/>
-              </span>
-                      </a>
-                  <% end %>
-                </li>
-                <li class="divider"></li>
-              </div>
             </div> <!-- span -->
           </div> <!-- row -->
         </ul>
       </div>
     </li>
   </ul>
-  <h3>Filter Results
-    <small><%= link_to '<button type="button">Clear</button>'.html_safe, search_index_path %></small>
-  </h3>
-  <% if @results.present? %>
+  <hr>
+  <% end %>
+  <h4>Filter Results</h4>
       <div style="height: 1px;"></div>
       <h4><%= image_tag "sitesicon.png", class: "baricon" %>Sites </h4>
       <div style="padding:1px"></div>
@@ -143,6 +110,26 @@
             <%= submit_tag %>
         <% end %>
       </ul>
+
+      <hr>
+      <h4><%= image_tag "variableicon.png", class: "baricon" %>Topics </h4>
+
+      <ul class="search-side">
+        <%= form_tag(request.fullpath, method: :get) do %>
+            <%= hidden_field_tag :keywords, @search_term %>
+            <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
+            <div class="filter_wrapper">
+              <% @topics.each do |item| %>
+                  <a href='#' class='brows_topic' value='<%= item.topic %>'>
+          <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
+            <%= item.topic %><br/>
+          </span>
+                  </a>
+              <% end %>
+            </div>
+        <% end %>
+      </ul>
+
       <hr>
       <h4><%= image_tag "variableicon.png", class: "baricon" %>Subtopics </h4>
 
@@ -167,7 +154,6 @@
         <% end %>
       </ul>
 
-  <% end %>
 
 </div> <!-- span -->
 
@@ -176,7 +162,7 @@
     <div class="span9">
       <div class="row">
         <div style="padding-left:20px;" class="span3">
-          <h4>Search by keyword</h4>
+          <h4>Search by keyword <%= link_to '<button class="btn btn-link" id="reset-button" type="button">Reset</button>'.html_safe, search_index_path %></h4>
         </div> <!-- span -->
         <div style="margin-right: -20px; padding-top: 10px;" class="span6">
           <fieldset>
@@ -224,7 +210,7 @@
     <% if @results.present? %>
         <%= paginate @results %>
         <div class="span9">
-          <%= @results.count %> total results for: <%= @search_term %></br>
+          <%= @total_search_count %> results</br>
           <strong>Click to Compare</strong>
         </div>
         <%= form_tag('/comparison', method: :get) do %>
@@ -267,6 +253,55 @@
             <%= submit_tag "Compare Datasets" %>
         <% end %>
         <%= paginate @results %>
+    <% else %>
+      <h3>Choose a location</h3>
+      <ul class="ul-no-style">
+        <div class="row">
+          <div class="span10">
+            <div class="span3">
+              <li>
+                <% @items[0].each do |item| %>
+                    <a href='#' class='location' value='<%= item.site_name %>'>
+            <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">
+              - <%= item.site_name %><br/>
+
+            </span>
+                    </a>
+                <% end %>
+              </li>
+              <li class="divider"></li>
+            </div> <!-- span -->
+            <div class="span3">
+              <% @items[1].each do |item| %>
+                  <a href='#' class='location' value='<%= item.site_name %>'>
+                      <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">- <%= item.site_name %>
+                        <br/></span>
+                  </a>
+              <% end %>
+              </li>
+              <li class="divider"></li>
+            </div> <!-- span -->
+
+            <div class="span3">
+              <li>
+                <% @items[2].each do |item| %>
+                    <a href='#' class='location' value='<%= item.site_name %>'>
+                        <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">- <%= item.site_name %>
+                          <br/></span>
+                    </a>
+                <% end %>
+              </li>
+              <li class="divider"></li>
+            </div> <!-- span -->
+
+            <div class="span2">
+              <li class="divider"></li>
+            </div> <!-- span -->
+
+
+          </div> <!-- span -->
+        </div> <!-- row -->
+      </ul>
     <% end %>
 
 

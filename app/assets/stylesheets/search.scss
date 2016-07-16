@@ -3,6 +3,11 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .filter_wrapper {
-  height:320px;
+  max-height:200px;
+  min-height: 50px;
   overflow: auto;
+}
+
+.ul-no-style  {
+  list-style: none;
 }
