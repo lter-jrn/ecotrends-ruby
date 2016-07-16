@@ -60,6 +60,11 @@ class ExtracatMetadata < ActiveRecord::Base
       keyword_search = keyword_search.where("topic" => topic_array)
     end
 
+    if term_hash["biome"].present?
+      biome_array = term_hash["biome"].split("-")
+      keyword_search = keyword_search.where("biome" => biome_array)
+    end
+
 
     if term_hash["site_filters"].present?
       keyword_search = keyword_search.where("site_name" => term_hash["site_filters"].split(","))

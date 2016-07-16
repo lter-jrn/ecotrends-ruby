@@ -34,6 +34,7 @@ class SearchController < ApplicationController
 
     @items = ExtracatMetadata.group(:site, :site_name).select(:site, :site_name).order(:site_name => "ASC").to_a
     @topics = ExtracatMetadata.group(:topic).select(:topic).order(:topic => "ASC").to_a
+    @biome = ExtracatMetadata.group(:biome).select(:biome)
     #starts here: Used to split the locations into groups of 20
     items, @items = @items.dup, []
     @items.push(items.shift(20)) until items.empty?
@@ -43,6 +44,7 @@ class SearchController < ApplicationController
     @sites_filtered = params[:site_filter].present? ? params[:site_filter].split() : []
     @subtopics_filtered = params[:subtopic].present? ? params[:subtopic].split("-") : []
     @topics_filtered = params[:topic].present? ? params[:topic].split("-") : []
+    @biome_filtered = params[:biome].present? ? params[:biome].split("-") : []
     @variable_filtered = params[:variable_filters].present? ? params[:variable_filters].split("-") : []
     @all_search_terms = params[:keywords].present? ? params[:keywords] : []
     @search_params = search_params.except("page")
@@ -60,7 +62,7 @@ class SearchController < ApplicationController
       @variable_names = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
       @sub_topics = ExtracatMetadata.search(search_params).map(&:subtopic).sort.uniq
 
-      if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topics].present? and !params[:variable_filters].present?
+      if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topics].present? and !params[:variable_filters].present? and !params[:biome].present?
         @results = nil
         @total_search_count = 0
       end
@@ -152,7 +154,7 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :search_term, :keywords, :page, :variable_filters, :site, :min_date, :max_date, :site_filters, :topic, :subtopics)
+    params.permit(:site_name, :id, :search_term, :keywords, :page, :variable_filters, :site, :min_date, :max_date, :site_filters, :topic, :subtopics, :biome, :biome_filters)
   end
 
   def search_setup

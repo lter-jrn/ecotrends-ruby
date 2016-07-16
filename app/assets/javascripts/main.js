@@ -77,6 +77,36 @@ $(function () {
     	}
     });
 
+    $(".biome_link").click(function(e){
+    	e.preventDefault();
+
+    	if ($(this).hasClass("bold")) {
+    	    // single choice in string
+    	    var nuts = $("#biome").val().replace(String(this.id), "");
+    	    $("#biome").val(nuts);
+    	    console.log($("#biome").val().replace(String(this.id), ""));
+    	    if($("#biome").val() == ' ' || $("#biome").val() == ' ') {
+    		$("#all_biome").addClass("bold");
+    	    }
+    	    $(this).removeClass("bold");
+
+    	}
+    	else {
+    	    $(this).addClass("bold");
+    	    if ($("#biome").val() == '') {
+    		$("#all_biome").removeClass("bold");
+    		$("#biome").val(this.id);
+    	    }
+    	    else {
+    		console.log("i am here right " + this.id );
+    		var stuff = $("#biome").val() + "-" + this.id;
+    		$("#biome").val(stuff);
+    		console.log($("#biome"));
+    	    }
+    	}
+      $('#search-form').submit();
+    });
+
     $(".topic_link").click(function(e){
     	e.preventDefault();
 
