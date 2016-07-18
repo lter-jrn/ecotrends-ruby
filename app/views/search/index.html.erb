@@ -108,8 +108,15 @@
                 <% @biome.each do |item| %>
                     <% if item.biome.present?  %>
                     <a href='#' class='brows_biome' value='<%= item.biome %>'>
+                      <span>
+                        <% if @biome_filtered.include?(item.biome) %>
+                          -
+                        <% else %>
+                          +
+                        <% end %>
+                      </span>
                       <span class="biome_link <%= "bold" if @biome_filtered.include?(item.biome) %>" id="<%= item.biome %>">
-                        <%= @biome_filtered.include?(item.biome) ? "_" : "+" %><%= item.topic %><br/>
+                        <%= item.biome %><br/>
                       </span>
                     </a>
                     <% end %>
@@ -128,9 +135,16 @@
               <div class="filter_wrapper">
                 <% @topics.each do |item| %>
                     <a href='#' class='brows_topic' value='<%= item.topic %>'>
-            <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
-              <%= @topics_filtered.include?(item.topic) ? "-" : "+" %> <%= item.topic %><br/>
-            </span>
+                      <span>
+                        <% if @topics_filtered.include?(item.topic) %>
+                          -
+                        <% else %>
+                          +
+                        <% end %>
+                      </span>
+                      <span class="topic_link <%= "bold" if @topics_filtered.include?(item.topic) %>" id="<%= item.topic %>">
+                        <%= item.topic %><br/>
+                      </span>
                     </a>
                 <% end %>
               </div>
@@ -307,7 +321,7 @@
         <% end %>
         <%= paginate @results %>
     <% else %>
-      <% if @search_params[:keywords].present? %>
+      <% if @search_params[:keywords].present? || @topics_filtered.present? || @biome_filtered.present? || @variable_filtered.present?%>
         <div class="alert alert-danger">
           <strong>Sorry!</strong> The search that you preformed doesn't seem to yield any results. Try removing some of the keywords above or click the reset link.
         </div>

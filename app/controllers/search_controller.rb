@@ -33,7 +33,7 @@ class SearchController < ApplicationController
     @search = ExtracatMetadata.search(search_params)
 
     @items = ExtracatMetadata.group(:site, :site_name).select(:site, :site_name).order(:site_name => "ASC").to_a
-    @topics = ExtracatMetadata.group(:topic).select(:topic).order(:topic => "ASC").to_a
+    @topics = ExtracatMetadata.group(:topic).select(:topic)
     @biome = ExtracatMetadata.group(:biome).select(:biome)
     #starts here: Used to split the locations into groups of 20
     items, @items = @items.dup, []
@@ -62,7 +62,7 @@ class SearchController < ApplicationController
       @variable_names = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
       @sub_topics = ExtracatMetadata.search(search_params).map(&:subtopic).sort.uniq
 
-      if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topics].present? and !params[:variable_filters].present? and !params[:biome].present?
+      if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topic].present? and !params[:variable_filters].present? and !params[:biome].present?
         @results = nil
         @total_search_count = 0
       end
