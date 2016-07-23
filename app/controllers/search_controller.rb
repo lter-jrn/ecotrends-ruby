@@ -42,7 +42,7 @@ class SearchController < ApplicationController
     @the_sites = []
     @sites_filtered = params[:site_filter].present? ? params[:site_filter].split() : []
     @subtopics_filtered = params[:subtopic].present? ? params[:subtopic].split("-") : []
-    @topics_filtered = params[:topic].present? ? params[:topic].split("-") : []
+    @topics_filtered = params[:topics].present? ? params[:topics].split("-") : []
     @biome_filtered = params[:biome].present? ? params[:biome].split("-") : []
 
     @ecosystems_filtered = params[:ecosystems].present? ? params[:ecosystems].split("-") : []
@@ -67,7 +67,7 @@ class SearchController < ApplicationController
       @biome = ExtracatMetadata.search(search_params).map(&:biome).uniq
       @ecosystems = ExtracatMetadata.search(search_params).map(&:ecosystem).uniq
       @topics = ExtracatMetadata.search(search_params).map(&:topic).uniq
-      if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topic].present? and !params[:variable_filters].present? and !params[:biome].present? and !params[:ecosystems].present?
+      if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topics].present? and !params[:variable_filters].present? and !params[:biome].present? and !params[:ecosystems].present?
         @results = nil
         @total_search_count = 0
       end
@@ -173,7 +173,8 @@ class SearchController < ApplicationController
   private
 
   def search_params
-    params.permit(:site_name, :id, :search_term, :keywords, :page, :variable_filters, :site, :min_date, :max_date, :site_filters, :topic, :subtopics, :biome, :biome_filters, :ecosystems, :ecosytem_filters)
+    params.permit(:site_name, :id, :search_term, :keywords, :page, :variable_filters, :site, :min_date, :max_date, :site_filters, :topic,
+    :topics, :subtopics, :biome, :biome_filters, :ecosystems, :ecosytem_filters)
   end
 
   def search_setup

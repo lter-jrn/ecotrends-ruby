@@ -55,8 +55,8 @@ class ExtracatMetadata < ActiveRecord::Base
       keyword_search = keyword_search.where("subtopic" => term_hash["subtopics"].split("-"))
     end
 
-    if term_hash["topic"].present?
-      topic_array = term_hash["topic"].split("-")
+    if term_hash["topics"].present?
+      topic_array = term_hash["topics"].split("-")
       keyword_search = keyword_search.where("topic" => topic_array)
     end
 

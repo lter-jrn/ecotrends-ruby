@@ -214,7 +214,7 @@ $(function () {
     $(".triggerbox").change(function(){
 
         var checkedSites = [];
-        var checkedTopics = [];
+        var checkedSubTopics = [];
         var variables = [];
         var checkedEcosystems = [];
         var checkedBiome = [];
@@ -225,7 +225,7 @@ $(function () {
                 if(this.name == "site")
                   checkedSites.push(this.value);
                 else if(this.name == "subtopic")
-                  checkedTopics.push(this.value);
+                  checkedSubTopics.push(this.value);
                 else if(this.name == "variable")
                   variables.push(this.value);
                 else if(this.name == "ecosystem")
@@ -289,13 +289,13 @@ $(function () {
 
         var fieldtopics =  $("#subtopics");
         $(fieldtopics).val("");
-        for(var i = 0; i < checkedTopics.length; i++) {
+        for(var i = 0; i < checkedSubTopics.length; i++) {
 
 
-            var value = checkedTopics[i] + "-";
+            var value = checkedSubTopics[i] + "-";
 
-            if(i == checkedTopics.length - 1)
-                value = checkedTopics[i];
+            if(i == checkedSubTopics.length - 1)
+                value = checkedSubTopics[i];
 
             $(fieldtopics).val($(fieldtopics).val() + value);
         }
