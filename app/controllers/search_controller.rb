@@ -33,24 +33,7 @@ class SearchController < ApplicationController
     @search = ExtracatMetadata.search(search_params)
 
     @items = ExtracatMetadata.group(:site, :site_name).select(:site, :site_name).order(:site_name => "ASC").to_a
-    @topics = ExtracatMetadata.group(:topic).select(:topic)
 
-    @biome = []
-    ExtracatMetadata.group(:biome).select(:biome).each do |item|
-      if item and item.biome.present?
-        @biome.concat(item.biome.split('|'))
-      end
-    end
-    @biome = @biome.uniq
-
-    @ecosystems = []
-
-    ExtracatMetadata.group(:ecosystem).select(:ecosystem).each do |item|
-      if item and item.ecosystem.present?
-        @ecosystems << item.ecosystem
-      end
-    end
-    @ecosystems.uniq
     #starts here: Used to split the locations into groups of 20
     items, @items = @items.dup, []
     @items.push(items.shift(20)) until items.empty?
@@ -70,24 +53,41 @@ class SearchController < ApplicationController
     @total_search_count = @search.nil? ? 0 : @search.count
 
 
-    unless @search.blank?
+    if @search.blank? == false
       @results = @search.page(params[:page])
       @min_date = params[:min_date] || @search.map(&:begin_date).min
       @max_date = params[:max_date] || @search.map(&:end_date).max
       @search_term = params[:keywords]
+
       @raw_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
       @the_sites = @raw_sites.first(10)
       @more_sites = @raw_sites - @the_sites if @raw_sites.present?
       @variable_names = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
       @sub_topics = ExtracatMetadata.search(search_params).map(&:subtopic).sort.uniq
-    #  @biome = ExtracatMetadata.search(search_params).map(&:biome).uniq
+      @biome = ExtracatMetadata.search(search_params).map(&:biome).uniq
+      @ecosystems = ExtracatMetadata.search(search_params).map(&:ecosystem).uniq
+      @topics = ExtracatMetadata.search(search_params).map(&:topic).uniq
       if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topic].present? and !params[:variable_filters].present? and !params[:biome].present? and !params[:ecosystems].present?
         @results = nil
         @total_search_count = 0
       end
 
+    else
 
+      @search_term = params[:keywords]
+      @min_date = params[:min_date]
+      @max_date = params[:max_date]
+      @raw_sites = @sites_filtered
+      @the_sites = @raw_sites.first(10)
+      @more_sites = @raw_sites - @the_sites if @raw_sites.present?
+      @variable_names = @variable_filters
+      @sub_topics = @subtopics_filtered
+      @biome = @biome_filtered
+      @ecosystems = @ecosystems_filtered
+      @topics = @topics_filtered
 
+      @results = nil
+      @total_search_count = 0
     end
 
   end

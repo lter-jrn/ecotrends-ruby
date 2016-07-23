@@ -80,28 +80,27 @@ $(function () {
     $(".ecosystem_link").click(function(e){
     	e.preventDefault();
 
-    	if ($(this).hasClass("bold")) {
+    	if ($(this).hasClass("checked")) {
     	    // single choice in string
     	    var nuts = $("#ecosystems").val().replace(String(this.id), "");
     	    $("#ecosystems").val(nuts);
     	    console.log($("#ecosystems").val().replace(String(this.id), ""));
     	    if($("#ecosystems").val() == ' ' || $("#ecosystems").val() == ' ') {
-    		$("#all_ecosystems").addClass("bold");
+    		$("#all_ecosystems").addClass("checked");
     	    }
-    	    $(this).removeClass("bold");
+    	    $(this).removeClass("checked");
 
     	}
     	else {
-    	    $(this).addClass("bold");
-    	    if ($("#ecosystem").val() == '') {
-    		$("#all_ecosystems").removeClass("bold");
-    		$("#ecosystems").val(this.id);
-    	    }
-    	    else {
-    		console.log("i am here right " + this.id );
-    		var stuff = $("#ecosystems").val() + "-" + this.id;
-    		$("#ecosystems").val(stuff);
-    		console.log($("#ecosystem"));
+    	    $(this).addClass("checked");
+    	    if ($("#ecosystems").val() == '') {
+        		$("#all_ecosystems").removeClass("checked");
+        		$("#ecosystems").val(this.id);
+    	    } else {
+    		    console.log("i am here right " + this.id );
+        		var stuff = $("#ecosystems").val() + "-" + this.id;
+        		$("#ecosystems").val(stuff);
+        		console.log($("#ecosystem"));
     	    }
     	}
       $('#search-form').submit();
@@ -110,28 +109,27 @@ $(function () {
     $(".biome_link").click(function(e){
     	e.preventDefault();
 
-    	if ($(this).hasClass("bold")) {
+    	if ($(this).hasClass("checked")) {
     	    // single choice in string
     	    var nuts = $("#biome").val().replace(String(this.id), "");
     	    $("#biome").val(nuts);
     	    console.log($("#biome").val().replace(String(this.id), ""));
     	    if($("#biome").val() == ' ' || $("#biome").val() == ' ') {
-    		$("#all_biome").addClass("bold");
+    		$("#all_biome").addClass("checked");
     	    }
-    	    $(this).removeClass("bold");
+    	    $(this).removeClass("checked");
 
     	}
     	else {
-    	    $(this).addClass("bold");
+    	    $(this).addClass("checked");
     	    if ($("#biome").val() == '') {
-    		$("#all_biome").removeClass("bold");
-    		$("#biome").val(this.id);
-    	    }
-    	    else {
-    		console.log("i am here right " + this.id );
-    		var stuff = $("#biome").val() + "-" + this.id;
-    		$("#biome").val(stuff);
-    		console.log($("#biome"));
+    		      $("#all_biome").removeClass("checked");
+    		        $("#biome").val(this.id);
+    	    } else {
+    		    console.log("i am here right " + this.id );
+    		    var stuff = $("#biome").val() + "-" + this.id;
+    		    $("#biome").val(stuff);
+    		    console.log($("#biome"));
     	    }
     	}
       $('#search-form').submit();
@@ -140,28 +138,27 @@ $(function () {
     $(".topic_link").click(function(e){
     	e.preventDefault();
 
-    	if ($(this).hasClass("bold")) {
+    	if ($(this).hasClass("checked")) {
     	    // single choice in string
     	    var nuts = $("#topic").val().replace(String(this.id), "");
     	    $("#topic").val(nuts);
     	    console.log($("#topic").val().replace(String(this.id), ""));
     	    if($("#topic").val() == ' ' || $("#topic").val() == ' ') {
-    		$("#all_topics").addClass("bold");
+    		    $("#all_topics").addClass("checked");
     	    }
-    	    $(this).removeClass("bold");
+    	    $(this).removeClass("checked");
 
     	}
     	else {
-    	    $(this).addClass("bold");
+    	    $(this).addClass("checked");
     	    if ($("#topic").val() == '') {
-    		$("#all_topics").removeClass("bold");
-    		$("#topic").val(this.id);
-    	    }
-    	    else {
-    		console.log("i am here right " + this.id );
-    		var stuff = $("#topic").val() + "-" + this.id;
-    		$("#topic").val(stuff);
-    		console.log($("#topic"));
+    		    $("#all_topics").removeClass("checked");
+    		    $("#topic").val(this.id);
+    	    } else {
+    		    console.log("i am here right " + this.id );
+        		var stuff = $("#topic").val() + "-" + this.id;
+        		$("#topic").val(stuff);
+        		console.log($("#topic"));
     	    }
     	}
       $('#search-form').submit();
@@ -219,6 +216,9 @@ $(function () {
         var checkedSites = [];
         var checkedTopics = [];
         var variables = [];
+        var checkedEcosystems = [];
+        var checkedBiome = [];
+        var checkedTopics = [];
         $(".triggerbox").each(function(index){
 
             if(this.checked == true) {
@@ -228,9 +228,15 @@ $(function () {
                   checkedTopics.push(this.value);
                 else if(this.name == "variable")
                   variables.push(this.value);
+                else if(this.name == "ecosystem")
+                  checkedEcosystems.push(this.value);
+                else if(this.name == "biome")
+                  checkedBiome.push(this.value);
+                else if(this.name == "topic")
+                  checkedTopics.push(this.value);
             }
         });
-        console.log("variables : ", variables);
+
         var fieldSites =  $("#site_filters");
         $(fieldSites).val("");
         for(var i = 0; i < checkedSites.length; i++) {
@@ -241,6 +247,44 @@ $(function () {
             }
 
             $(fieldSites).val($(fieldSites).val() + value);
+        }
+
+        var ecoItems =  $("#ecosystems");
+        $(ecoItems).val("");
+        for(var i = 0; i < checkedEcosystems.length; i++) {
+
+
+            var value = checkedEcosystems[i] + "-";
+
+            if(i == checkedEcosystems.length - 1)
+                value = checkedEcosystems[i];
+
+            $(ecoItems).val($(ecoItems).val() + value);
+        }
+
+        var biomeItems =  $("#biome");
+        $(biomeItems).val("");
+        for(var i = 0; i < checkedBiome.length; i++) {
+
+
+            var value = checkedBiome[i] + "-";
+
+            if(i == checkedBiome.length - 1)
+                value = checkedBiome[i];
+
+            $(biomeItems).val($(biomeItems).val() + value);
+        }
+        var topicItems =  $("#topics");
+        $(topicItems).val("");
+        for(var i = 0; i < checkedTopics.length; i++) {
+
+
+            var value = checkedTopics[i] + "-";
+
+            if(i == checkedTopics.length - 1)
+                value = checkedTopics[i];
+
+            $(topicItems).val($(topicItems).val() + value);
         }
 
         var fieldtopics =  $("#subtopics");
