@@ -77,6 +77,36 @@ $(function () {
     	}
     });
 
+    $(".ecosystem_link").click(function(e){
+    	e.preventDefault();
+
+    	if ($(this).hasClass("bold")) {
+    	    // single choice in string
+    	    var nuts = $("#ecosystems").val().replace(String(this.id), "");
+    	    $("#ecosystems").val(nuts);
+    	    console.log($("#ecosystems").val().replace(String(this.id), ""));
+    	    if($("#ecosystems").val() == ' ' || $("#ecosystems").val() == ' ') {
+    		$("#all_ecosystems").addClass("bold");
+    	    }
+    	    $(this).removeClass("bold");
+
+    	}
+    	else {
+    	    $(this).addClass("bold");
+    	    if ($("#ecosystem").val() == '') {
+    		$("#all_ecosystems").removeClass("bold");
+    		$("#ecosystems").val(this.id);
+    	    }
+    	    else {
+    		console.log("i am here right " + this.id );
+    		var stuff = $("#ecosystems").val() + "-" + this.id;
+    		$("#ecosystems").val(stuff);
+    		console.log($("#ecosystem"));
+    	    }
+    	}
+      $('#search-form').submit();
+    });
+
     $(".biome_link").click(function(e){
     	e.preventDefault();
 

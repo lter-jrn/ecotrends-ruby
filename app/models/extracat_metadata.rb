@@ -60,6 +60,11 @@ class ExtracatMetadata < ActiveRecord::Base
       keyword_search = keyword_search.where("topic" => topic_array)
     end
 
+    if term_hash["ecosystems"].present?
+      ecosystems_array = term_hash["ecosystems"].split("-")
+      keyword_search = keyword_search.where("ecosystem" => ecosystems_array)
+    end
+
     if term_hash["biome"].present?
       biome_array = term_hash["biome"].split("-")
       keyword_search = keyword_search.where("biome" => biome_array)

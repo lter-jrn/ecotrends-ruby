@@ -97,6 +97,36 @@
             </div>
         <% end %>
       </ul>
+
+      <% if @ecosystems.present? %>
+        <hr>
+        <h4><%= image_tag "variableicon.png", class: "baricon" %>Ecosystems </h4>
+        <ul class="search-side">
+          <%= form_tag(request.fullpath, method: :get) do %>
+              <%= hidden_field_tag :keywords, @search_term %>
+              <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
+              <div class="filter_wrapper">
+                <% @ecosystems.each do |item| %>
+                    <% if item.present?  %>
+                    <a href='#' class='brows_ecosystem' value='<%= item %>'>
+                      <span>
+                        <% if @ecosystems_filtered.include?(item) %>
+                          -
+                        <% else %>
+                          +
+                        <% end %>
+                      </span>
+                      <span class="ecosystem_link <%= "bold" if @ecosystems_filtered.include?(item) %>" id="<%= item %>">
+                        <%= item %><br/>
+                      </span>
+                    </a>
+                    <% end %>
+                <% end %>
+              </div>
+          <% end %>
+        </ul>
+      <% end %>
+
       <% if @biome.present? %>
         <hr>
         <h4><%= image_tag "variableicon.png", class: "baricon" %>Biome </h4>
@@ -106,17 +136,17 @@
               <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
               <div class="filter_wrapper">
                 <% @biome.each do |item| %>
-                    <% if item.biome.present?  %>
-                    <a href='#' class='brows_biome' value='<%= item.biome %>'>
+                    <% if item.present?  %>
+                    <a href='#' class='brows_biome' value='<%= item %>'>
                       <span>
-                        <% if @biome_filtered.include?(item.biome) %>
+                        <% if @biome_filtered.include?(item) %>
                           -
                         <% else %>
                           +
                         <% end %>
                       </span>
-                      <span class="biome_link <%= "bold" if @biome_filtered.include?(item.biome) %>" id="<%= item.biome %>">
-                        <%= item.biome %><br/>
+                      <span class="biome_link <%= "bold" if @biome_filtered.include?(item) %>" id="<%= item %>">
+                        <%= item %><br/>
                       </span>
                     </a>
                     <% end %>
@@ -240,6 +270,7 @@
                 <%= hidden_field_tag :subtopics, params[:subtopics] %>
                 <%= hidden_field_tag :variable_filters, params[:variable_filters] %>
                 <%= hidden_field_tag :biome, params[:biome] %>
+                <%= hidden_field_tag :ecosystems, params[:ecosystems] %>
                 <%= submit_tag "Search", class: "btn btn-primary", id: "search-button" %>
             <% end %>
           </fieldset>
