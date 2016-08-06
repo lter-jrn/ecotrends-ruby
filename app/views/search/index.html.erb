@@ -1,73 +1,28 @@
 <div class="span3" id="filter-container">
-  <% if @results.present? %>
-  <ul class='browse-by'>
-    <li>
-      <div class="dropdown">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-          <h4><%= image_tag "globeicon.png", class: "baricon" %>Add a location</h4>
-        </a>
-        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-          <div class="row">
-            <div class="span10">
-              <div class="span3">
-                <li>
-                  <% @items[0].each do |item| %>
-                      <a href='#' class='location' value='<%= item.site_name %>'>
-              <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">
-                - <%= item.site_name %><br/>
-
-              </span>
-                      </a>
+  <% if @the_sites.present? %>
+  <div style="height: 1px;"></div>
+  <h4><%= image_tag "sitesicon.png", class: "baricon" %>Add a site </h4>
+  <div style="padding:1px"></div>
+  <ul class="search-side">
+    <%= form_tag(search_index_path, method: :get) do %>
+        <%= hidden_field_tag :keywords, @search_term %>
+        <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
+        <div class="filter_wrapper">
+          <% @the_sites.each do |site| %>
+              <% @checked = "" %>
+              <% if @site_filters.nil? == false %>
+                  <% @site_filters.each do |site_filter| %>
+                      <% if site_filter == site %>
+                          <% @checked = "checked" %>
+                      <% end %>
                   <% end %>
-                </li>
-                <li class="divider"></li>
-              </div> <!-- span -->
-              <div class="span3">
-                <% @items[1].each do |item| %>
-                    <a href='#' class='location' value='<%= item.site_name %>'>
-                        <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">- <%= item.site_name %>
-                          <br/></span>
-                    </a>
-                <% end %>
-                </li>
-                <li class="divider"></li>
-              </div> <!-- span -->
+              <% end %>
+              <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>" <%= @checked %>> <%= site %> </li>
+          <% end %>
+            <% if @more_sites.present? %>
+            <div class="more_items">
+              <% @more_sites.each do |site| %>
 
-              <div class="span3">
-                <li>
-                  <% @items[2].each do |item| %>
-                      <a href='#' class='location' value='<%= item.site_name %>'>
-                          <span class="location_link <%= "bold" if @sites_filtered.include?(item.site) %>" id="<%= item.site %>">- <%= item.site_name %>
-                            <br/></span>
-                      </a>
-                  <% end %>
-                </li>
-                <li class="divider"></li>
-              </div> <!-- span -->
-
-              <div class="span2">
-                <li class="divider"></li>
-              </div> <!-- span -->
-
-            </div> <!-- span -->
-          </div> <!-- row -->
-        </ul>
-      </div>
-    </li>
-  </ul>
-  <hr>
-  <% end %>
-  <h4>Filter Results</h4>
-      <% if @the_sites.present? %>
-      <div style="height: 1px;"></div>
-      <h4><%= image_tag "sitesicon.png", class: "baricon" %>Sites </h4>
-      <div style="padding:1px"></div>
-      <ul class="search-side">
-        <%= form_tag(search_index_path, method: :get) do %>
-            <%= hidden_field_tag :keywords, @search_term %>
-            <%= hidden_field_tag :variable_name, @variables if params[:variable_name].present? %>
-            <div class="filter_wrapper">
-              <% @the_sites.each do |site| %>
                   <% @checked = "" %>
                   <% if @site_filters.nil? == false %>
                       <% @site_filters.each do |site_filter| %>
@@ -77,30 +32,17 @@
                       <% end %>
                   <% end %>
                   <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>" <%= @checked %>> <%= site %> </li>
+
               <% end %>
-                <% if @more_sites.present? %>
-                <div class="more_items">
-                  <% @more_sites.each do |site| %>
-
-                      <% @checked = "" %>
-                      <% if @site_filters.nil? == false %>
-                          <% @site_filters.each do |site_filter| %>
-                              <% if site_filter == site %>
-                                  <% @checked = "checked" %>
-                              <% end %>
-                          <% end %>
-                      <% end %>
-                      <li><input type="checkbox" name="site" class="triggerbox" value="<%= site %>" <%= @checked %>> <%= site %> </li>
-
-                  <% end %>
-                </div>
-                <% end %>
             </div>
-        <% end %>
-      </ul>
-      <hr>
-      <% end %>
-
+            <% end %>
+        </div>
+    <% end %>
+  </ul>
+  <hr>
+  <% end %>
+  <h4>Filter Results</h4>
+  <hr>
       <% if @ecosystems.present? %>
         <h4><%= image_tag "variableicon.png", class: "baricon" %>Ecosystems </h4>
         <ul class="search-side">
@@ -108,19 +50,28 @@
               <%= hidden_field_tag :keywords, @search_term %>
               <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
               <div class="filter_wrapper">
-                <% @ecosystems.each do |item| %>
-                    <% if item.present? and item != "" %>
+                <% @all_ecosystems.each do |eco_item| %>
+                    <% @disabled = "disabled" %>
                     <% @checked = "" %>
-                    <% if @ecosystems_filtered.nil? == false %>
-                        <% @ecosystems_filtered.each do |item_filter| %>
-                            <% if item_filter == item %>
-                                <% @checked = "checked" %>
-                            <% end %>
+                    <% @ecosystems.each do |item| %>
+                        <% if item.present? and item != "" %>
+                          <% if eco_item == item %>
+                            <% @disabled = "" %>
+                          <% end %>
                         <% end %>
-                    <% end %>
-                    <li><input type="checkbox" name="ecosystem" class="triggerbox" value="<%= item %>" <%= @checked %>> <%= item %> </li>
-                    <% end %>
+                  <% end %>
+
+                  <% if @ecosystems_filtered.nil? == false %>
+                      <% @ecosystems_filtered.each do |item_filter| %>
+                          <% if item_filter == eco_item %>
+                              <% @checked = "checked" %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+                  <li> <div class="checkbox-trigger"><input type="checkbox" name="ecosystem" id="ecosystem_input" class="triggerbox" value="<%= eco_item %>" <%= @checked %> <%= @disabled %> ><label for="ecosystem_input" class="checkbox-label <%= "checkbox-#{@disabled}" %>"><%= eco_item %></label></div>
+                  </li>
                 <% end %>
+
               </div>
           <% end %>
         </ul>
@@ -134,20 +85,25 @@
               <%= hidden_field_tag :keywords, @search_term %>
               <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
               <div class="filter_wrapper">
-
-                <% @biome.each do |item| %>
-                    <% if item.present? and item != "" %>
-                    <% @checked = "" %>
-                    <% if @biome_filtered.nil? == false %>
-                        <% @biome_filtered.each do |item_filter| %>
-                            <% if item_filter == item %>
-                                <% @checked = "checked" %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                    <li><input type="checkbox" name="biome" class="triggerbox" value="<%= item %>" <%= @checked %>> <%= item %> </li>
-                    <% end %>
+                <% @all_biome.each do |biome_item| %>
+                  <% @disabled = "disabled" %>
+                  <% @checked = "" %>
+                  <% @biome.each do |item| %>
+                      <% if biome_item == item %>
+                        <% @disabled = "" %>
+                      <% end %>
+                  <% end %>
+                  <% if @biome_filtered.nil? == false %>
+                      <% @biome_filtered.each do |item_filter| %>
+                          <% if item_filter == biome_item %>
+                              <% @checked = "checked" %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+                  <li> <div class="checkbox-trigger"><input type="checkbox" name="biome" id="biome_input" class="triggerbox" value="<%= biome_item %>" <%= @checked %> <%= @disabled %> ><label for="biome_input" class="checkbox-label <%= "checkbox-#{@disabled}" %>"><%= biome_item %></label></div>
+                  </li>
                 <% end %>
+
               </div>
           <% end %>
         </ul>
@@ -160,20 +116,27 @@
               <%= hidden_field_tag :keywords, @search_term %>
               <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
               <div class="filter_wrapper">
+                <% @all_topics.each do |topic_item| %>
+                  <% @checked = "" %>
+                  <% @disabled = "disabled" %>
+                  <% @topics.each do |item| %>
+                    <% if topic_item.topic == item %>
+                      <% @disabled = "" %>
+                    <% end %>
+                  <% end %>
 
-                <% @topics.each do |item| %>
-                    <% if item.present? and item != "" %>
-                    <% @checked = "" %>
-                    <% if @topics_filtered.nil? == false %>
-                        <% @topics_filtered.each do |item_filter| %>
-                            <% if item_filter == item %>
-                                <% @checked = "checked" %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                    <li><input type="checkbox" name="topic" class="triggerbox" value="<%= item %>" <%= @checked %>> <%= item %> </li>
-                    <% end %>
+                  <% if @topics_filtered.nil? == false %>
+                      <% @topics_filtered.each do |item_filter| %>
+                          <% if item_filter == topic_item %>
+                              <% @checked = "checked" %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+
+                  <li> <div class="checkbox-trigger"><input type="checkbox" name="topic" id="topic_input" class="triggerbox" value="<%= topic_item.topic %>" <%= @checked %> <%= @disabled %> ><label for="topic_input" class="checkbox-label <%= "checkbox-#{@disabled}" %>"><%= topic_item.topic %></label></div>
+                  </li>
                 <% end %>
+
               </div>
           <% end %>
         </ul>
@@ -187,17 +150,24 @@
               <%= hidden_field_tag :keywords, @search_term %>
               <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
               <div class="filter_wrapper">
-                <% @sub_topics.map do |stopic| %>
-                    <% @checked = "" %>
-                    <% if @subtopic_filters.nil? == false %>
-                        <% @subtopic_filters.each do |subtopic| %>
-                            <% if subtopic == stopic %>
-                                <% @checked = "checked" %>
-                            <% end %>
-                        <% end %>
+                <% @all_sub_topics.map do |stopic| %>
+                  <% @checked = "" %>
+                  <% @disabled = "disabled" %>
+                  <% @sub_topics.map do |sstopic| %>
+                    <% if stopic == sstopic %>
+                      <% @disabled = "" %>
                     <% end %>
-                    <li><input type="checkbox" name="subtopic" class="triggerbox" value="<%= stopic %>" <%= @checked %>> <%= stopic %>
-                    </li>
+                  <% end %>
+                  <% if @subtopic_filters.nil? == false %>
+                      <% @subtopic_filters.each do |subtopic| %>
+                          <% if subtopic == stopic %>
+                              <% @checked = "checked" %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+                  <li> <div class="checkbox-trigger"><input type="checkbox" name="subtopic" id="suptopic_input" class="triggerbox" value="<%= stopic %>" <%= @checked %> <%= @disabled %> ><label for="suptopic_input" class="checkbox-label <%= "checkbox-#{@disabled}" %>"><%= stopic %></label></div>
+                  </li>
+
                 <% end %>
               </div>
           <% end %>
@@ -213,17 +183,26 @@
               <%= hidden_field_tag :keywords, @search_term %>
               <%= hidden_field_tag :site, params[:site] if params[:site].present? %>
               <div class="filter_wrapper">
-                <% @variable_names.map do |variable| %>
-                    <% @checked = "" %>
-                    <% if @variable_filtered.nil? == false %>
-                        <% @variable_filtered.each do |v| %>
-                            <% if v == variable %>
-                                <% @checked = "checked" %>
-                            <% end %>
-                        <% end %>
-                    <% end %>
-                    <li><input type="checkbox" name="variable" class="triggerbox" value="<%= variable %>" <%= @checked %>> <%= variable %>
-                    </li>
+                <% @all_variables.each do |variable_item| %>
+                  <% @checked = "" %>
+                  <% @disabled = "disabled" %>
+                  <% @variable_names.map do |variable| %>
+                      <% if variable_item == variable %>
+                        <% @disabled = "" %>
+                      <% end %>
+                  <% end %>
+
+                  <% if @variable_filtered.nil? == false %>
+                      <% @variable_filtered.each do |v| %>
+                          <% if v == variable_item %>
+                              <% @checked = "checked" %>
+                          <% end %>
+                      <% end %>
+                  <% end %>
+
+
+                  <li> <div class="checkbox-trigger"><input type="checkbox" name="variable" id="variable-item" class="triggerbox" value="<%= variable_item %>" <%= @checked %> <%= @disabled %> ><label for="variable-item" class="checkbox-label <%= "checkbox-#{@disabled}" %>"><%= variable_item %></label></div>
+                  </li>
                 <% end %>
               </div>
           <% end %>

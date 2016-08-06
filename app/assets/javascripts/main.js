@@ -66,14 +66,14 @@ $(function () {
     	}
     	else {
     	    $(this).addClass("bold");
-    	    if ($("#site_filter").val() == '') {
-    		      $("#all_locations").removeClass("bold");
-    		      $("#site_filter").val(this.id);
-    	    }
-    	    else {
-    		      var stuff = $("#site_filter").val() + " " + this.id;
-    		      $("#site_filter").val(stuff);
-    	    }
+    	    // if ($("#site_filter").val() == '') {
+    		  //     $("#all_locations").removeClass("bold");
+    		  //     $("#site_filter").val(this.id);
+    	    // }
+    	    // else {
+    		  //     var stuff = $("#site_filter").val() + " " + this.id;
+    		  //     $("#site_filter").val(stuff);
+    	    // }
     	}
     });
 
@@ -372,17 +372,11 @@ $(function () {
         var word = $(this).attr("value").trim();
         var keywords = $('#keywords_field').val()
 
-        if(keywords.includes(word) == false) {
-          if(keywords.length == 0) {
-            keywords = word;
-          } else {
-              keywords += (','+word);
-          }
+        var fieldSites =  $("#site_filters");
+        $(fieldSites).val(word);
 
-        }
-
-        $('#keywords_field').val(keywords);
-        $('#search-form').submit();
+        $("#search-form").submit();
+         callSubmit = true;
     });
 
     $("#print-info").tooltip();

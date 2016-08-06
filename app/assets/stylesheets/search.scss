@@ -11,3 +11,30 @@
 .ul-no-style  {
   list-style: none;
 }
+
+.checkbox-trigger {
+  width:200px;
+  display:flex;
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+
+
+input {
+  font-size:12px;
+}
+input[type="checkbox"] {
+  width:15px;
+  height:15px;
+  min-width: 15px;
+  min-height: 15px;
+}
+input[type="checkbox"] + label {
+  font-size:12px;
+}
+
+input[type="checkbox"]:disabled+label {
+  font-size:12px;
+  color:#ecedea;
+}

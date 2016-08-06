@@ -43,15 +43,48 @@ class SearchController < ApplicationController
     @sites_filtered = params[:site_filter].present? ? params[:site_filter].split() : []
     @subtopics_filtered = params[:subtopic].present? ? params[:subtopic].split("-") : []
     @topics_filtered = params[:topics].present? ? params[:topics].split("-") : []
+    @all_topics = ExtracatMetadata.group(:topic).select(:topic).order(:topic => "ASC").to_a.compact.uniq
     @biome_filtered = params[:biome].present? ? params[:biome].split("-") : []
+    @allbiome = ExtracatMetadata.group(:biome).select(:biome).order(:biome => "ASC").to_a
+
+    #ExtracatMetadata.search({}).map(&:biome).compact.uniq
+
+    @all_biome = []
+    @allbiome.each do |bitem|
+
+      if bitem[:biome].present?
+        item = bitem[:biome].split("|")
+        if item.kind_of?(Array)
+          @all_biome.concat(item)
+        else
+          @all_biome << item
+        end
+      end
+    end
+    @all_biome = @all_biome.uniq
+    @all_biome.compact.sort
 
     @ecosystems_filtered = params[:ecosystems].present? ? params[:ecosystems].split("-") : []
 
+    @all_ecosystems = ExtracatMetadata.search(:ecosystem).map(&:ecosystem).compact.sort.uniq
+
     @variable_filtered = params[:variable_filters].present? ? params[:variable_filters].split("-") : []
+
+    all_variables_before = ExtracatMetadata.group(:variable_name).select(:variable_name).order(:variable_name => "ASC").to_a
+
+    @all_variables = []
+    all_variables_before.each do |var_item|
+      if var_item[:variable_name].present?
+        @all_variables.push(var_item[:variable_name])
+      end
+    end
+    @all_variables.compact.uniq.sort
+
     @all_search_terms = params[:keywords].present? ? params[:keywords] : []
     @search_params = search_params.except("page")
     @total_search_count = @search.nil? ? 0 : @search.count
 
+    @all_sub_topics = ExtracatMetadata.search(:subtopic).map(&:subtopic).compact.sort.uniq
 
     if @search.blank? == false
       @results = @search.page(params[:page])
@@ -59,14 +92,29 @@ class SearchController < ApplicationController
       @max_date = params[:max_date] || @search.map(&:end_date).max
       @search_term = params[:keywords]
 
-      @raw_sites = ExtracatMetadata.search(search_params).map(&:site_name).sort.uniq
+      @raw_sites = ExtracatMetadata.search(:site_name).map(&:site_name).compact.sort.uniq
       @the_sites = @raw_sites.first(10)
       @more_sites = @raw_sites - @the_sites if @raw_sites.present?
-      @variable_names = ExtracatMetadata.search(search_params).map(&:variable_name).sort.uniq
-      @sub_topics = ExtracatMetadata.search(search_params).map(&:subtopic).sort.uniq
-      @biome = ExtracatMetadata.search(search_params).map(&:biome).uniq
-      @ecosystems = ExtracatMetadata.search(search_params).map(&:ecosystem).uniq
-      @topics = ExtracatMetadata.search(search_params).map(&:topic).uniq
+      @variable_names = ExtracatMetadata.search(search_params).map(&:variable_name).compact.sort.uniq
+      @sub_topics = ExtracatMetadata.search(search_params).map(&:subtopic).compact.sort.uniq
+      @biome_before_split = ExtracatMetadata.search(search_params).map(&:biome).compact
+      @biome = []
+      @biome_before_split.each do |biome|
+        if biome
+          item = biome.split("|")
+          if item.kind_of?(Array)
+            @biome.concat(item)
+          else
+            @biome << item
+          end
+        end
+      end
+
+      @biome.sort.uniq
+
+      @ecosystems = ExtracatMetadata.search(search_params).map(&:ecosystem).compact.sort.uniq
+      @topics = ExtracatMetadata.search(search_params).map(&:topic).compact.sort.uniq
+
       if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topics].present? and !params[:variable_filters].present? and !params[:biome].present? and !params[:ecosystems].present?
         @results = nil
         @total_search_count = 0

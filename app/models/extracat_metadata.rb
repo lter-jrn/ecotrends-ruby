@@ -42,9 +42,19 @@ class ExtracatMetadata < ActiveRecord::Base
 
     if term_hash["keywords"].present?
       words_array = term_hash["keywords"].split(",")
+      if term_hash["site_filters"].present?
+        sites = term_hash["site_filters"].split(',')
+        words_array.append(sites)
+      end
       keyword_search = self.where("keywords ILIKE ANY (array[?]) or docid ILIKE ANY (array[?])", words_array.map {|val| "%#{val}%"}, words_array.map {|val| "%#{val}%"})
     else
-      keyword_search = self
+      if term_hash["site_filters"].present?
+        sites = term_hash["site_filters"].split(',')
+        keyword_search = self.where("keywords ILIKE ANY (array[?]) or docid ILIKE ANY (array[?])", sites.map {|val| "%#{val}%"}, sites.map {|val| "%#{val}%"})
+      else
+        keyword_search = self
+      end
+
     end
 
     if term_hash["variable_filters"].present?
@@ -71,9 +81,9 @@ class ExtracatMetadata < ActiveRecord::Base
     end
 
 
-    if term_hash["site_filters"].present?
-      keyword_search = keyword_search.where("site_name" => term_hash["site_filters"].split(","))
-    end
+    # if term_hash["site_filters"].present?
+    #   keyword_search = keyword_search.where("site_name" => term_hash["site_filters"].split(","))
+    # end
     if term_hash["min_date"].present? && term_hash["max_date"].blank?
       keyword_search = keyword_search.where("begin_date > ?", term_hash["min_date"])
     end
