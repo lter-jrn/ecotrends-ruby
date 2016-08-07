@@ -36,5 +36,7 @@ input[type="checkbox"] + label {
 
 input[type="checkbox"]:disabled+label {
   font-size:12px;
+  min-width: 15px;
+  min-height: 15px;
   color:#ecedea;
 }
