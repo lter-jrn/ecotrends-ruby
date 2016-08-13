@@ -53,11 +53,6 @@
 		  <p><i>Welcome, <%= current_user %></i>
 		    <a href="#"><li>Account</li></a>
 		    <a href="/logout"><li>Log Out</li></a></p>
-		<% else %>
-		    <p>
-		      <i><%= link_to "Register", signup_path%></i> &nbsp;&nbsp;
-		      <%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
-		    </p>
 		<% end %>
 	      </div>
 	      <div class="row">
@@ -83,14 +78,17 @@
 
 		  </div> <!-- span -->
 		  <div style="float: right;" class="span3">
-		    <h1 class="splashheader">Thousands of Datasets... Sign Up Today!</h1>
-		    <%= form_tag '/signup' , method: :get do %>
-		      <fieldset>
-			<%= text_field_tag :email, "", placeholder: "E-mail Address" %>
-			<br>
-			<button type="submit" class="btn btn-primary">Begin Sign Up</button>
-		      </fieldset>
-		<% end %>
+        <% if current_user.present? == false%>
+        <h1 class="splashheader">To access data and tools you’ll need to login!</h1>
+        <%= form_tag '/signup' , method: :get do %>
+          <fieldset>
+          <br>
+          <div class="login-wrapper">
+            <button type="submit" class="btn btn-primary">Sign Up</button> &nbsp; &nbsp;<%= link_to "Login", "/login", class: 'btn btn-sm', style: 'color: #000;' %>
+          </div>
+          </fieldset>
+        <% end %>
+    		<% end %>
 		  </div> <!-- span -->
 		</div> <!-- span -->
 	      </div> <!-- row -->

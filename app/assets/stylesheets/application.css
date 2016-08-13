@@ -16,6 +16,9 @@
 .bold {
     font-weight: bold;
 }
+.home-copy {
+  font-size: 14px;
+}
 .line-legend li {
     list-style: none;
 }
@@ -74,4 +77,9 @@
 
 .chart-checkbox {
   margin-top:0 !important;
+}
+
+.login-wrapper {
+  width: 200px;
+  text-align: right;
 }
