@@ -1,7 +1,7 @@
 <div class="span3" id="filter-container">
   <% if @the_sites.present? %>
   <div style="height: 1px;"></div>
-  <h4><%= image_tag "sitesicon.png", class: "baricon" %>Add a site <%= image_tag 'bn_save_changes', class:"filter-button"%></h4>
+  <h4><%= image_tag "sitesicon.png", class: "baricon" %>Add a site <%= image_tag 'bn_save_changes.png', class:"filter-button"%></h4>
 
   <div style="padding:1px"></div>
   <ul class="search-side">
@@ -359,10 +359,10 @@
 
         <ul class="search-side">
           <%= form_tag(request.fullpath, method: :get) do %>
-              
+
               <li>Min Date: <%= text_field_tag :min_date_field, @min_date, class: "datepicker min-date" %></li>
               <li>Max Date: <%= text_field_tag :max_date_field, @max_date, class: "datepicker max-date" %></li>
-              <div class="date-save-button"><%= image_tag 'bn_save_changes', class:"filter-button"%></div>
+              <div class="date-save-button"><%= image_tag 'bn_save_changes.png', class:"filter-button"%></div>
           <% end %>
         </ul>
       <% end %>
