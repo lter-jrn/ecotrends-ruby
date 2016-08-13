@@ -88,8 +88,8 @@ class SearchController < ApplicationController
 
     if @search.blank? == false
       @results = @search.page(params[:page])
-      @min_date = params[:min_date] || @search.map(&:begin_date).min
-      @max_date = params[:max_date] || @search.map(&:end_date).max
+      @min_date = @search.map(&:begin_date).min
+      @max_date = @search.map(&:end_date).max
       @search_term = params[:keywords]
 
       @raw_sites = ExtracatMetadata.search(:site_name).map(&:site_name).compact.sort.uniq

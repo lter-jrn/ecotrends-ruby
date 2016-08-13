@@ -2,6 +2,10 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
+.filter-button {
+  padding-left:20px;
+  cursor: pointer;
+}
 .filter_wrapper {
   max-height:200px;
   min-height: 50px;
@@ -18,8 +22,6 @@
   flex-direction: row;
   align-items: flex-start;
 }
-
-
 
 input {
   font-size:12px;
@@ -39,4 +41,9 @@ input[type="checkbox"]:disabled+label {
   min-width: 15px;
   min-height: 15px;
   color:#ecedea;
+}
+
+.date-save-button {
+  width:220px;
+  text-align: right;
 }

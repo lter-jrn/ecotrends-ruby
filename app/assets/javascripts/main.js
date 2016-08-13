@@ -211,8 +211,15 @@ $(function () {
 					 });
     var callSubmit = true;
 
-    $(".triggerbox").change(function(){
+    function setDates() {
+      var min_date = $(".min-date").val();
+      var max_date = $(".max-date").val();
+      $("#min_date").val(min_date);
+      $("#max_date").val(max_date);
+    }
 
+    $(".filter-button").click(function(){
+        setDates();
         var checkedSites = [];
         var checkedSubTopics = [];
         var variables = [];
