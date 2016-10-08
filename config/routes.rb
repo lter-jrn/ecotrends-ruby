@@ -12,7 +12,7 @@ EcoTrends::Application.routes.draw do
   post 'login' => 'login#create'
   put 'reset' => 'login#update'
   get 'logout' => 'login#destroy'
-  match 'signup' => 'registration#new', via: :get
+  get 'signup' => 'registration#show'
   post 'signup' => 'registration#create'
 
   get "splash/index"

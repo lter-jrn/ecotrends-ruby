@@ -6,18 +6,30 @@ class LoginController < ApplicationController
 
   def create
     the_route = '/login'
+    the_notice = nil
     if params["uid"].present? && params["password"].present?
       @user = UserProfile.authenticate(params)
 
-      if @user.present?
-        #session stuff here
-        session["current_user"] = @user["uid"]
-        session["iduser"] = @user["iduser"]
-        set_datastore_array
-        the_route = '/search'
+      if !verify_recaptcha
+        the_route = '/login'
+        the_notice = "reCAPTCHA Error! Please try again."
+      else
+        if @user.present?
+          #session stuff here
+          session["current_user"] = @user["uid"]
+          session["iduser"] = @user["iduser"]
+          set_datastore_array
+          the_route = '/search'
+        end
       end
+
     end
-    redirect_to the_route
+    if the_notice.nil?
+      redirect_to the_route
+    else
+      redirect_to the_route, notice: the_notice
+    end
+
   end
   def edit
 

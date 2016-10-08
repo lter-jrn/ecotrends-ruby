@@ -40,6 +40,9 @@
     <%= label_tag 'Password Confirmation' %> <%= password_field_tag :password_confirmation %>
   </p>
   <p>
+    <%= recaptcha_tags %>
+  </p>
+  <p>
     <%= submit_tag "Register" %>
   </p>
 <% end %>
