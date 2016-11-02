@@ -58,26 +58,40 @@ class ExtracatMetadata < ActiveRecord::Base
     end
 
     if term_hash["variable_filters"].present?
-      keyword_search = keyword_search.where("variable_name" => term_hash["variable_filters"])
+      # keyword_search = keyword_search.where("variable_name" => term_hash["variable_filters"]).split("-")
+      variable_array = term_hash["variable_filters"].split("-")
+      keyword_search = keyword_search.where("variable_name ILIKE ANY (array[?])", variable_array.map {|val| "%#{val}%"})
     end
 
     if term_hash["subtopics"].present?
-      keyword_search = keyword_search.where("subtopic" => term_hash["subtopics"].split("-"))
+      #keyword_search = keyword_search.where("subtopic" => term_hash["subtopics"].split("-"))
+
+      subtopics_array = term_hash["subtopics"].split("-")
+      keyword_search = keyword_search.where("subtopic ILIKE ANY (array[?])", subtopics_array.map {|val| "%#{val}%"})
     end
 
     if term_hash["topics"].present?
+      # topic_array = term_hash["topics"].split("-")
+      # keyword_search = keyword_search.where("topic" => topic_array)
+
       topic_array = term_hash["topics"].split("-")
-      keyword_search = keyword_search.where("topic" => topic_array)
+      keyword_search = keyword_search.where("topics ILIKE ANY (array[?])", topic_array.map {|val| "%#{val}%"})
     end
 
     if term_hash["ecosystems"].present?
+      # ecosystems_array = term_hash["ecosystems"].split("-")
+      # keyword_search = keyword_search.where("ecosystem" => ecosystems_array)
+
       ecosystems_array = term_hash["ecosystems"].split("-")
-      keyword_search = keyword_search.where("ecosystem" => ecosystems_array)
+      keyword_search = keyword_search.where("ecosystem ILIKE ANY (array[?])", ecosystems_array.map {|val| "%#{val}%"})
     end
 
     if term_hash["biome"].present?
       biome_array = term_hash["biome"].split("-")
       keyword_search = keyword_search.where("biome" => biome_array)
+
+      biome_array = term_hash["biome"].split("-")
+      keyword_search = keyword_search.where("biome ILIKE ANY (array[?])", biome_array.map {|val| "%#{val}%"})
     end
 
 
