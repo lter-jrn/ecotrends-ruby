@@ -75,7 +75,7 @@ class ExtracatMetadata < ActiveRecord::Base
       # keyword_search = keyword_search.where("topic" => topic_array)
 
       topic_array = term_hash["topics"].split("-")
-      keyword_search = keyword_search.where("topics ILIKE ANY (array[?])", topic_array.map {|val| "%#{val}%"})
+      keyword_search = keyword_search.where("topic ILIKE ANY (array[?])", topic_array.map {|val| "%#{val}%"})
     end
 
     if term_hash["ecosystems"].present?
@@ -87,8 +87,8 @@ class ExtracatMetadata < ActiveRecord::Base
     end
 
     if term_hash["biome"].present?
-      biome_array = term_hash["biome"].split("-")
-      keyword_search = keyword_search.where("biome" => biome_array)
+      # biome_array = term_hash["biome"].split("-")
+      # keyword_search = keyword_search.where("biome" => biome_array)
 
       biome_array = term_hash["biome"].split("-")
       keyword_search = keyword_search.where("biome ILIKE ANY (array[?])", biome_array.map {|val| "%#{val}%"})
