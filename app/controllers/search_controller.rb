@@ -33,7 +33,6 @@ class SearchController < ApplicationController
     @search = ExtracatMetadata.search(search_params)
 
     @items = ExtracatMetadata.group(:site, :site_name).select(:site, :site_name).order(:site_name => "ASC").to_a
-
     #starts here: Used to split the locations into groups of 20
     items, @items = @items.dup, []
     @items.push(items.shift(20)) until items.empty?
@@ -85,7 +84,6 @@ class SearchController < ApplicationController
     @total_search_count = @search.nil? ? 0 : @search.count
 
     @all_sub_topics = ExtracatMetadata.search(:subtopic).map(&:subtopic).compact.sort.uniq
-
     if @search.blank? == false
       @results = @search.page(params[:page])
       @min_date = @search.map(&:begin_date).min
@@ -101,7 +99,7 @@ class SearchController < ApplicationController
       @biome = []
       @biome_before_split.each do |biome|
         if biome
-          item = biome.split("|")
+          item = biome.split("|") #ecotrends.398.1
           if item.kind_of?(Array)
             @biome.concat(item)
           else
@@ -114,6 +112,17 @@ class SearchController < ApplicationController
 
       @ecosystems = ExtracatMetadata.search(search_params).map(&:ecosystem).compact.sort.uniq
       @topics = ExtracatMetadata.search(search_params).map(&:topic).compact.sort.uniq
+
+      @saveIds = []
+      @results.each do | result |
+        dataset = SavedDataset.where(docid: result["docid"])
+        if dataset.count > 0
+          @saveIds << dataset.first.idsave
+        else
+          @saveIds << ""
+        end
+
+      end
 
       if !params[:keywords].present? and !params[:site_filters].present? and !params[:subtopics].present? and !params[:topics].present? and !params[:variable_filters].present? and !params[:biome].present? and !params[:ecosystems].present?
         @results = nil

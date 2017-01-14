@@ -431,7 +431,7 @@
           <strong>Click to Compare</strong>
         </div>
         <%= form_tag('/comparison', method: :get) do %>
-            <% @results.each do |result| %>
+            <% @results.each_with_index do |result, index| %>
                 <%# {"id_obs"=>"1", "start_date"=>"1988-01-01 00:00:00", "end_date"=>"1988-12-31 00:00:00", "year"=>"1988", "month"=>nil, "observation"=>"506.7", "observation_est"=>"506.7", "s_err"=>"24", "s_dev"=>"48", "n_expected"=>nil, "n_observed"=>"4", "n_missing"=>nil, "n_questionable"=>nil, "n_estimated"=>nil, "n_trace"=>nil, "n_invalid"=>nil} %>
                 <div class="span9">
                   <div class="row">
@@ -451,16 +451,13 @@
                     <div class="span2 searchright">
                       <h4><%= result.begin_date.year %> - <%= result.end_date.year %></h4>
                       <% if session["datastore_array"].include?(result.docid.to_s) %>
-                          <div class="remove-datastore">
-                            <%= hidden_field_tag :jsdocid, result.docid.to_s, class: "jsdocid" %>
-                            <i class="fa fa-area-chart fa-3x text-error"></i>
-                          </div>
-
+                        <%= link_to image_tag("chart_minus.png"),
+                          datastore_path(@saveIds[index]),
+                          method: :delete, title: "Remove from datastore", data: { confirm: 'Are you sure?' } %>
                       <% else %>
-                          <div class="add-datastore">
-                            <%= hidden_field_tag :jsdocid, result.docid.to_s, class: "jsdocid" %>
-                            <i class="fa fa-line-chart fa-3x"></i>
-                          </div>
+                      <%= link_to image_tag("chart_plus.png"),
+                        "/datastores?docids=#{result.docid}",
+                        method: :create, title: "Add to datastore" %>
                       <% end %>
                     </div> <!-- span -->
                   </div> <!-- row -->

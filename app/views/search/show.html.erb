@@ -34,9 +34,9 @@
   <h2>Dataset Information</h2>
     <p>
       <%= form_tag("/datastores") do %>
-	<%= hidden_field_tag :docids, @data_record.docid  %>
-	<%= submit_tag "Add To Datastore" %>
-<% end %>
+    	 <%= hidden_field_tag :docids, @data_record.docid  %>
+    	 <%= submit_tag "Add To Datastore" %>
+      <% end %>
     </p>
     <p>
       <strong>Dataset ID: </strong> <%= @data_record.docid%>

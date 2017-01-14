@@ -50,9 +50,11 @@ class DatastoresController < ApplicationController
         end
       end
       set_datastore_array
+    else
+      is_not = ""
     end
     respond_to do |format|
-      format.html {redirect_to datastores_path, notice: "Dataset was {is_not}saved"}
+      format.html {redirect_to datastores_path, notice: "Dataset #{is_not}was saved"}
       format.json { render json: {success: true}.to_json, status: 200}
     end
 
