@@ -96,7 +96,7 @@ GEM
       tilt
     libv8 (3.16.14.11)
     loofah (2.2.1)
-      nokogiri (>= 1.5.9)
+      nokogiri (>= 1.8.1)
     mail (2.6.3)
       mime-types (>= 1.16, < 3)
     method_source (0.8.2)
